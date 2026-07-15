@@ -3,8 +3,8 @@
 2-orange (fruit, round, orange, medium)|DRAW|P2
 wildcard max 1|DRAW|P1
 1-handphone (gadget, rectangle, black, small)|DRAW|P2
-wildcard+tux lyx 6|DRAW|P1
-wildcard+tux lyx 2|DRAW|P2
+wildcard+cut lyx 6|DRAW|P1
+wildcard+cut lyx 2|DRAW|P2
 1-jelly (food, round, purple, small)|DRAW|P1
 2-drum (music, round, blue, medium)|DRAW|P2
 2-tennis ball (sports, round, green, medium)|DRAW|P1
@@ -80,7 +80,7 @@ wildcard tux 3
 3-grape (fruit, round, purple, small)
 
 # TURN 5A - P1 DISCARDS SERIES: 9 COLORS. P1 WINS.
-wildcard+tux lyx 6
+wildcard+cut lyx 6
 wildcard tux 4
 wildcard tux 1
 wildcard tux 2

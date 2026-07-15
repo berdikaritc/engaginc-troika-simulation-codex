@@ -25,12 +25,12 @@
                      "P2"
                   ],
                   [
-                     "wildcard+tux lyx 6",
+                     "wildcard+cut lyx 6",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "wildcard+tux lyx 2",
+                     "wildcard+cut lyx 2",
                      "DRAW",
                      "P2"
                   ],
@@ -368,7 +368,7 @@
                "call" : "P1 CALLS: 9 COLORS. P1 WINS.",
                "moves" : [
                   [
-                     "wildcard+tux lyx 6",
+                     "wildcard+cut lyx 6",
                      "P1",
                      "DISCARD"
                   ],
