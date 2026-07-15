@@ -5,16 +5,16 @@ let state = {
   p1: [],      // Array of { id, name, element, highlighted, isMoving }
   p2: [],      // Array of { id, name, element, highlighted, isMoving }
   discard: [], // Array of { id, name, element, highlighted, isMoving }
-  
+
   currentTurnIndex: 0,
   currentStepIndex: 0,
   currentMoveIndex: 0,
-  
+
   isPlaying: false,
   isWaitingForNextStep: false,
   isWaitingForCall: false,
   autoAdvance: true,
-  
+
   // Settings (seconds)
   playbackSpeed: 1.0,
   drawDuration: 1.5,
@@ -63,10 +63,10 @@ async function loadSimulation(caseName) {
     showToast("Please enter a simulation name!");
     return;
   }
-  
+
   showToast(`Loading simulation ${caseName}...`);
   pause();
-  
+
   try {
     const response = await fetch(`simdata/${caseName}/simulation.json`);
     if (!response.ok) {
@@ -74,10 +74,10 @@ async function loadSimulation(caseName) {
     }
     simulationData = await response.json();
     showToast(`Simulation ${caseName} loaded successfully!`);
-    
+
     buildStepList();
     goToShowStep(0, 0);
-    
+
     // Automatically trigger initial delay and start play
     play();
   } catch (error) {
@@ -90,23 +90,23 @@ async function loadSimulation(caseName) {
 function buildStepList() {
   stepListContainer.innerHTML = '';
   if (!simulationData || !simulationData.turns) return;
-  
+
   simulationData.turns.forEach((turn, turnIdx) => {
     turn.steps.forEach((step, stepIdx) => {
       const item = document.createElement('div');
       item.className = 'step-item';
       item.id = `step-item-${turnIdx}-${stepIdx}`;
-      
+
       const titleText = `Turn ${turnIdx + 1}, Step ${stepIdx + 1}`;
       item.innerHTML = `
         <div class="step-item-title">${titleText}</div>
         <div class="step-item-summary">${step.summary || 'Move'}</div>
       `;
-      
+
       item.addEventListener('click', () => {
         goToShowStep(turnIdx, stepIdx);
       });
-      
+
       stepListContainer.appendChild(item);
     });
   });
@@ -115,7 +115,7 @@ function buildStepList() {
 // Update Step List Highlight in Sidebar
 function updateStepListHighlight() {
   document.querySelectorAll('.step-item').forEach(el => el.classList.remove('active'));
-  
+
   const activeEl = document.getElementById(`step-item-${state.currentTurnIndex}-${state.currentStepIndex}`);
   if (activeEl) {
     activeEl.classList.add('active');
@@ -132,7 +132,7 @@ function showToast(message, isError = false) {
     toastEl.style.borderColor = "var(--gold)";
   }
   toastEl.classList.add('show');
-  
+
   setTimeout(() => {
     toastEl.classList.remove('show');
   }, 3000);
@@ -152,12 +152,12 @@ function setupEventListeners() {
 
   // Play / Pause
   btnPlay.addEventListener('click', togglePlay);
-  
+
   // Prev / Next / Restart
   btnPrev.addEventListener('click', stepBackward);
   btnNext.addEventListener('click', stepForward);
   btnRestart.addEventListener('click', restart);
-  
+
   // Speed Slider
   slideSpeed.addEventListener('input', (e) => {
     const val = parseFloat(e.target.value);
@@ -166,7 +166,7 @@ function setupEventListeners() {
     // Dynamically adjust ongoing transitions if any
     layoutCards(true);
   });
-  
+
   // Stagger Slider
   slideStagger.addEventListener('input', (e) => {
     const val = parseFloat(e.target.value);
@@ -197,7 +197,7 @@ function setupEventListeners() {
       if (document.activeElement.tagName === 'INPUT') return; // Don't intercept inputs
       e.preventDefault();
     }
-    
+
     switch (e.code) {
       case 'Space':
         togglePlay();
@@ -252,24 +252,24 @@ function play() {
     showToast("No simulation loaded!");
     return;
   }
-  
+
   state.isPlaying = true;
   updatePlayPauseButton();
-  
+
   // Start executing the current step
   runCurrentStep();
 }
 
 function pause() {
   if (!state.isPlaying) return;
-  
+
   state.isPlaying = false;
   updatePlayPauseButton();
-  
+
   // Clear all scheduled timeouts
   activeTimeouts.forEach(clearTimeout);
   activeTimeouts = [];
-  
+
   // If paused during sequential deal, keep track of currentMoveIndex so we can resume
   // If paused during waiting or call announcement, we reset state flags so they resume clean
   state.isWaitingForNextStep = false;
@@ -298,15 +298,15 @@ function restart() {
 function stepForward() {
   if (!simulationData) return;
   pause();
-  
+
   let t = state.currentTurnIndex;
   let s = state.currentStepIndex + 1;
-  
+
   if (s >= simulationData.turns[t].steps.length) {
     s = 0;
     t++;
   }
-  
+
   if (t < simulationData.turns.length) {
     goToShowStep(t, s);
     showToast(`Stepped Forward to Turn ${t+1}, Step ${s+1}`);
@@ -318,17 +318,17 @@ function stepForward() {
 function stepBackward() {
   if (!simulationData) return;
   pause();
-  
+
   let t = state.currentTurnIndex;
   let s = state.currentStepIndex - 1;
-  
+
   if (s < 0) {
     t--;
     if (t >= 0) {
       s = simulationData.turns[t].steps.length - 1;
     }
   }
-  
+
   if (t >= 0) {
     goToShowStep(t, s);
     showToast(`Stepped Backward to Turn ${t+1}, Step ${s+1}`);
@@ -342,13 +342,13 @@ function goToShowStep(turnIndex, stepIndex) {
   // 1. Clear all active timers
   activeTimeouts.forEach(clearTimeout);
   activeTimeouts = [];
-  
+
   // 2. Clear call overlay
   hideCallOverlay();
-  
+
   // 3. Clear all DOM elements from cards layer
   cardsLayer.innerHTML = '';
-  
+
   // 4. Reset state model
   state.p1 = [];
   state.p2 = [];
@@ -358,9 +358,9 @@ function goToShowStep(turnIndex, stepIndex) {
   state.currentMoveIndex = 0;
   state.isWaitingForNextStep = false;
   state.isWaitingForCall = false;
-  
+
   nextCardId = 1;
-  
+
   // 5. Recompute the cards state by applying all moves before the target step instantly
   for (let t = 0; t <= turnIndex; t++) {
     const turn = simulationData.turns[t];
@@ -392,10 +392,10 @@ function goToShowStep(turnIndex, stepIndex) {
       });
     }
   }
-  
+
   // 6. Draw current positions with transition animation disabled
   layoutCards(false);
-  
+
   // 7. Update header texts
   const currentTurn = simulationData.turns[turnIndex];
   const currentStep = currentTurn.steps[stepIndex];
@@ -443,7 +443,7 @@ function showCallOverlay(text) {
   else caller = "P2";
 
   callOverlayTitle.textContent = `${caller} CALLS`;
-  
+
   // Extract call message (e.g. remove "P1 CALLS: " from text if present)
   let cleanText = text;
   if (text.includes("CALLS:")) {
@@ -451,7 +451,7 @@ function showCallOverlay(text) {
   } else if (text.includes("DISCARDS GROUP:")) {
     cleanText = text.split("DISCARDS GROUP:")[1].trim();
   }
-  
+
   callOverlayText.textContent = cleanText;
   callOverlay.classList.add('visible');
 }
@@ -486,7 +486,7 @@ function finalizeDiscardMoves() {
 // Execute Draw Move
 function executeDrawMove(move) {
   const [cardName, from, to] = move;
-  
+
   const cardId = nextCardId++;
   const el = createCardElement(cardName);
   // Spawn at Draw Pile location (offscreen left)
@@ -494,10 +494,10 @@ function executeDrawMove(move) {
   el.style.top = '494px'; // centered with discard pile area
   el.style.transition = 'none';
   cardsLayer.appendChild(el);
-  
+
   // Force browser layout pass
   el.offsetHeight;
-  
+
   const cardObj = {
     id: cardId,
     name: cardName,
@@ -505,13 +505,13 @@ function executeDrawMove(move) {
     highlighted: false,
     isMoving: true
   };
-  
+
   if (to === 'P1') {
     state.p1.push(cardObj);
   } else if (to === 'P2') {
     state.p2.push(cardObj);
   }
-  
+
   layoutCards(true);
 }
 
@@ -527,8 +527,8 @@ function layoutCards(animate = true) {
   const speed = state.playbackSpeed;
   const drawDur = state.drawDuration / speed;
   const discDur = state.discardDuration / speed;
-  
-  const cardWidth = 150;
+
+  const cardWidth = 165;
   const canvasWidth = 720;
   const staggerFactor = 7; // spacing is ~1/7th width
 
@@ -542,7 +542,7 @@ function layoutCards(animate = true) {
     const el = card.element;
     const isHighlighted = card.highlighted;
     const isMoving = card.isMoving;
-    
+
     const left = p1Start + idx * p1S;
     const top = 150 + (28 - (isHighlighted ? 25 : 0)); // shifts up on highlight (centered vertically: (290 - 233)/2 = 28.5px)
     const zIndex = isMoving ? (1000 + idx) : (10 + idx); // lift moving card to top z-index (preserve order)
@@ -552,17 +552,17 @@ function layoutCards(animate = true) {
     } else {
       el.style.transition = 'none';
     }
-    
+
     el.style.left = `${left}px`;
     el.style.top = `${top}px`;
     el.style.zIndex = zIndex;
-    
+
     if (isHighlighted) {
       el.classList.add('highlighted');
     } else {
       el.classList.remove('highlighted');
     }
-    
+
     if (isMoving) {
       el.classList.add('in-flight');
     } else {
@@ -580,7 +580,7 @@ function layoutCards(animate = true) {
     const el = card.element;
     const isHighlighted = card.highlighted;
     const isMoving = card.isMoving;
-    
+
     const left = p2Start + idx * p2S;
     const top = 750 + (28 - (isHighlighted ? 25 : 0)); // shifts up on highlight
     const zIndex = isMoving ? (1000 + idx) : (10 + idx);
@@ -590,7 +590,7 @@ function layoutCards(animate = true) {
     } else {
       el.style.transition = 'none';
     }
-    
+
     el.style.left = `${left}px`;
     el.style.top = `${top}px`;
     el.style.zIndex = zIndex;
@@ -600,7 +600,7 @@ function layoutCards(animate = true) {
     } else {
       el.classList.remove('highlighted');
     }
-    
+
     if (isMoving) {
       el.classList.add('in-flight');
     } else {
@@ -611,13 +611,13 @@ function layoutCards(animate = true) {
   // 3. Position Discard Pile (with dynamic spacing based on pile count)
   const discLen = state.discard.length;
   let discStaggerFactor = 7;
-  
+
   if (discLen >= 20) {
     discStaggerFactor = 11; // 20+ cards -> ~1/11th card width spacing
   } else if (discLen >= 12) {
     discStaggerFactor = 9;  // 12-19 cards -> ~1/9th card width spacing
   }
-  
+
   const discS = cardWidth / discStaggerFactor;
   const discW = cardWidth + (discLen - 1) * discS;
   const discStart = (canvasWidth - discW) / 2;
@@ -625,7 +625,7 @@ function layoutCards(animate = true) {
   state.discard.forEach((card, idx) => {
     const el = card.element;
     const isMoving = card.isMoving;
-    
+
     const left = discStart + idx * discS;
     const top = 440 + 38; // Centered vertically in 310px area: (310 - 233)/2 = 38.5px
     const zIndex = isMoving ? (1000 + idx) : (10 + idx);
@@ -635,13 +635,13 @@ function layoutCards(animate = true) {
     } else {
       el.style.transition = 'none';
     }
-    
+
     el.style.left = `${left}px`;
     el.style.top = `${top}px`;
     el.style.zIndex = zIndex;
-    
+
     el.classList.remove('highlighted');
-    
+
     if (isMoving) {
       el.classList.add('in-flight');
     } else {
@@ -653,73 +653,73 @@ function layoutCards(animate = true) {
 // Master Step Execution Engine
 function runCurrentStep() {
   if (!state.isPlaying || !simulationData) return;
-  
+
   const turn = simulationData.turns[state.currentTurnIndex];
   const step = turn.steps[state.currentStepIndex];
-  
+
   // 1. Update Top Info Display
   updateInfoBar(turn, step);
   updateStepListHighlight();
-  
+
   const isFirstStep = (state.currentTurnIndex === 0 && state.currentStepIndex === 0 && state.currentMoveIndex === 0);
   const delay = isFirstStep ? state.initialDelay : state.stepDelay;
-  
+
   state.isWaitingForNextStep = true;
-  
+
   // 2. Wait stepDelay (or initialDelay) before starting step movements
   const stepStartTimer = setTimeout(() => {
     state.isWaitingForNextStep = false;
     executeStepContent(step);
   }, (delay / state.playbackSpeed) * 1000);
-  
+
   activeTimeouts.push(stepStartTimer);
 }
 
 // Execute the moves/announcements inside the step
 function executeStepContent(step) {
   const speed = state.playbackSpeed;
-  
+
   if (step.call) {
     // DISCARD STEP
     // A. Highlight the discarding cards immediately
     highlightDiscardingCards(step.moves);
-    
+
     // B. Show the Call Overlay
     showCallOverlay(step.call);
     state.isWaitingForCall = true;
-    
+
     // C. Wait callDuration (3 seconds default)
     const callTimer = setTimeout(() => {
       state.isWaitingForCall = false;
       hideCallOverlay();
-      
+
       // D. Animate the cards to the discard pile simultaneously
       performDiscardMoves(step.moves);
-      
+
       // E. Wait for the discard transition to finish (1.5 seconds)
       const transitionTimer = setTimeout(() => {
         finalizeDiscardMoves();
         advanceStep();
       }, (state.discardDuration / speed) * 1000);
-      
+
       activeTimeouts.push(transitionTimer);
     }, (state.callDuration / speed) * 1000);
-    
+
     activeTimeouts.push(callTimer);
-    
+
   } else {
     // DRAWING STEP
     // Draw cards one by one based on state.currentMoveIndex
     const remainingMoves = step.moves.slice(state.currentMoveIndex);
     const stagger = state.staggerDelay / speed;
-    
+
     remainingMoves.forEach((move, index) => {
       const moveTimer = setTimeout(() => {
         if (!state.isPlaying) return;
-        
+
         executeDrawMove(move);
         state.currentMoveIndex++;
-        
+
         // If this is the last card in the step
         if (state.currentMoveIndex === step.moves.length) {
           // Wait for this last card's animation to finish
@@ -727,11 +727,11 @@ function executeStepContent(step) {
             finalizeDrawMoves();
             advanceStep();
           }, (state.drawDuration / speed) * 1000);
-          
+
           activeTimeouts.push(finalizeTimer);
         }
       }, index * stagger * 1000);
-      
+
       activeTimeouts.push(moveTimer);
     });
   }
@@ -740,33 +740,33 @@ function executeStepContent(step) {
 // Move to next step or next turn
 function advanceStep() {
   if (!state.isPlaying) return;
-  
+
   state.currentMoveIndex = 0;
   state.currentStepIndex++;
-  
+
   const currentTurn = simulationData.turns[state.currentTurnIndex];
-  
+
   if (state.currentStepIndex >= currentTurn.steps.length) {
     state.currentStepIndex = 0;
     state.currentTurnIndex++;
   }
-  
+
   // Check if simulation ended
   if (state.currentTurnIndex >= simulationData.turns.length) {
     state.isPlaying = false;
     state.currentTurnIndex = simulationData.turns.length - 1;
-    
+
     // Set step index to last step of last turn
     const lastTurnIdx = simulationData.turns.length - 1;
     const lastTurn = simulationData.turns[lastTurnIdx];
     state.currentStepIndex = lastTurn.steps.length - 1;
-    
+
     updatePlayPauseButton();
     updateStepListHighlight();
     showToast("Simulation Complete!");
     return;
   }
-  
+
   // If Manual Control, pause automatically after each step
   if (!state.autoAdvance) {
     pause();
@@ -774,6 +774,6 @@ function advanceStep() {
     showToast(`Step completed. Paused. Click Play to continue.`);
     return;
   }
-  
+
   runCurrentStep();
 }

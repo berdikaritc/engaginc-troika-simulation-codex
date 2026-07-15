@@ -2,7 +2,8 @@
 ** Summary
 i'm making a html+css+javascript-based card game play simulation animation that
 will be recorded using a desktop recorder like simplescreenrecorder on linux to
-produce a video animation (the video will be portrait 720x1080).
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
 
 the name of the card game is "Anak Bos Troika" (Troika for short).
 
@@ -25,7 +26,7 @@ From top to bottom:
   screen. The cards put in this pile should not overlap or cover the cards in
   discard pile.
 
-Width of card should be 150.
+Width of card should be 165. The height should be proportional.
 
 Try to conserve vertical space.
 
@@ -304,7 +305,7 @@ when animating a player drawing cards from the draw pile (including the first
 turn where all the players are dealt 9 cards each) each card should be animated
 separately in order. the animation should be smooth (60fps) and each card
 movement from the draw pile (left of the screen) to its final position in the
-player's hand should take about 1.5 seconds.
+player's hand should take 0.4 seconds.
 
 There should not be a delay between moving of one card to another. so for the
 first card, it should be animated from the left of the screen (the draw pile) to
@@ -313,6 +314,9 @@ the leftmost of P2's hand. then the third card drawn is from the draw pile to
 the right of the previous card of P1's hand. and so on. make sure when animating
 the card, the card has not appeared in P1's hand. it should come from the draw
 pile.
+
+When it is the turn of a player (e.g. it's P1's turn for turn 2, P2's turn for
+turn 3 and so on), the label of the player's hand should be highlighted.
 
 When animating a player discarding his group of cards, first all the cards that
 will be moved in his hand should be highlighted, then the call of that step is
@@ -364,10 +368,11 @@ outside the area where the cards will be placed.
 # ok tapi ada glitch sedikit.
 
 # but the frustrating thing about using vibecoding: everything is random,
-# between each run nama variabel bakal bisa beda2x, dari sim jadi simulation,
-# ntar ini itu bisa beda2 kecil semua. jadi begitu dapat yg bagus, udah bagus.
-# kalo dapat yg jelek memolesnya jadi bagus capek. enakan one-shot sih lebih
-# clean. ngedit2 lewat prompt berikutnya itu hit and miss.
+# between each run nama variabel bakal bisa beda2x, style variabel dari
+# mixedCase jadi UPPER_CAE, dari 'sim' jadi 'simulation', ntar ini itu bisa
+# beda2 kecil semua. jadi begitu dapat yg bagus, udah bagus. kalo dapat yg jelek
+# memolesnya jadi bagus capek. enakan one-shot sih lebih clean. ngedit2 lewat
+# prompt berikutnya itu hit and miss.
 
 * [2026-07-15 Wed] Prompt 1T1AG.2
 Enlarge the cards a bit, while still making sure the cards in the P1's hand and
@@ -388,3 +393,81 @@ final position.
  #   gak mulus, setiap call LAYAR DIBLUR, wtf. gw revert ah.
 * [2026-07-15 Wed] Prompt 1T1AG.2-question
 what if i want to change the simulation data from S1 to, say, S2, which part should i change?
+* [2026-07-15 Wed] eng: imagegen: close up shots of wsc baby animals (buat bahan nanti meningkatkan konsistensi)
+
+zoom in so the full face (including the ears) fills the frame.
+
+# # jangan deh, ntar susah videnya jadi terlalu invent
+# zoom in so the face (and not the ears) fills the frame.
+
+# zoom in so the face fills the frame.
+
+change horizontal angle to 3/4.
+
+change horizontal angle to side, face facing left.
+
+add blurred cartoony background of a typical backyard in jakarta.
+
+add blurred cartoony background of a typical chicken coop in jakarta.
+
+add blurred cartoony background of a typical backyard in bandung indonesia.
+
+add blurred cartoony background of a typical park in jakarta.
+
+add blurred cartoony background of a typical garden in jakarta.
+
+add blurred cartoony background of a typical road side in jakarta.
+
+add blurred cartoony background of a typical housing complex in jakarta.
+
+add blurred cartoony background of the ragunan zoo in jakarta.
+
+* [2026-07-15 Wed] eng: videogen: close up cute shots of wsc baby animals
+funny expressions to do with one's face, for close up shots.
+
+funny expressions that kitten or cat does with its face.
+
+---
+
+keep the zoom level, do not zoom out. the character looks at the camera, smiles and then winks happily.
+
+keep the zoom level, do not zoom out. the character looks at his nose, wiggles his nose a bit, and giggles.
+
+the character looks at his nose, wiggles his nose a bit, and giggles. camera: slow zoom in.
+
+keep the zoom level. the character looks at his nose, wiggles his nose a bit, and giggles.
+
+keep the zoom level. the character puffs both cheeks full of air, then smiles.
+
+keep the zoom level. the character is doing a "fish face" (sucked-in cheeks).
+
+keep the zoom level. the character is sticking out his tongue, then smiles.
+
+keep the zoom level. the character is doing a fake grin showing all teeth.
+
+keep the zoom level. the character is squinting his eyes to the camera, then smiles slightly.
+
+keep the zoom level. the character is doing a tiny pursed lips.
+
+keep the zoom level. the character is widening his eyes as wide as possible, then smiles.
+
+keep the zoom level. the character's mouth is hanging open in surprise.
+
+keep the zoom level. the character is doing one or more of these funny poses:
+sticking out his tongue, puffs both cheeks full of air, looking at his nose,
+winks at the camera, smiling.
+
+the character is sticking out his tongue, then smiles. camera: slow & slight zoom in.
+keep the character exactly like in the reference image.
+
+ # duh kadang2x berubah lari ke arah realistik.
+ # udah disuruh keep, juga tetap berubah
+ # kayaknya ada gerakan kamera jadi shift deh
+
+keep the zoom level. the character is doing a wet dog shake while still being dry.
+
+# The tip of the tongue sticks out slightly.
+# Gives a silly, absent-minded look.
+keep the zoom level. the character is doing a blep expression.
+* zzz journal
+** [2026-07-16 Thu] gw taruh di sub results/NAME/ agar repo ini bisa menyimpan berbagai hasil vibecoding
