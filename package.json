@@ -1,0 +1,14 @@
+{
+  "name": "troika-simulation",
+  "version": "1.0.0",
+  "description": "Anak Bos Troika Card Game Simulation Animation",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}

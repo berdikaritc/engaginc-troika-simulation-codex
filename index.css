@@ -1,0 +1,699 @@
+/* CSS Variable Setup */
+:root {
+  --bg-app: #080a0f;
+  --bg-sidebar: rgba(13, 17, 27, 0.7);
+  --border-sidebar: rgba(255, 255, 255, 0.05);
+  
+  --gold: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.3);
+  --gold-text: #f3e5ab;
+  
+  --teal: #00f2fe;
+  --teal-glow: rgba(0, 242, 254, 0.2);
+  
+  --card-w: 130px;
+  --card-h: 202px;
+  --canvas-w: 720px;
+  --canvas-h: 1080px;
+  
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+  
+  --transition-speed: 0.3s;
+}
+
+/* Reset & Scrollbar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: #ffffff;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout structure */
+.app-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebar Controls */
+.control-panel {
+  width: 360px;
+  height: 100%;
+  background: var(--bg-sidebar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 25px;
+  z-index: 100;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.control-panel.hidden {
+  transform: translateX(-100%);
+  position: absolute;
+}
+
+.panel-header {
+  margin-bottom: 25px;
+}
+
+.panel-header h1 {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold-text);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.panel-header .subtitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #727a8e;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+/* Form & Slider Controls */
+.control-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-group > label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a0a5b5;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input-row input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 10px 15px;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-row input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d4af37 0%, #aa8414 100%);
+  border: none;
+  border-radius: 6px;
+  color: #0c0e14;
+  font-weight: 700;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px var(--gold-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Playback Control Grid */
+.playback-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 6px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+.btn-play-pause {
+  flex: 1;
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  border: none;
+  border-radius: 6px;
+  color: #050b14;
+  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-play-pause:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px var(--teal-glow);
+}
+
+.btn-play-pause.paused {
+  background: linear-gradient(135deg, #d4af37 0%, #aa8414 100%);
+}
+
+.btn-play-pause.paused:hover {
+  box-shadow: 0 5px 15px var(--gold-glow);
+}
+
+/* Sliders */
+.slider-container {
+  margin-bottom: 12px;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #a0a5b5;
+  margin-bottom: 6px;
+}
+
+.slider-header span:last-child {
+  color: var(--gold-text);
+  font-weight: 600;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+/* Toggle Switch */
+.toggle-container {
+  margin-top: 5px;
+}
+
+.btn-toggle {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #727a8e;
+  border-radius: 6px;
+  padding: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-toggle.active {
+  background: rgba(0, 242, 254, 0.1);
+  border-color: var(--teal);
+  color: #ffffff;
+  box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.05);
+}
+
+/* Steps checklist scrollable */
+.scrollable-list-container {
+  flex: 1;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.step-list {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: background 0.2s, border-left 0.2s;
+  border-left: 3px solid transparent;
+  font-size: 12px;
+}
+
+.step-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.step-item.active {
+  background: rgba(212, 175, 55, 0.06);
+  border-left: 3px solid var(--gold);
+}
+
+.step-item-title {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.step-item-summary {
+  color: #8b949e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keyboard Hints */
+.keyboard-shortcuts {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.keyboard-shortcuts h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #727a8e;
+  margin-bottom: 8px;
+}
+
+.keyboard-shortcuts ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.keyboard-shortcuts li {
+  font-size: 12px;
+  color: #8b949e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: monospace;
+  font-size: 10px;
+  color: #fff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.panel-footer {
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a0a5b5;
+  border-radius: 6px;
+  padding: 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* Floating toggler */
+.btn-floating-toggle {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(13, 17, 27, 0.8);
+  border: 1px solid var(--border-sidebar);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+.btn-floating-toggle:hover {
+  transform: rotate(45deg) scale(1.1);
+}
+
+.btn-floating-toggle.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Canvas Area Container */
+.canvas-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-app);
+  overflow: auto;
+  position: relative;
+}
+
+/* Recording Canvas Viewport (720x1080) */
+.recording-canvas {
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+  background: radial-gradient(circle at center, #161a24 0%, #090b10 100%);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Gold inset border trim for the gaming table aesthetic */
+.recording-canvas::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header inside Canvas */
+.canvas-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 55px;
+  z-index: 12;
+}
+
+.logo-container img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-fallback {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold-text);
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px var(--gold-glow);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.info-container {
+  position: absolute;
+  top: 85px;
+  left: 30px;
+  right: 30px;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.turn-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.step-summary {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+}
+
+/* Guides for the hands and discard areas */
+.region {
+  position: absolute;
+  left: 35px;
+  right: 35px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px dashed rgba(255, 255, 255, 0.03);
+  box-sizing: border-box;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.region-p1 {
+  top: 150px;
+  height: 270px;
+}
+
+.region-discard {
+  top: 440px;
+  height: 290px;
+}
+
+.region-p2 {
+  top: 750px;
+  height: 270px;
+}
+
+/* Vertical labels on the right edge of regions */
+.area-label {
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.12);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Cards Layer container */
+.cards-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none; /* Cards will be animated and not interactable during video capture */
+}
+
+/* Single Card styling */
+.card {
+  position: absolute;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 8px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-sizing: border-box;
+  /* GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: left, top, transform, box-shadow;
+}
+
+/* Subtle border glow or lift on highlight (discarding) */
+.card.highlighted {
+  transform: translateY(-25px) scale(1.05) translateZ(0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
+  border-color: var(--gold);
+}
+
+/* Elevate card when it is moving */
+.card.in-flight {
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7);
+  transform: scale(1.03) translateZ(0);
+}
+
+/* Call Overlay modal */
+.call-overlay {
+  position: absolute;
+  top: 585px; /* Center of Discard region vertically */
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 75%;
+  background: rgba(9, 11, 16, 0.96);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 35px var(--gold-glow), inset 0 0 15px rgba(212, 175, 55, 0.15);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 500;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.call-overlay.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.call-overlay-title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: #727a8e;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.call-overlay-text {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: rgba(13, 17, 27, 0.9);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
