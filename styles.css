@@ -28,17 +28,23 @@ body {
 }
 
 .game-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 3vw, 24px);
   padding: 4px 18px;
   border-bottom: 1px solid rgb(255 255 255 / 14%);
 }
 
-.logo { width: clamp(78px, 19vw, 130px); max-height: 86px; object-fit: contain; }
+.logo {
+  position: absolute;
+  left: clamp(12px, 3vw, 24px);
+  width: clamp(78px, 19vw, 130px);
+  max-height: 86px;
+  object-fit: contain;
+}
 
-.turn-info { display: grid; gap: 4px; max-width: 56%; text-shadow: 0 2px 3px #08213a; }
+.turn-info { display: grid; gap: 4px; max-width: 58%; text-align: center; text-shadow: 0 2px 3px #08213a; }
 #turn-label { color: #ffd35a; font-size: clamp(12px, 2.4vw, 17px); font-weight: 800; letter-spacing: .06em; }
 #step-summary { font-size: clamp(10px, 2vw, 14px); font-weight: 700; line-height: 1.15; }
 
@@ -59,7 +65,14 @@ body {
   letter-spacing: .08em;
 }
 
-.pile { position: absolute; inset: 0; overflow: visible; }
+.pile {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
 .game-card, .flying-card {
   position: absolute;
   width: var(--card-width);

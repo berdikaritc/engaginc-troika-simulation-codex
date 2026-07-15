@@ -43,14 +43,14 @@ function positionFor(pileName, index, total) {
   return { left: rect.left + 6 + index * spacing, top: rect.top + (rect.height - width * 1029 / 662) / 2 };
 }
 
-function renderPile(pileName, highlighted = []) {
+function renderPile(pileName, highlightedCards = []) {
   const pile = elements[pileName];
   pile.replaceChildren();
   const cards = piles[pileName];
   cards.forEach((card, index) => {
     const position = positionFor(pileName, index, cards.length);
     const image = document.createElement('img');
-    image.className = `game-card${highlighted.includes(index) ? ' highlighted' : ''}`;
+    image.className = `game-card${highlightedCards.includes(card) ? ' highlighted' : ''}`;
     image.src = cardUrl(card);
     image.alt = card;
     image.style.left = `${position.left - pile.getBoundingClientRect().left}px`;
@@ -89,19 +89,12 @@ async function drawCard(card, destination) {
   renderPile(destination);
 }
 
-function indicesForMoves(source, moves) {
-  const virtual = [...piles[source]];
-  return moves.map(([card]) => {
-    const index = virtual.lastIndexOf(card);
-    if (index < 0) throw new Error(`${card} is not in ${source}`);
-    virtual.splice(index, 1);
-    return index;
-  });
-}
-
 async function discardGroup(moves, source) {
-  const indices = indicesForMoves(source, moves);
-  renderPile(source, indices);
+  const discardedCards = moves.map(([card]) => card);
+  for (const card of discardedCards) {
+    if (!piles[source].includes(card)) throw new Error(`${card} is not in ${source}`);
+  }
+  renderPile(source, discardedCards);
   const call = moves.call || '';
   if (call) {
     elements.call.textContent = call;
