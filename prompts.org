@@ -11,16 +11,24 @@ the simulation will be for 2 players (P1 and P2).
 ** Layout of the screen & appearance
 From top to bottom:
 
-- the very top will contain title (use logo file logo/logo.png), and turn/step
-  information, and nothing else.
-- then P1's hand which will occupy almost 1/3 of vertical area of the
-  screen.
-- then some clearance ~1/10 vertical area to separate P1's hand with discard pile.
-- then discard pile which will also occupy almost 1/3 of vertical area of the
-  screen.
-- then some clearance ~1/10 vertical area to separate P2's hand with discard pile.
-- then P2's hand which will also occupy almost 1/3 of vertical area of the
-  screen.
+- The top logo+information area: the very top will contain title (use logo file
+  logo/logo.png), and turn/step information, and nothing else. The logo
+  positioning should be absolute so it does not move to the left or right
+  whenever the information displayed is changed.
+- P1's hand: then P1's hand which will occupy almost 1/3 of vertical area of the
+  screen. The cards put in this hand should not overlap or cover the top area or
+  the discard pile.
+- discard pile: discard pile which will also occupy almost 1/3 of vertical area
+  of the screen. The cards put in this pile should not overlap or cover the
+  cards in P1's hand or P2's hand.
+- P2's hand: P2's hand which will also occupy almost 1/3 of vertical area of the
+  screen. The cards put in this pile should not overlap or cover the cards in
+  discard pile.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be covered by the cards. Maybe put the
+labels far on the right side.
 
 The players' hands will be displayed in accordeon style with fixed spacing between
 cards (~1/7 width of the card). The leftmost card will be the bottommost card,
@@ -310,6 +318,8 @@ displayed on the screen, e.g. "medium" for about 3 seconds, then all the cards
 is moved/animated going to the discard pile all at once. the animation should be
 smooth. the movement from the player's hand to the final position in the discard
 pile should take about 1.5 seconds.
+
+Make sure all the cards highlighted are the cards that are being discarded.
 
 the cards on the discard pile should also be displayed like a player's hand: the
 bottommost card is on the left and the next card on top of it is on its right.
