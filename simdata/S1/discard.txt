@@ -1,3 +1,6 @@
+2-bed (furniture, rectangle, white, large)
+wildcard max 1
+1-house roof (building, triangle, red, large)
 3-cupboard (furniture, rectangle, brown, large)
 3-bed (furniture, rectangle, white, large)
 3-swimming trunk (fashion, triangle, blue, small)

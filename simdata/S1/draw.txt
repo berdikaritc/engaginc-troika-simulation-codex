@@ -1,6 +1,3 @@
-wildcard max 5
-1-pyramid (building, triangle, brown, large)
-3-tv (gadget, rectangle, black, medium)
 1-tent (building, triangle, yellow, large)
 2-tent (building, triangle, yellow, large)
 3-table (furniture, rectangle, brown, medium)

@@ -1,9 +1,9 @@
+wildcard max 5
+1-pyramid (building, triangle, brown, large)
+3-tv (gadget, rectangle, black, medium)
 3-dice (toy, rectangle, red, small)
 1-grape (fruit, round, purple, small)
 wildcard max 6
-1-house roof (building, triangle, red, large)
-wildcard max 1
 wildcard tux 5
 wildcard max 2
-2-bed (furniture, rectangle, white, large)
 2-hat (fashion, round, purple, medium)
