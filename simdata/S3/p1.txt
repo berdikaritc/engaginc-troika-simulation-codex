@@ -1,0 +1,8 @@
+2-tv (gadget, rectangle, black, medium)
+2-laptop (gadget, rectangle, red, medium)
+1-cake slice (food, triangle, orange, small)
+2-cloth hanger (fashion, triangle, blue, large)
+3-tent (building, triangle, yellow, large)
+2-the triangle (music, triangle, white, medium)
+2-dice (toy, rectangle, red, small)
+1-watermelon (fruit, round, green, large)

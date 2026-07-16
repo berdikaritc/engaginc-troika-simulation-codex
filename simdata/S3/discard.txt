@@ -1,0 +1,7 @@
+2-pizza slice (food, triangle, yellow, medium)
+2-drum (music, round, blue, medium)
+2-tennis ball (sports, round, green, medium)
+2-alphabet block (toy, rectangle, green, small)
+3-table (furniture, rectangle, brown, medium)
+3-handphone (gadget, rectangle, black, small)
+3-bed (furniture, rectangle, white, large)

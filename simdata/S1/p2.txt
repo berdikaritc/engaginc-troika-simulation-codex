@@ -1,7 +1,0 @@
-2-swimming trunk (fashion, triangle, blue, small)
-3-dice (toy, rectangle, red, small)
-1-tent (building, triangle, yellow, large)
-1-house roof (building, triangle, red, large)
-wildcard max 3
-1-bed (furniture, rectangle, white, large)
-3-watermelon (fruit, round, green, large)

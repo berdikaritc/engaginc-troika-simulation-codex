@@ -1,0 +1,40 @@
+# TURN 1 - INITIAL DRAW
+1-watermelon (fruit, round, green, large)
+3-paper airplane (toy, triangle, yellow, small)
+3-bed (furniture, rectangle, white, large)
+2-tennis ball (sports, round, green, medium)
+3-handphone (gadget, rectangle, black, small)
+3-tv (gadget, rectangle, black, medium)
+2-dice (toy, rectangle, red, small)
+2-drum (music, round, blue, medium)
+3-table (furniture, rectangle, brown, medium)
+2-pizza slice (food, triangle, yellow, medium)
+2-the triangle (music, triangle, white, medium)
+3-pizza slice (food, triangle, yellow, medium)
+2-alphabet block (toy, rectangle, green, small)
+3-dice (toy, rectangle, red, small)
+3-tent (building, triangle, yellow, large)
+wildcard+cut lyx 4
+2-cloth hanger (fashion, triangle, blue, large)
+3-pyramid (building, triangle, brown, large)
+
+# TURN 2A - P1 DISCARDS GROUP: RECTANGLE
+3-bed (furniture, rectangle, white, large)
+3-handphone (gadget, rectangle, black, small)
+3-table (furniture, rectangle, brown, medium)
+2-alphabet block (toy, rectangle, green, small)
+
+# TURN 2B - P1 DRAWS
+1-cake slice (food, triangle, orange, small)
+2-laptop (gadget, rectangle, red, medium)
+2-tv (gadget, rectangle, black, medium)
+
+# TURN 2C - P2 DISCARDS GROUP: 2
+2-tennis ball (sports, round, green, medium)
+2-drum (music, round, blue, medium)
+2-pizza slice (food, triangle, yellow, medium)
+
+# TURN 2D - P2 DRAWS
+1-handphone (gadget, rectangle, black, small)
+2-hat (fashion, round, purple, medium)
+wildcard+cut lyx 6
