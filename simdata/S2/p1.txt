@@ -1,11 +1,7 @@
-# SERIES: 6 CATEGORIES
-x5 wildcard max 4
+2-tent (building, triangle, yellow, large)
+3-hat (fashion, round, purple, medium)
+1-laptop (gadget, rectangle, red, medium)
 3-drum (music, round, blue, medium)
-x6 2-paper airplane (toy, triangle, yellow, small)
-x4 1-table (furniture, rectangle, brown, medium)
 2-golf ball (sports, round, white, small)
-x3 2-basket ball (sports, round, orange, large)
-x2 2-piano (music, rectangle, black, large)
-x1 3-cloth hanger (fashion, triangle, blue, large)
 wildcard+cut lyx 6
 2-cupboard (furniture, rectangle, brown, large)

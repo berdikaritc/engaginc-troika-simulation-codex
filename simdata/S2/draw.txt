@@ -1,9 +1,3 @@
-2-tent (building, triangle, yellow, large)
-3-hat (fashion, round, purple, medium)
-1-laptop (gadget, rectangle, red, medium)
-3-tennis ball (sports, round, green, medium)
-3-alphabet block (toy, rectangle, green, small)
-3-tent (building, triangle, yellow, large)
 wildcard max 6
 3-golf ball (sports, round, white, small)
 2-handphone (gadget, rectangle, black, small)

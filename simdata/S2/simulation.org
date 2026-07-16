@@ -78,3 +78,28 @@ wildcard max 4
 2-pizza slice (food, triangle, yellow, medium)
 2-cake slice (food, triangle, orange, small)
 1-jelly (food, round, purple, small)
+
+# TURN 5A - P1 DISCARDS SERIES: 6 CATEGORIES
+3-cloth hanger (fashion, triangle, blue, large)
+2-piano (music, rectangle, black, large)
+2-basket ball (sports, round, orange, large)
+1-table (furniture, rectangle, brown, medium)
+wildcard max 4
+2-paper airplane (toy, triangle, yellow, small)
+
+# TURN 5B - P1 DRAWS
+1-laptop (gadget, rectangle, red, medium)
+3-hat (fashion, round, purple, medium)
+2-tent (building, triangle, yellow, large)
+
+# TURN 5C - P2 DISCARDS GROUP: 2
+2-hat (fashion, round, purple, medium)
+2-tennis ball (sports, round, green, medium)
+2-grape (fruit, round, purple, small)
+2-pizza slice (food, triangle, yellow, medium)
+2-cake slice (food, triangle, orange, small)
+
+# TURN 5D - P2 DRAWS
+3-tent (building, triangle, yellow, large)
+3-alphabet block (toy, rectangle, green, small)
+3-tennis ball (sports, round, green, medium)

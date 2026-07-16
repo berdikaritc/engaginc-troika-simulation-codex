@@ -1,7 +1,5 @@
+3-tennis ball (sports, round, green, medium)
+3-alphabet block (toy, rectangle, green, small)
+3-tent (building, triangle, yellow, large)
 1-jelly (food, round, purple, small)
-2-cake slice (food, triangle, orange, small)
-2-pizza slice (food, triangle, yellow, medium)
-2-grape (fruit, round, purple, small)
-2-tennis ball (sports, round, green, medium)
 wildcard+cut lyx 5
-2-hat (fashion, round, purple, medium)
