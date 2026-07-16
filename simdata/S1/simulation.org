@@ -1,59 +1,19 @@
 # TURN 1 - INITIAL DRAW
-3-cupboard (furniture, rectangle, brown, large)
-2-hat (fashion, round, purple, medium)
-2-tennis ball (sports, round, green, medium)
-2-bed (furniture, rectangle, white, large)
-1-pizza slice (food, triangle, yellow, medium)
-wildcard max 2
-3-bed (furniture, rectangle, white, large)
-wildcard tux 5
-3-swimming trunk (fashion, triangle, blue, small)
-wildcard max 1
-wildcard+cut lyx 3
-1-house roof (building, triangle, red, large)
-1-orange (fruit, round, orange, medium)
-wildcard max 6
-wildcard+cut lyx 2
-1-grape (fruit, round, purple, small)
-wildcard+cut lyx 1
-3-dice (toy, rectangle, red, small)
-
-# TURN 2A - P1 DISCARDS GROUP: 3
-3-swimming trunk (fashion, triangle, blue, small)
-3-bed (furniture, rectangle, white, large)
-3-cupboard (furniture, rectangle, brown, large)
-
-# TURN 2B - P1 DRAWS
-wildcard tux 6
-1-watermelon (fruit, round, green, large)
-2-the triangle (music, triangle, white, medium)
-
-# TURN 2C - P2 DISCARDS GROUP: LARGE
-1-house roof (building, triangle, red, large)
-wildcard max 1
-2-bed (furniture, rectangle, white, large)
-
-# TURN 2D - P2 DRAWS
+2-pyramid (building, triangle, brown, large)
+3-watermelon (fruit, round, green, large)
+3-paper airplane (toy, triangle, yellow, small)
 3-tv (gadget, rectangle, black, medium)
-1-pyramid (building, triangle, brown, large)
-wildcard max 5
-
-# TURN 3A - P1 DISCARDS GROUP: 2
-2-the triangle (music, triangle, white, medium)
-wildcard tux 6
-2-tennis ball (sports, round, green, medium)
-
-# TURN 3B - P1 DRAWS
-3-table (furniture, rectangle, brown, medium)
-2-tent (building, triangle, yellow, large)
-1-tent (building, triangle, yellow, large)
-
-# TURN 3C - P2 DISCARDS GROUP: medium
-wildcard max 5
-3-tv (gadget, rectangle, black, medium)
-2-hat (fashion, round, purple, medium)
-
-# TURN 3D - P2 DRAWS
-2-dice (toy, rectangle, red, small)
+3-piano (music, rectangle, black, large)
+1-bed (furniture, rectangle, white, large)
+3-grape (fruit, round, purple, small)
+1-golf ball (sports, round, white, small)
+1-piano (music, rectangle, black, large)
 1-tennis ball (sports, round, green, medium)
-3-handphone (gadget, rectangle, black, small)
+1-grape (fruit, round, purple, small)
+2-alphabet block (toy, rectangle, green, small)
+2-handphone (gadget, rectangle, black, small)
+2-dice (toy, rectangle, red, small)
+2-drum (music, round, blue, medium)
+1-handphone (gadget, rectangle, black, small)
+1-laptop (gadget, rectangle, red, medium)
+1-paper airplane (toy, triangle, yellow, small)

@@ -1,9 +1,9 @@
-3-handphone (gadget, rectangle, black, small)
-1-tennis ball (sports, round, green, medium)
+1-paper airplane (toy, triangle, yellow, small)
+1-handphone (gadget, rectangle, black, small)
 2-dice (toy, rectangle, red, small)
-1-pyramid (building, triangle, brown, large)
-3-dice (toy, rectangle, red, small)
-1-grape (fruit, round, purple, small)
-wildcard max 6
-wildcard tux 5
-wildcard max 2
+2-alphabet block (toy, rectangle, green, small)
+1-tennis ball (sports, round, green, medium)
+1-golf ball (sports, round, white, small)
+1-bed (furniture, rectangle, white, large)
+3-tv (gadget, rectangle, black, medium)
+3-watermelon (fruit, round, green, large)

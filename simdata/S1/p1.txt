@@ -1,9 +1,9 @@
-1-tent (building, triangle, yellow, large)
-2-tent (building, triangle, yellow, large)
-3-table (furniture, rectangle, brown, medium)
-1-watermelon (fruit, round, green, large)
-wildcard+cut lyx 1
-wildcard+cut lyx 2
-1-orange (fruit, round, orange, medium)
-wildcard+cut lyx 3
-1-pizza slice (food, triangle, yellow, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-drum (music, round, blue, medium)
+2-handphone (gadget, rectangle, black, small)
+1-grape (fruit, round, purple, small)
+1-piano (music, rectangle, black, large)
+3-grape (fruit, round, purple, small)
+3-piano (music, rectangle, black, large)
+3-paper airplane (toy, triangle, yellow, small)
+2-pyramid (building, triangle, brown, large)
