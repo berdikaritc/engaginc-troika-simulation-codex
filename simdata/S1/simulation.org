@@ -22,3 +22,8 @@ wildcard+tux lyx 1
 3-swimming trunk (fashion, triangle, blue, small)
 3-bed (furniture, rectangle, white, large)
 3-cupboard (furniture, rectangle, brown, large)
+
+# TURN 2B - P1 DRAWS
+wildcard tux 6
+1-watermelon (fruit, round, green, large)
+2-the triangle (music, triangle, white, medium)

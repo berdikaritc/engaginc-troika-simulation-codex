@@ -1,0 +1,52 @@
+#!/usr/bin/env perl
+
+use 5.014;
+use strict;
+use warnings;
+
+use File::Slurper qw(read_text read_lines write_text);
+
+my $which_p = $0 =~ /p1-/ ? "p1" : "p2";
+
+my @cards = read_lines("draw.txt");
+die "I can't handle case where draw.txt has less than 3 cards"
+    if @cards < 3;
+
+my @draw = reverse(splice @cards, 0, 3);
+
+# largest turn number
+my $max_turn;
+{
+    open my $fh, "<", "simulation.org" or die "Can't open simulation.org for reading: $!";
+    while (defined(my $line = <$fh>)) {
+        $line =~ /^# TURN (\d+)/ or next;
+        $max_turn = $1 if !$max_turn or $max_turn < $1;
+    }
+    close $fh;
+}
+
+my $turn_num = $max_turn;
+my $turn_letter = $which_p eq 'p1' ? 'B' : 'D';
+{
+    open my $fh, ">>", "simulation.org" or die "Can't open simulation.org for append: $!";
+    print $fh "\n";
+    print $fh "# TURN $turn_num$turn_letter - ".uc($which_p)." DRAWS\n";
+    print $fh "$_\n" for @draw;
+}
+
+my $orig;
+
+#$orig = read_text("draw.txt");
+{
+    open my $fh, ">", "draw.txt" or die "Can't open draw.txt for writing: $!";
+    print $fh "$_\n" for @cards;
+    close $fh;
+}
+
+$orig = read_text("$which_p.txt");
+{
+    open my $fh, ">", "$which_p.txt" or die "Can't open $which_p.txt for writing: $!";
+    print $fh "$_\n" for reverse @draw;
+    print $fh $orig;
+    close $fh;
+}

@@ -1,3 +1,6 @@
+2-the triangle (music, triangle, white, medium)
+1-watermelon (fruit, round, green, large)
+wildcard tux 6
 wildcard+tux lyx 1
 wildcard+tux lyx 2
 1-orange (fruit, round, orange, medium)
