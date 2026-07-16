@@ -4,6 +4,7 @@ const CONFIG = Object.freeze({
   simulation: "S1",
   initialWait: 3500,
   stepWait: 2000,
+  initialDrawDuration: 200,
   drawDuration: 400,
   discardDuration: 200,
   callDuration: 3000,
@@ -140,7 +141,7 @@ async function showCall(text) {
   await sleep(220);
 }
 
-async function runStep(step) {
+async function runStep(step, isInitialDraw = false) {
   const isDiscard = step.moves?.some(move => move[2] === "DISCARD");
   if (isDiscard) {
     highlightDiscardCards(step);
@@ -149,7 +150,9 @@ async function runStep(step) {
 
   for (const [name, from, to] of step.moves || []) {
     await flyCard(name, from, to,
-      from === "DRAW" ? CONFIG.drawDuration : CONFIG.discardDuration);
+      from === "DRAW"
+        ? (isInitialDraw ? CONFIG.initialDrawDuration : CONFIG.drawDuration)
+        : CONFIG.discardDuration);
   }
 }
 
@@ -177,7 +180,7 @@ async function start() {
       stepInfo.textContent = step.summary || "";
       setActivePlayer(playerForStep(step));
       await sleep(CONFIG.stepWait);
-      await runStep(step);
+      await runStep(step, turnIndex === 0);
     }
   }
 
