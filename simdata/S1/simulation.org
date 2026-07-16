@@ -39,3 +39,23 @@ wildcard tux 1
 3-laptop (gadget, rectangle, red, medium)
 2-basket ball (sports, round, orange, large)
 wildcard max 3
+
+# TURN 3A - P1 DISCARDS GROUP: 1
+1-piano (music, rectangle, black, large)
+wildcard tux 1
+1-laptop (gadget, rectangle, red, medium)
+
+# TURN 3B - P1 DRAWS
+1-tv (gadget, rectangle, black, medium)
+1-hat (fashion, round, purple, medium)
+wildcard+cut lyx 4
+
+# TURN 3C - P2 DISCARDS GROUP: MEDIUM
+3-tv (gadget, rectangle, black, medium)
+1-tennis ball (sports, round, green, medium)
+3-laptop (gadget, rectangle, red, medium)
+
+# TURN 3D - P2 DRAWS
+2-table (furniture, rectangle, brown, medium)
+2-laptop (gadget, rectangle, red, medium)
+wildcard tux 2

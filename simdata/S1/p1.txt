@@ -1,8 +1,8 @@
-wildcard tux 1
+wildcard+cut lyx 4
+1-hat (fashion, round, purple, medium)
+1-tv (gadget, rectangle, black, medium)
 2-house roof (building, triangle, red, large)
 wildcard max 2
-1-laptop (gadget, rectangle, red, medium)
 2-drum (music, round, blue, medium)
-1-piano (music, rectangle, black, large)
 3-piano (music, rectangle, black, large)
 2-pyramid (building, triangle, brown, large)

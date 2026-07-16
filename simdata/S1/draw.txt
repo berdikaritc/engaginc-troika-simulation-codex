@@ -1,9 +1,3 @@
-wildcard+cut lyx 4
-1-hat (fashion, round, purple, medium)
-1-tv (gadget, rectangle, black, medium)
-wildcard tux 2
-2-laptop (gadget, rectangle, red, medium)
-2-table (furniture, rectangle, brown, medium)
 1-pyramid (building, triangle, brown, large)
 2-orange (fruit, round, orange, medium)
 3-tennis ball (sports, round, green, medium)

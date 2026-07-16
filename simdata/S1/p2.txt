@@ -1,8 +1,8 @@
+wildcard tux 2
+2-laptop (gadget, rectangle, red, medium)
+2-table (furniture, rectangle, brown, medium)
 wildcard max 3
 2-basket ball (sports, round, orange, large)
-3-laptop (gadget, rectangle, red, medium)
 2-dice (toy, rectangle, red, small)
-1-tennis ball (sports, round, green, medium)
 1-bed (furniture, rectangle, white, large)
-3-tv (gadget, rectangle, black, medium)
 3-watermelon (fruit, round, green, large)
