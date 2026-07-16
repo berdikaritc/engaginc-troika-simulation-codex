@@ -1,9 +1,9 @@
+wildcard+cut lyx 1
+3-drum (music, round, blue, medium)
+3-jelly (food, round, purple, small)
 wildcard+cut lyx 6
-2-hat (fashion, round, purple, medium)
 1-handphone (gadget, rectangle, black, small)
 3-pyramid (building, triangle, brown, large)
 wildcard+cut lyx 4
 3-dice (toy, rectangle, red, small)
-3-pizza slice (food, triangle, yellow, medium)
-3-tv (gadget, rectangle, black, medium)
 3-paper airplane (toy, triangle, yellow, small)

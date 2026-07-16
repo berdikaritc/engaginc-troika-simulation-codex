@@ -26,6 +26,8 @@
 
     note: file di emacs akan terupdate otomatis.
 
+    note: jika tidak bisa atau tidak mau discard, beri call # PASS
+
 3b. p2 juga discard & draw:
 
     sleep 3; ../../scripts/sim02c-p2-discard && ../../scripts/sim02d-p2-draw

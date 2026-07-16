@@ -38,3 +38,25 @@ wildcard+cut lyx 4
 1-handphone (gadget, rectangle, black, small)
 2-hat (fashion, round, purple, medium)
 wildcard+cut lyx 6
+
+# TURN 3A - P1 DISCARDS GROUP: 2
+2-dice (toy, rectangle, red, small)
+2-the triangle (music, triangle, white, medium)
+2-cloth hanger (fashion, triangle, blue, large)
+2-laptop (gadget, rectangle, red, medium)
+2-tv (gadget, rectangle, black, medium)
+
+# TURN 3B - P1 DRAWS
+3-golf ball (sports, round, white, small)
+wildcard max 2
+2-handphone (gadget, rectangle, black, small)
+
+# TURN 3C - P2 DISCARDS GROUP: MEDIUM
+3-tv (gadget, rectangle, black, medium)
+3-pizza slice (food, triangle, yellow, medium)
+2-hat (fashion, round, purple, medium)
+
+# TURN 3D - P2 DRAWS
+3-jelly (food, round, purple, small)
+3-drum (music, round, blue, medium)
+wildcard+cut lyx 1

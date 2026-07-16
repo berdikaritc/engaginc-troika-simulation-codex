@@ -1,9 +1,3 @@
-2-handphone (gadget, rectangle, black, small)
-wildcard max 2
-3-golf ball (sports, round, white, small)
-wildcard+cut lyx 1
-3-drum (music, round, blue, medium)
-3-jelly (food, round, purple, small)
 3-hat (fashion, round, purple, medium)
 wildcard max 1
 3-cloth hanger (fashion, triangle, blue, large)
