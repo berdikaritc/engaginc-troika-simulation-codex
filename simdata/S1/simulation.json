@@ -1,3 +1,20 @@
+DEBUG: description=<1>, turn_num=<1>, turn_letter=<>, rest=<>
+DEBUG: description=<2A GROUP: 3>, turn_num=<2>, turn_letter=<A>, rest=< GROUP: 3>
+DEBUG: description=<2B>, turn_num=<2>, turn_letter=<B>, rest=<>
+DEBUG: description=<2C GROUP: SMALL>, turn_num=<2>, turn_letter=<C>, rest=< GROUP: SMALL>
+DEBUG: description=<2D>, turn_num=<2>, turn_letter=<D>, rest=<>
+DEBUG: description=<3A GROUP: SMALL>, turn_num=<3>, turn_letter=<A>, rest=< GROUP: SMALL>
+DEBUG: description=<3B>, turn_num=<3>, turn_letter=<B>, rest=<>
+DEBUG: description=<3C GROUP: 1>, turn_num=<3>, turn_letter=<C>, rest=< GROUP: 1>
+DEBUG: description=<3D>, turn_num=<3>, turn_letter=<D>, rest=<>
+DEBUG: description=<4A GROUP: 1>, turn_num=<4>, turn_letter=<A>, rest=< GROUP: 1>
+DEBUG: description=<4B>, turn_num=<4>, turn_letter=<B>, rest=<>
+DEBUG: description=<4C GROUP: RECTANGLE>, turn_num=<4>, turn_letter=<C>, rest=< GROUP: RECTANGLE>
+DEBUG: description=<4D>, turn_num=<4>, turn_letter=<D>, rest=<>
+DEBUG: description=<5A GROUP: 2>, turn_num=<5>, turn_letter=<A>, rest=< GROUP: 2>
+DEBUG: description=<5B>, turn_num=<5>, turn_letter=<B>, rest=<>
+DEBUG: description=<5C GROUP: 2>, turn_num=<5>, turn_letter=<C>, rest=< GROUP: 2>
+DEBUG: description=<5D>, turn_num=<5>, turn_letter=<D>, rest=<>
 {
    "turns" : [
       {
@@ -5,72 +22,32 @@
             {
                "moves" : [
                   [
-                     "2-laptop",
+                     "2-jelly",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "2-orange",
+                     "wildcard tux 3",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "wildcard max 1",
+                     "1-the triangle",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "1-handphone",
+                     "3-drum",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "wildcard+cut lyx 6",
+                     "3-grape",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "wildcard+cut lyx 2",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "1-jelly",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-drum",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "2-tennis ball",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-golf ball",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard tux 4",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "wildcard tux 6",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard tux 1",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "wildcard max 2",
+                     "3-alphabet block",
                      "DRAW",
                      "P2"
                   ],
@@ -80,7 +57,47 @@
                      "P1"
                   ],
                   [
-                     "1-bed",
+                     "1-cupboard",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "3-dice",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "1-watermelon",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "3-table",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "3-cake slice",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "1-dice",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "2-house roof",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "3-pizza slice",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "3-cupboard",
                      "DRAW",
                      "P2"
                   ],
@@ -90,7 +107,7 @@
                      "P1"
                   ],
                   [
-                     "2-dice",
+                     "wildcard max 6",
                      "DRAW",
                      "P2"
                   ]
@@ -102,40 +119,50 @@
       {
          "steps" : [
             {
-               "call" : "P1 CALLS: ROUND",
+               "call" : "P1 CALLS: 3",
                "moves" : [
+                  [
+                     "3-grape",
+                     "P1",
+                     "DISCARD"
+                  ],
+                  [
+                     "3-dice",
+                     "P1",
+                     "DISCARD"
+                  ],
+                  [
+                     "3-table",
+                     "P1",
+                     "DISCARD"
+                  ],
+                  [
+                     "3-pizza slice",
+                     "P1",
+                     "DISCARD"
+                  ],
                   [
                      "3-basket ball",
                      "P1",
                      "DISCARD"
-                  ],
-                  [
-                     "1-jelly",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "2-tennis ball",
-                     "P1",
-                     "DISCARD"
                   ]
                ],
-               "summary" : "P1 DISCARDS GROUP: ROUND"
+               "summary" : "P1 DISCARDS GROUP: 3"
             },
             {
                "moves" : [
                   [
-                     "1-watermelon",
+                     "2-piano",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "2-house roof",
+                     "2-orange",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "3-laptop",
+                     "2-hat",
                      "DRAW",
                      "P1"
                   ]
@@ -143,45 +170,40 @@
                "summary" : "P1 DRAWS ANOTHER 3 CARDS"
             },
             {
-               "call" : "P2 CALLS: 2",
+               "call" : "P2 CALLS: SMALL",
                "moves" : [
                   [
-                     "2-orange",
+                     "3-cake slice",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "2-drum",
+                     "3-alphabet block",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "2-golf ball",
-                     "P2",
-                     "DISCARD"
-                  ],
-                  [
-                     "2-dice",
+                     "wildcard tux 3",
                      "P2",
                      "DISCARD"
                   ]
                ],
-               "summary" : "P2 DISCARDS GROUP: 2"
+               "summary" : "P2 DISCARDS GROUP: SMALL"
             },
             {
                "moves" : [
                   [
-                     "2-jelly",
+                     "1-alphabet block",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "1-cake slice",
+                     "2-alphabet block",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "3-the triangle",
+                     "wildcard tux 4",
                      "DRAW",
                      "P2"
                   ]
@@ -193,40 +215,40 @@
       {
          "steps" : [
             {
-               "call" : "P1 CALLS: RECTANGLE",
+               "call" : "P1 CALLS: SMALL",
                "moves" : [
                   [
-                     "2-laptop",
+                     "2-jelly",
                      "P1",
                      "DISCARD"
                   ],
                   [
-                     "wildcard max 1",
+                     "wildcard tux 2",
                      "P1",
                      "DISCARD"
                   ],
                   [
-                     "3-laptop",
+                     "1-dice",
                      "P1",
                      "DISCARD"
                   ]
                ],
-               "summary" : "P1 DISCARDS GROUP: RECTANGLE"
+               "summary" : "P1 DISCARDS GROUP: SMALL"
             },
             {
                "moves" : [
                   [
-                     "1-basket ball",
+                     "3-the triangle",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "2-hat",
+                     "1-handphone",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "1-house roof",
+                     "1-laptop",
                      "DRAW",
                      "P1"
                   ]
@@ -234,40 +256,40 @@
                "summary" : "P1 DRAWS ANOTHER 3 CARDS"
             },
             {
-               "call" : "P2 CALLS: RECTANGLE",
+               "call" : "P2 CALLS: 1",
                "moves" : [
                   [
-                     "1-bed",
+                     "1-cupboard",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "wildcard max 2",
+                     "1-watermelon",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "1-handphone",
+                     "1-alphabet block",
                      "P2",
                      "DISCARD"
                   ]
                ],
-               "summary" : "P2 DISCARDS GROUP: RECTANGLE"
+               "summary" : "P2 DISCARDS GROUP: 1"
             },
             {
                "moves" : [
                   [
-                     "wildcard tux 5",
+                     "wildcard tux 1",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "1-alphabet block",
+                     "2-basket ball",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "1-tv",
+                     "wildcard max 3",
                      "DRAW",
                      "P2"
                   ]
@@ -282,17 +304,17 @@
                "call" : "P1 CALLS: 1",
                "moves" : [
                   [
-                     "1-watermelon",
+                     "1-the triangle",
                      "P1",
                      "DISCARD"
                   ],
                   [
-                     "1-basket ball",
+                     "1-handphone",
                      "P1",
                      "DISCARD"
                   ],
                   [
-                     "1-house roof",
+                     "1-laptop",
                      "P1",
                      "DISCARD"
                   ]
@@ -302,17 +324,17 @@
             {
                "moves" : [
                   [
-                     "3-alphabet block",
+                     "wildcard tux 1",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "wildcard tux 3",
+                     "2-basket ball",
                      "DRAW",
                      "P1"
                   ],
                   [
-                     "2-cloth hanger",
+                     "wildcard max 3",
                      "DRAW",
                      "P1"
                   ]
@@ -320,40 +342,40 @@
                "summary" : "P1 DRAWS ANOTHER 3 CARDS"
             },
             {
-               "call" : "P2 CALLS: 1",
+               "call" : "P2 CALLS: RECTANGLE",
                "moves" : [
                   [
-                     "1-cake slice",
+                     "3-cupboard",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "1-alphabet block",
+                     "wildcard max 6",
                      "P2",
                      "DISCARD"
                   ],
                   [
-                     "1-tv",
+                     "2-alphabet block",
                      "P2",
                      "DISCARD"
                   ]
                ],
-               "summary" : "P2 DISCARDS GROUP: 1"
+               "summary" : "P2 DISCARDS GROUP: RECTANGLE"
             },
             {
                "moves" : [
                   [
-                     "1-cupboard",
+                     "2-table",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "2-watermelon",
+                     "wildcard max 5",
                      "DRAW",
                      "P2"
                   ],
                   [
-                     "3-grape",
+                     "1-jelly",
                      "DRAW",
                      "P2"
                   ]
@@ -365,35 +387,15 @@
       {
          "steps" : [
             {
-               "call" : "P1 CALLS: 9 COLORS. P1 WINS.",
+               "call" : "P1 CALLS: 2",
                "moves" : [
                   [
-                     "wildcard+cut lyx 6",
+                     "2-piano",
                      "P1",
                      "DISCARD"
                   ],
                   [
-                     "wildcard tux 4",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "wildcard tux 1",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "wildcard tux 2",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "wildcard tux 3",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "2-house roof",
+                     "2-orange",
                      "P1",
                      "DISCARD"
                   ],
@@ -403,17 +405,73 @@
                      "DISCARD"
                   ],
                   [
-                     "3-alphabet block",
-                     "P1",
-                     "DISCARD"
-                  ],
-                  [
-                     "2-cloth hanger",
+                     "2-basket ball",
                      "P1",
                      "DISCARD"
                   ]
                ],
-               "summary" : "P1 DISCARDS SERIES: 9 COLORS"
+               "summary" : "P1 DISCARDS GROUP: 2"
+            },
+            {
+               "moves" : [
+                  [
+                     "1-table",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "1-golf ball",
+                     "DRAW",
+                     "P1"
+                  ],
+                  [
+                     "1-grape",
+                     "DRAW",
+                     "P1"
+                  ]
+               ],
+               "summary" : "P1 DRAWS ANOTHER 3 CARDS"
+            },
+            {
+               "call" : "P2 CALLS: 2",
+               "moves" : [
+                  [
+                     "2-house roof",
+                     "P2",
+                     "DISCARD"
+                  ],
+                  [
+                     "2-basket ball",
+                     "P2",
+                     "DISCARD"
+                  ],
+                  [
+                     "2-table",
+                     "P2",
+                     "DISCARD"
+                  ]
+               ],
+               "summary" : "P2 DISCARDS GROUP: 2"
+            },
+            {
+               "moves" : [
+                  [
+                     "3-tv",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "3-laptop",
+                     "DRAW",
+                     "P2"
+                  ],
+                  [
+                     "3-house roof",
+                     "DRAW",
+                     "P2"
+                  ]
+               ],
+               "summary" : "P2 DRAWS ANOTHER 3 CARDS"
             }
          ]
       }

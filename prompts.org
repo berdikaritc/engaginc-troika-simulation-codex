@@ -45,32 +45,17 @@ cards on the discard pile, the spacing is reduced to ~1/8 width of the card.
 When there are 20 or more cards on the discard pile, the spacing is reduced to
 ~1/10 width of the card.
 
-** The cards
-the following are all the card names: 1-grape 2-grape 3-grape 1-orange 2-orange
-3-orange 1-watermelon 2-watermelon 3-watermelon 1-golf ball 2-golf ball 3-golf
-ball 1-tennis ball 2-tennis ball 3-tennis ball 1-basket ball 2-basket ball
-3-basket ball 1-house roof 2-house roof 3-house roof 1-tent 2-tent 3-tent
-1-pyramid 2-pyramid 3-pyramid 1-cake slice 2-cake slice 3-cake slice 1-pizza
-slice 2-pizza slice 3-pizza slice 1-jelly 2-jelly 3-jelly 1-handphone
-2-handphone 3-handphone 1-tv 2-tv 3-tv 1-laptop 2-laptop 3-laptop 1-swimming
-trunk 2-swimming trunk 3-swimming trunk 1-cloth hanger 2-cloth hanger 3-cloth
-hanger 1-hat 2-hat 3-hat 1-table 2-table 3-table 1-cupboard 2-cupboard
-3-cupboard 1-bed 2-bed 3-bed 1-paper airplane 2-paper airplane 3-paper airplane
-1-dice 2-dice 3-dice 1-alphabet block 2-alphabet block 3-alphabet block 1-the
-triangle 2-the triangle 3-the triangle 1-drum 2-drum 3-drum 1-piano 2-piano
-3-piano wildcard max 1 wildcard max 2 wildcard max 3 wildcard max 4 wildcard max
-5 wildcard max 6 wildcard tux 1 wildcard tux 2 wildcard tux 3 wildcard tux 4
-wildcard tux 5 wildcard tux 6 wildcard+cut lyx 1 wildcard+cut lyx 2 wildcard+cut
-lyx 3 wildcard+cut lyx 4 wildcard+cut lyx 5 wildcard+cut lyx 6
-
 ** The simulation data
-An example simulation data is in simdata/S1/simulation.json file.
+An example simulation data is in simdata/S1/simulation.json file. The simulation
+data is represented by a JSON object.
 
-The simulation structure specifies list of turns to make. Each turn contains
-information of the number of steps to make. And each step contains a summary as
-well as list of card moves to make. Each card move is a 3-element array in the
-format of [CARDNAME, FROM_PILE, TO_PILE] specifying movement of card from a pile
-to another pile.
+The simulation JSON object specifies list of turns to make (in its 'turns'
+property, which is an array of turns). Each turn is a JSON object containing
+information of the number of steps to make (in its 'steps' property, which is an
+array of steps). Each step is a JSON object containing 'summary' as well as list
+of card moves to make (in its 'moves' property, which is an array of moves).
+Each card move is a 3-element array in the format of [CARDNAME, FROM_PILE,
+TO_PILE] specifying movement of card from a pile to another pile.
 
 There are 4 different "piles" in the game:
 - P1: P1's hand, which will be shown in an accordeon style to make sure the top
@@ -79,233 +64,36 @@ There are 4 different "piles" in the game:
 - P2: P2's hand.
 - DRAW: the draw pile, which is not shown in the display, but when a player is
   drawing from the draw pile, the card will be animated from the left of the
-  screen to the P1's hand)
+  screen and vertically middle area to the P1's hand.
 - DISCARD: the discard pile, which is also shown in an accordeon style to let
   viewers identify each card.
 
-*** the first turn
-Let's see the first turn in the example. From the simulation data:
+The first turn consists of one step, which consists of 18 card moves: drawing 9
+cards to each player (first card to P1, then second card to P2, then third card
+to P1, and so on). Note that the movement of cards is ordered, so subsequent
+card moved to the same target pile will be on top of the previously moved card .
 
-      {
-         "steps" : [
-            {
-               "moves" : [
-                  [
-                     "2-laptop",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-orange",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard max 1",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "1-handphone",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard+tux lyx 6",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "wildcard+tux lyx 2",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "1-jelly",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-drum",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "2-tennis ball",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-golf ball",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard tux 4",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "wildcard tux 6",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard tux 1",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "wildcard max 2",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "wildcard tux 2",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "1-bed",
-                     "DRAW",
-                     "P2"
-                  ],
-                  [
-                     "3-basket ball",
-                     "DRAW",
-                     "P1"
-                  ],
-                  [
-                     "2-dice",
-                     "DRAW",
-                     "P2"
-                  ]
-               ],
-               "summary" : "INITIAL DRAW"
-            }
-         ]
-      },
+Subsequent turns will each consist of 4 separate steps. First step is P1
+discarding a group of cards from his hand to the discard pile and call his
+discarded card group. Second, P1 draws another 3 card from the draw pile. Third,
+P2 continues by discarding a group of cards from his hand to the discard pile and
+call his discarded card group. Fourth, P2 draws 3 cards from the draw pile.
 
-The first turn consists of one step: drawing 9 cards to each player (first card
-to P1, then second card to P2, then third card to P1, and so on). Note that the
-movement of cards is ordered, so subsequent card moved to the same target pile
-will be on top of the previously moved card .
-
-*** the second turn
-The second turn in the example consists of 4 separate steps. first, P1 discard a
-group of cards from his hand to the discard pile and call his discarded card
-group. second, P1 draws another 3 card from the draw pile. third, P2 continue by
-discarding a group of card from his hand to the discard pile and call his
-discarded card group. fourth, P2 draws 3 cards from the draw pile. From the
-simulation data:
-
-        {
-            "steps" : [
-                {
-                    "call" : "ROUND",
-                    "moves" : [
-                        [
-                            "3-basket ball",
-                            "P1",
-                            "DISCARD"
-                        ],
-                        [
-                            "1-jelly",
-                            "P1",
-                            "DISCARD"
-                        ],
-                        [
-                            "2-tennis ball",
-                            "P1",
-                            "DISCARD"
-                        ]
-                    ],
-                    "summary" : "PLAYER 1 DISCARDS GROUP: ROUND"
-                },
-                {
-                    "moves" : [
-                        [
-                            "1-watermelon",
-                            "DRAW",
-                            "P1"
-                        ],
-                        [
-                            "2-house roof",
-                            "DRAW",
-                            "P1"
-                        ],
-                        [
-                            "3-laptop",
-                            "DRAW",
-                            "P1"
-                        ]
-                    ],
-                    "summary" : "PLAYER 1 DRAWS ANOTHER 3 CARDS"
-                },
-                {
-                    "call" : "2",
-                    "moves" : [
-                        [
-                            "2-orange",
-                            "P2",
-                            "DISCARD"
-                        ],
-                        [
-                            "2-drum",
-                            "P2",
-                            "DISCARD"
-                        ],
-                        [
-                            "2-golf ball",
-                            "P2",
-                            "DISCARD"
-                        ],
-                        [
-                            "2-dice",
-                            "P2",
-                            "DISCARD"
-                        ]
-                    ],
-                    "summary" : "PLAYER 2 DISCARDS GROUP: 2"
-                },
-                {
-                    "moves" : [
-                        [
-                            "2-jelly",
-                            "DRAW",
-                            "P2"
-                        ],
-                        [
-                            "1-cake slice",
-                            "DRAW",
-                            "P2"
-                        ],
-                        [
-                            "3-the triangle",
-                            "DRAW",
-                            "P2"
-                        ]
-                    ],
-                    "summary" : "PLAYER 2 DRAWS ANOTHER 3 CARDS"
-                }
-            ]
-        },
-
-** the card images
+** The card images
 the images for the front side of the cards are in cards-front/ subdirectory,
 with the PNG files named "CARDNAME.png".
 
-** the simulation
+** The simulation
 i want to be able to specify somewhere which simulation to run (in this example,
 S1). But if I specify e.g. S2 then the simulation data is in
 simdata/S2/simulation.json.
 
-** animation style
-when animating a player drawing cards from the draw pile (including the first
+** Animation style
+When animating a player drawing cards from the draw pile (including the first
 turn where all the players are dealt 9 cards each) each card should be animated
 separately in order. the animation should be smooth (60fps) and each card
-movement from the draw pile (left of the screen) to its final position in the
-player's hand should take 0.4 seconds.
+movement from the draw pile (left of the screen, vertically centered) to its
+final position in the player's hand should take 0.2 seconds.
 
 There should not be a delay between moving of one card to another. so for the
 first card, it should be animated from the left of the screen (the draw pile) to
@@ -322,7 +110,7 @@ When animating a player discarding his group of cards, first all the cards that
 will be moved in his hand should be highlighted, then the call of that step is
 displayed on the screen, e.g. "medium" for about 3 seconds, then individual
 cards is moved/animated going to the discard pile in order where each card
-moving is done in about 0.75 second. the animation should be smooth.
+moving is done in about 0.2 second. the animation should be smooth.
 
 Make sure all the cards highlighted are the cards that are being discarded.
 

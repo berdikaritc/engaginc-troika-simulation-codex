@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1">
+  <title>Anak Bos Troika — Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage" aria-label="Anak Bos Troika card game simulation">
+    <header class="topbar">
+      <img class="logo" src="logo/logo.png" alt="Anak Bos Troika">
+      <div class="status">
+        <div id="turn-info">GET READY</div>
+        <div id="step-summary">Simulation loading…</div>
+      </div>
+    </header>
+
+    <section class="lane" id="lane-p1" data-pile="P1">
+      <div class="lane-label"><strong>P1</strong><span>PLAYER 1</span></div>
+      <div class="cards" id="pile-p1"></div>
+    </section>
+
+    <section class="lane discard-lane" id="lane-discard" data-pile="DISCARD">
+      <div class="lane-label"><strong>DISCARD</strong><span id="discard-count">0 CARDS</span></div>
+      <div class="cards" id="pile-discard"></div>
+    </section>
+
+    <section class="lane" id="lane-p2" data-pile="P2">
+      <div class="lane-label"><strong>P2</strong><span>PLAYER 2</span></div>
+      <div class="cards" id="pile-p2"></div>
+    </section>
+
+    <div id="callout" aria-live="polite"></div>
+    <div id="error" hidden></div>
+  </main>
+  <script src="simulation.js"></script>
+</body>
+</html>

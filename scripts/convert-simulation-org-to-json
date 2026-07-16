@@ -12,7 +12,7 @@ my $simulation = {
 };
 
 my $content = do {
-    open my $f, "<", "simulation.org" or die;
+    open my $f, "<", "simulation.org" or die "Can't open simulation.org: $!";
     local $/;
     scalar <$f>;
 };
@@ -27,8 +27,10 @@ while ($content =~ /^# TURN ([^\r\n]+)\R([^#]+)/gms) {
 
 my $prev_turn_num;
 for my $step0 (@steps0) {
-    my ($turn_num, $turn_letter, $rest) = $step0->{description} =~ /(\d+)([ABCD]?) - (.+)/
-        or die;
+    my ($turn_num, $turn_letter, $rest) = $step0->{description} =~ /(\d+)([ABCD]?)(.*)/
+        or die "Can't parse description: $step0->{description}";
+    $rest //= '';
+    print "DEBUG: description=<$step0->{description}>, turn_num=<$turn_num>, turn_letter=<$turn_letter>, rest=<$rest>\n";
     my $turn;
     if (!$prev_turn_num || $turn_num != $prev_turn_num) {
         # a new turn
@@ -56,7 +58,7 @@ for my $step0 (@steps0) {
     } else {
         my ($from, $to);
         if ($turn_letter eq 'A') {
-            $rest =~ /DISCARDS (\w+): ([^.]+)/ or die;
+            $rest =~ /(?:DISCARDS )?(\w+): ([^.]+)/ or die "Can't parse rest: $rest (description: $step0->{description})";
             $step->{summary} = "P1 DISCARDS $1: $2";
             $step->{call} = "P1 CALLS: $2";
             $step->{call} .= ". P1 WINS." if $rest =~ /WIN/;
@@ -67,7 +69,7 @@ for my $step0 (@steps0) {
             $from = 'DRAW';
             $to = 'P1';
         } elsif ($turn_letter eq 'C') {
-            $rest =~ /DISCARDS (\w+): ([^.]+)/ or die;
+            $rest =~ /(?:DISCARDS )?(\w+): ([^.]+)/ or die "Can't parse rest: $rest (description: $step0->{description})";
             $step->{summary} = "P2 DISCARDS $1: $2";
             $step->{call} = "P2 CALLS: $2";
             $step->{call} .= ". P2 WINS." if $rest =~ /WIN/;

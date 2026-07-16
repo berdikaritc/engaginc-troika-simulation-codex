@@ -1,0 +1,203 @@
+:root {
+  --card-w: 165px;
+  --card-h: 257px;
+  --ink: #f9f3df;
+  --gold: #ffce45;
+  --panel: rgba(12, 25, 34, .72);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #081116;
+  font-family: Inter, "Arial Narrow", Arial, sans-serif;
+}
+
+#animation {
+  position: relative;
+  width: 720px;
+  height: 1080px;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% 46%, rgba(38, 112, 101, .42), transparent 40%),
+    linear-gradient(135deg, rgba(255,255,255,.025) 25%, transparent 25%) 0 0 / 24px 24px,
+    linear-gradient(160deg, #102d31, #07171d 58%, #0b2228);
+  isolation: isolate;
+}
+
+#animation::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: inset 0 0 55px rgba(0,0,0,.48);
+}
+
+.topbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 150px;
+  border-bottom: 2px solid rgba(255,206,69,.34);
+  background: rgba(4, 13, 18, .72);
+}
+
+.logo {
+  position: absolute;
+  left: 22px;
+  top: 18px;
+  width: 176px;
+  height: auto;
+}
+
+.status {
+  position: absolute;
+  left: 220px;
+  right: 26px;
+  top: 38px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+#turn-info {
+  color: var(--gold);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+#step-info {
+  min-height: 44px;
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .4px;
+}
+
+.zone {
+  position: absolute;
+  left: 0;
+  width: 720px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+#p1-zone { top: 150px; height: 300px; }
+#discard-zone { top: 450px; height: 300px; }
+#p2-zone { top: 750px; height: 330px; border-bottom: 0; }
+
+.pile {
+  position: absolute;
+  left: 26px;
+  top: 21px;
+  width: 570px;
+  height: var(--card-h);
+}
+
+#p2-pile { top: 25px; }
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card-w);
+  height: var(--card-h);
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.48);
+  transform-origin: center;
+  will-change: transform, filter, opacity;
+}
+
+.card.highlighted {
+  filter: brightness(1.16) drop-shadow(0 0 9px #ffe46b) drop-shadow(0 0 17px #ff9d1f);
+  outline: 4px solid #ffe169;
+  outline-offset: -4px;
+  transform: translateY(-10px);
+}
+
+.zone-label {
+  position: absolute;
+  z-index: 100;
+  right: 17px;
+  top: 23px;
+  width: 94px;
+  padding: 10px 8px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 8px;
+  background: var(--panel);
+  color: rgba(255,255,255,.78);
+  text-align: center;
+  font-size: 27px;
+  font-weight: 900;
+  line-height: .85;
+  transition: .18s ease;
+}
+
+.zone-label span {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.zone-label.active {
+  color: #172027;
+  border-color: #fff0a1;
+  background: var(--gold);
+  box-shadow: 0 0 18px rgba(255,206,69,.78);
+  transform: scale(1.06);
+}
+
+.discard-label { font-size: 17px; line-height: 1; }
+
+#flying-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+}
+
+.flying-card { position: absolute; margin: 0; }
+
+.callout {
+  position: absolute;
+  z-index: 700;
+  left: 50%;
+  top: 50%;
+  min-width: 390px;
+  padding: 22px 28px;
+  border: 3px solid #ffe783;
+  border-radius: 14px;
+  opacity: 0;
+  color: #fff7cd;
+  background: rgba(4, 13, 18, .95);
+  box-shadow: 0 8px 35px rgba(0,0,0,.7), 0 0 25px rgba(255,198,50,.35);
+  text-align: center;
+  font-size: 35px;
+  font-weight: 950;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transform: translate(-50%, -45%) scale(.88);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+
+.callout.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.error {
+  position: absolute;
+  z-index: 800;
+  inset: 360px 45px auto;
+  padding: 24px;
+  border: 2px solid #ff7272;
+  background: #2b1111;
+  color: white;
+  font-size: 18px;
+  line-height: 1.5;
+}
