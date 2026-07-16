@@ -7,6 +7,7 @@ const CONFIG = Object.freeze({
   initialDrawDuration: 200,
   drawDuration: 400,
   discardDuration: 200,
+  discardStagger: 100,
   callDuration: 3000,
   handSpacing: 27.5
 });
@@ -47,9 +48,9 @@ function makeCard(name) {
   return image;
 }
 
-function layoutPile(pileName) {
+function layoutPile(pileName, spacingOverride = null) {
   const cards = state[pileName];
-  const spacing = spacingFor(pileName, cards.length);
+  const spacing = spacingOverride ?? spacingFor(pileName, cards.length);
   cards.forEach((card, index) => {
     card.style.left = `${index * spacing}px`;
     card.style.zIndex = index + 1;
@@ -79,7 +80,7 @@ function targetPosition(pileName) {
   };
 }
 
-async function flyCard(name, from, to, duration) {
+async function flyCard(name, from, to, duration, options = {}) {
   const rootRect = root.getBoundingClientRect();
   let sourceCard = null;
   let start;
@@ -93,7 +94,7 @@ async function flyCard(name, from, to, duration) {
     start = { x: rect.left - rootRect.left, y: rect.top - rootRect.top };
   }
 
-  const end = targetPosition(to);
+  const end = options.target || targetPosition(to);
   const flyer = makeCard(name);
   flyer.classList.add("flying-card");
   flyer.style.left = `${start.x}px`;
@@ -117,7 +118,32 @@ async function flyCard(name, from, to, duration) {
   const finalCard = makeCard(name);
   piles[to].appendChild(finalCard);
   state[to].push(finalCard);
-  layoutPile(to);
+  layoutPile(to, options.destinationSpacing);
+}
+
+async function flyDiscardGroup(moves) {
+  const rootRect = root.getBoundingClientRect();
+  const pileRect = piles.DISCARD.getBoundingClientRect();
+  const startingCount = state.DISCARD.length;
+  const finalCount = startingCount + moves.length;
+  const finalSpacing = spacingFor("DISCARD", finalCount);
+
+  // Compress the existing pile to its final spacing before reserving landing
+  // positions for all concurrently moving cards.
+  layoutPile("DISCARD", finalSpacing);
+
+  await Promise.all(moves.map(async ([name, from, to], index) => {
+    await sleep(index * CONFIG.discardStagger);
+    return flyCard(name, from, to, CONFIG.discardDuration, {
+      target: {
+        x: pileRect.left - rootRect.left + (startingCount + index) * finalSpacing,
+        y: pileRect.top - rootRect.top
+      },
+      destinationSpacing: finalSpacing
+    });
+  }));
+
+  layoutPile("DISCARD");
 }
 
 function highlightDiscardCards(step) {
@@ -148,11 +174,13 @@ async function runStep(step, isInitialDraw = false) {
     if (step.call) await showCall(step.call);
   }
 
-  for (const [name, from, to] of step.moves || []) {
-    await flyCard(name, from, to,
-      from === "DRAW"
-        ? (isInitialDraw ? CONFIG.initialDrawDuration : CONFIG.drawDuration)
-        : CONFIG.discardDuration);
+  if (isDiscard) {
+    await flyDiscardGroup(step.moves);
+  } else {
+    for (const [name, from, to] of step.moves || []) {
+      await flyCard(name, from, to,
+        isInitialDraw ? CONFIG.initialDrawDuration : CONFIG.drawDuration);
+    }
   }
 }
 
