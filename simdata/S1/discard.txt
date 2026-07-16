@@ -1,3 +1,6 @@
+2-tennis ball (sports, round, green, medium)
+wildcard tux 6
+2-the triangle (music, triangle, white, medium)
 2-bed (furniture, rectangle, white, large)
 wildcard max 1
 1-house roof (building, triangle, red, large)

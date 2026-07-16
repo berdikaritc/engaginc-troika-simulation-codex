@@ -1,9 +1,9 @@
-2-the triangle (music, triangle, white, medium)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-table (furniture, rectangle, brown, medium)
 1-watermelon (fruit, round, green, large)
-wildcard tux 6
 wildcard+tux lyx 1
 wildcard+tux lyx 2
 1-orange (fruit, round, orange, medium)
 wildcard+tux lyx 3
 1-pizza slice (food, triangle, yellow, medium)
-2-tennis ball (sports, round, green, medium)
