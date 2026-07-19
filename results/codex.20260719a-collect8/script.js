@@ -22,18 +22,14 @@
     ['the triangle','music','white'],['drum','music','blue'],['piano','music','black']
   ];
   const all = items.flatMap(([name,category,color]) => [1,2,3].map(q => ({name:`${q}-${name}`,category,color})));
-  const byName = n => all.find(c => c.name === n);
-  const red = ['1-house roof','2-house roof','3-house roof','1-laptop','2-laptop','3-laptop','1-dice','2-dice','3-dice'].map(byName);
-  const used = new Set();
-  const take = n => { const c=byName(n); used.add(n); return c; };
-  // A legal preset deal creates an intelligible short story: P1 commits to red.
-  const hands = {
-    P1:[take('1-house roof'),take('2-house roof'),take('3-house roof'),take('1-laptop'),take('2-laptop'),take('1-grape'),take('1-orange'),take('1-table'),take('1-drum')],
-    P2:[take('1-watermelon'),take('2-watermelon'),take('3-watermelon'),take('1-tennis ball'),take('2-tennis ball'),take('1-jelly'),take('1-hat'),take('1-piano'),take('1-cupboard')]
-  };
-  const scripted = [take('3-laptop'),take('2-jelly'),take('1-dice'),take('2-hat'),take('2-dice')];
-  const rest = all.filter(c => !used.has(c.name)).sort(() => Math.random()-.5);
-  const deck = [...scripted, ...rest];
+  const hands = {P1:[], P2:[]};
+  const goals = {P1:null, P2:null};
+  // Fisher–Yates gives every refresh a new, unbiased ordering of all 81 cards.
+  const deck = [...all];
+  for(let i=deck.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [deck[i],deck[j]]=[deck[j],deck[i]];
+  }
   const discard = [];
 
   const cardImg = (card, back=false) => {
@@ -62,28 +58,40 @@
     await anim.finished; f.remove();
   }
   async function deal() {
-    const p1=[...hands.P1], p2=[...hands.P2]; hands.P1=[]; hands.P2=[];
     for(let i=0;i<9;i++) for(const p of ['P1','P2']) {
-      const c=(p==='P1'?p1:p2)[i];
+      const c=deck.shift(); renderPiles();
       await fly(c,$('#draw-pile'),$(`#${p.toLowerCase()}-hand`),400,i);
       hands[p].push(c); renderHand(p);
     }
   }
   const score = (p,key) => Math.max(...Object.values(hands[p].reduce((a,c)=>(a[c[key]]=(a[c[key]]||0)+1,a),{})));
-  const chooseDiscard = p => {
-    if(p==='P1') return hands[p].findIndex(c=>c.color!=='red');
-    const counts=hands[p].reduce((a,c)=>(a[c.category]=(a[c.category]||0)+1,a),{});
-    const target=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];
-    return hands[p].findIndex(c=>c.category!==target);
+  const chooseGoal = p => {
+    const candidates=[];
+    for(const key of ['color','category']) {
+      const counts=hands[p].reduce((a,c)=>(a[c[key]]=(a[c[key]]||0)+1,a),{});
+      for(const [value,count] of Object.entries(counts)) candidates.push({key,value,count});
+    }
+    return candidates.sort((a,b)=>b.count-a.count || Math.random()-.5)[0];
+  };
+  const chooseDiscard = (p,target) => {
+    const choices=hands[p].map((c,i)=>({c,i})).filter(({c})=>c[target.key]!==target.value);
+    return choices.length ? choices[Math.floor(Math.random()*choices.length)].i : Math.floor(Math.random()*hands[p].length);
   };
   async function turn(p) {
     $(`#${p.toLowerCase()}-label`).classList.add('active'); $('#turn-status').textContent=copy.turn(p);
-    if(!deck.length) return 'draw';
-    const c=deck.shift(); renderPiles(); await fly(c,$('#draw-pile'),$(`#${p.toLowerCase()}-hand`),1000,hands[p].length); hands[p].push(c); renderHand(p);
+    const target=goals[p];
+    const topDiscard=discard.at(-1);
+    const takeDiscard=topDiscard && topDiscard[target.key]===target.value;
+    if(!takeDiscard && !deck.length) return 'draw';
+    const source=takeDiscard ? $('#discard-pile .card') : $('#draw-pile');
+    const c=takeDiscard ? topDiscard : deck.shift();
+    await fly(c,source,$(`#${p.toLowerCase()}-hand`),1000,hands[p].length);
+    if(takeDiscard) discard.pop();
+    hands[p].push(c); renderHand(p); renderPiles();
     if(score(p,'color')>=8 || score(p,'category')>=8) return p;
     $('#turn-status').textContent=copy.thinking; await sleep(1400);
-    const idx=chooseDiscard(p), out=hands[p][idx], source=$(`#${p.toLowerCase()}-hand .card:nth-child(${idx+1})`);
-    await fly(out,source,$('#discard-pile'),1000); hands[p].splice(idx,1); discard.push(out); renderHand(p); renderPiles();
+    const idx=chooseDiscard(p,target), out=hands[p][idx], sourceCard=$(`#${p.toLowerCase()}-hand .card:nth-child(${idx+1})`);
+    await fly(out,sourceCard,$('#discard-pile'),1000); hands[p].splice(idx,1); discard.push(out); renderHand(p); renderPiles();
     $(`#${p.toLowerCase()}-label`).classList.remove('active'); $('#turn-status').textContent=''; await sleep(1000); return null;
   }
   async function start() {
@@ -94,7 +102,9 @@
     await Promise.all(['images/cards-back/back.png'].map(src => new Promise(resolve => {
       const img=new Image(); img.onload=img.onerror=resolve; img.src=src;
     })));
-    renderPiles(); await sleep(2000); await deal(); await sleep(900);
+    renderPiles(); await sleep(2000); await deal();
+    goals.P1=chooseGoal('P1'); goals.P2=chooseGoal('P2');
+    await sleep(900);
     let result=null, p='P1';
     while(!result){result=await turn(p); p=p==='P1'?'P2':'P1';}
     $('#turn-status').textContent=''; document.querySelectorAll('.player-label').forEach(x=>x.classList.remove('active'));

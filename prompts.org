@@ -224,18 +224,17 @@ wildcard+cut lyx 6
 
 And aside from that, there are also three wildcard cards, with the following names:
 
-wildcard max 1
-wildcard tux 1
-wildcard+cut lyx 1
+wildcard max 1 wildcard tux 1 wildcard+cut lyx 1
 
 *** The game description
-The Troika cards can be used to play many kinds of games.
-One of them is Collect Eight.
-The object of this game is to be the first two collect 8 cards of the same color or category.
-This game utilizes the 81 object cards but none of the wildcards.
-Shuffle the cards, deal 9 to each players face down.
-Players take turns taking a card from the draw pile or the last card discarded by previous player, then discard 1 card from their hand, to keep their hand at 9 cards.
-When a player has collected 8 cards of the same color or category, he reveals his hand and wins.
+The Troika cards can be used to play many kinds of games. One of them is Collect
+Eight. The object of this game is to be the first two collect 8 cards of the
+same color or category. This game utilizes the 81 object cards but none of the
+wildcards. Shuffle the cards, deal 9 to each players face down. Players take
+turns taking a card from the draw pile or the last card discarded by previous
+player, then discard 1 card from their hand, to keep their hand at 9 cards. When
+a player has collected 8 cards of the same color or category, he reveals his
+hand and wins.
 *** The game mechanics
 At the start of the game, each player is dealt 9 cards.
 
@@ -286,51 +285,37 @@ The discard pile will be displayed as a vertical pile where only the top of the
 pile is shown, face up.
 
 *** The simulation
-The simulation starts with P1 and P2 already having their piles ready
-(containing cards in shuffled order). The discard pile is empty.
+After 2 seconds, the simulation starts.
 
-After 2 seconds, the animation starts.
+The simulation starts with P1 and P2 being dealt nine cards, face down. Cards
+are flying from draw pile to player's hand face up. Make sure animation is
+smooth 60 fps. Each card animation should take 0.4s.
 
-First a card from P1's pile is animated as flying face down (smooth animation 60
-fps) into the discard pile (animation should take 0.6s) then flipped instantly.
-Then the call is displayed on the screen pretty prominently, e.g. "1 Small"
-(without covering the piles or blurring the screen). Do NOT show any text
-concerning the object name or anything else. The images on the card will
-suffice.
+P1's turn. The label for P1 is highlighted. P1 starts drawing 1 card from the
+draw pile, face up, into his hand. Card is flying from draw pile to player's
+hand face up. Make sure animation is smooth 60 fps. Each card animation should
+take 1s.
 
-If the card does not match the call as per rule, one of these things should happen:
+Then there should be a delay of about 1-2s, representing P1 thinking.
 
-a) there should be a 2% chance that a player slaps mistakenly, in which case the
-   slapping player must take the cards in the discard pile.
+P1 should select which card to discard back to discard pile (he should already
+decide which color or category to collect). The card to be discarded should be
+animated/flying into discard pile, face up. Make sure animation is smooth 60
+fps. Each card animation should take 1s.
 
-   Animation of the slap: there should be a delay between 0.1s and 0.5s. the
-   image of the player's hand should appear near the discard pile then quickly
-   slaps the card by moving into the center of the card in the discard pile
-   (animation should take between 0.1s and 0.2s, randomly). Then the card is
-   highlighted and and a red big "WRONG SLAP" should be displayed prominently.
-   Then there should be animation of the cards in the discard pile being flipped
-   instantly face down, and flying smoothly into the losing player's pile while
-   his current pile slides to the right first. after the incoming pile, the
-   current pile slides back to the right on top of the incoming pile (animation
-   should take about 2s). Then there should be a delay between 0.5s and 1s.
+Then the label for P1 is unhighlighted.
 
-b) (98% chance happening) there should a delay of about 0.1s and 0.5s.
+Then there should be a delay of 1s.
 
-If the card matches the call, the players race to slap, with the animation like
-described above in a) point. There is a random 50% : 50% chance that P1 wins the
-slap. Then the card and the label of the player who wins the slap should be
-highlighted, with a text saying something like "P1 FASTEST". Then there's the
-animation of the losing player taking the cards in the discard pile to the
-bottom of his pile, like previously described (animation should take about 3s).
+P2's turn. The label for P2 is highlighted. Then P2 also draws and discards his
+card, like P1 does.
 
-After that the simulation continue with the next turn.
+Then back to P1's turn and so on, until one of the player wins (at which there
+should be a big text being displayed on the center of the screen: "P1 WINS" or
+"P2 WINS") or the draw pile is exhausted (upon which there should be a big text
+being displayed on the center of the screen: "DRAW").
 
-Continue until one of the player wins.
-
-When a player wins, the text should display it prominently (e.g. "P1 WINS THE
-GAME" or "P2 WINS THE GAME").
-
-Then the simulation ends.
+Then simulation ends.
 *** The images
 the images for the front side of the cards are in images/cards-front/
 subdirectory, with the PNG files named "CARDNAME.png".
@@ -344,12 +329,19 @@ named either "hands-01.png" (for player 1's hand) or "hands-02.png" (for player
 *** Options
 i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
 When the parameter is set to 'id', the text should all be in Indonesian instead
-of English. This include the call (e.g. "1 Kecil" instead of "1 Small") and
-other messages ("WRONG SLAP" becomes "SALAH GEBRAK", "P1 FASTEST" becomes "P1
-DULUAN", "P1 WINS THE GAME" becomes "P1 MENANG" and accordingly).
+of English. This include "P1 WINS" becoming "P1 MENANG", "DRAW" becoming "SERI".
+** [2026-07-19 Sun] session: codex.20260719a-collect8
+*** journal
+**** [2026-07-19 Sun 09:39] start
+*** additional prompts
+remove the hands images.
 
-*** Animation style
-Animation should be smooth (60 fps).
+every time the page is refreshed, a new random simulation is started. start from
+a completely random shuffled draw pile.
+
+when a player takes his turn, make him also be able to take from last discarded
+card from the discard pile if it helps towards his goal of collecting the
+color/category he wants to collect.
 * game > slap
 ** [2026-07-18 Sat] description
 *** id
