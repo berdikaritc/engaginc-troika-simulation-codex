@@ -342,6 +342,15 @@ a completely random shuffled draw pile.
 when a player takes his turn, make him also be able to take from last discarded
 card from the discard pile if it helps towards his goal of collecting the
 color/category he wants to collect.
+
+# terlalu lama deh sampe menang, ada kali sampe butuh 40 turns
+speed up the animation by 2x.
+
+# ada bug deh, P1 belum 8 kartu tapi sudah dinyatakan menang
+show what collection a player is collecting, perhaps below the player's hand
+label? with the same font color and size as the "HAND" text in the player's hand
+label, e.g. "COLLECTING MUSIC", or "COLLECTING RED". (in indonesian it's
+"MENGOLEKSI MUSIK" or "MENGOLEKSI MERAH").
 * game > slap
 ** [2026-07-18 Sat] description
 *** id

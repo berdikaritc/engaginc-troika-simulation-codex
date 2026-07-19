@@ -12,7 +12,7 @@ header { position:absolute; z-index:30; left:0; top:0; width:100%; height:116px;
 .hand { position:absolute; left:63px; top:16px; width:594px; height:260px; z-index:5; }
 .card { position:absolute; width:var(--card-w); height:var(--card-h); border-radius:10px; object-fit:cover; filter:drop-shadow(0 5px 5px #0008); background:#fff; transform-origin:center; }
 .hand .card { left:calc(var(--i) * 47px); top:0; z-index:var(--i); }
-.player-label { position:absolute; z-index:20; right:13px; top:10px; width:68px; padding:8px 5px 7px; border-radius:9px; background:#071b15dd; border:2px solid #ffffff55; text-align:center; transition:.25s ease; box-shadow:0 3px 8px #0008; }
+.player-label { position:absolute; z-index:20; right:13px; top:10px; width:68px; padding:8px 5px 7px; border-radius:9px; background:#071b15dd; border:2px solid #ffffff55; text-align:center; transition:.125s ease; box-shadow:0 3px 8px #0008; }
 .player-label span { display:block; font-size:25px; line-height:24px; font-weight:900; }
 .player-label small { display:block; margin-top:4px; font-size:9px; letter-spacing:1px; }
 .player-label.active { color:#152017; background:var(--gold); border-color:#fff3a6; transform:scale(1.09); box-shadow:0 0 22px #ffd850; }
@@ -27,9 +27,9 @@ header { position:absolute; z-index:30; left:0; top:0; width:100%; height:116px;
 .count { position:absolute; right:4px; bottom:2px; min-width:31px; padding:5px; color:#1b261e; background:var(--gold); border-radius:15px; font-weight:bold; }
 #turn-status { position:absolute; z-index:4; top:15px; left:260px; width:200px; text-align:center; color:#ffe886; font-size:15px; font-weight:bold; letter-spacing:1px; text-transform:uppercase; }
 .flying-card { position:absolute; z-index:100; width:165px; height:256px; border-radius:10px; object-fit:cover; filter:drop-shadow(0 12px 10px #000a); will-change:transform; pointer-events:none; }
-#result { position:absolute; z-index:200; inset:0; display:grid; place-items:center; visibility:hidden; background:#04120da8; opacity:0; transition:opacity .45s; }
+#result { position:absolute; z-index:200; inset:0; display:grid; place-items:center; visibility:hidden; background:#04120da8; opacity:0; transition:opacity .225s; }
 #result.show { visibility:visible; opacity:1; }
-#result div { width:620px; padding:34px 15px; text-align:center; color:#fff8cf; font-size:75px; line-height:1; font-weight:1000; letter-spacing:2px; text-shadow:0 6px 0 #7c4e00, 0 0 28px #ffd84f; background:#143e2ee8; border:5px solid var(--gold); border-radius:26px; transform:scale(.5); transition:transform .55s cubic-bezier(.2,1.5,.4,1); }
+#result div { width:620px; padding:34px 15px; text-align:center; color:#fff8cf; font-size:75px; line-height:1; font-weight:1000; letter-spacing:2px; text-shadow:0 6px 0 #7c4e00, 0 0 28px #ffd84f; background:#143e2ee8; border:5px solid var(--gold); border-radius:26px; transform:scale(.5); transition:transform .275s cubic-bezier(.2,1.5,.4,1); }
 #result.show div { transform:scale(1); }
 @media (max-width:719px), (max-height:1079px) { body { transform-origin:top center; } }
 @media (prefers-reduced-motion: reduce) { .flying-card { transition-duration:.01ms!important; } }

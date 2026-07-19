@@ -60,7 +60,7 @@
   async function deal() {
     for(let i=0;i<9;i++) for(const p of ['P1','P2']) {
       const c=deck.shift(); renderPiles();
-      await fly(c,$('#draw-pile'),$(`#${p.toLowerCase()}-hand`),400,i);
+      await fly(c,$('#draw-pile'),$(`#${p.toLowerCase()}-hand`),200,i);
       hands[p].push(c); renderHand(p);
     }
   }
@@ -85,14 +85,14 @@
     if(!takeDiscard && !deck.length) return 'draw';
     const source=takeDiscard ? $('#discard-pile .card') : $('#draw-pile');
     const c=takeDiscard ? topDiscard : deck.shift();
-    await fly(c,source,$(`#${p.toLowerCase()}-hand`),1000,hands[p].length);
+    await fly(c,source,$(`#${p.toLowerCase()}-hand`),500,hands[p].length);
     if(takeDiscard) discard.pop();
     hands[p].push(c); renderHand(p); renderPiles();
     if(score(p,'color')>=8 || score(p,'category')>=8) return p;
-    $('#turn-status').textContent=copy.thinking; await sleep(1400);
+    $('#turn-status').textContent=copy.thinking; await sleep(700);
     const idx=chooseDiscard(p,target), out=hands[p][idx], sourceCard=$(`#${p.toLowerCase()}-hand .card:nth-child(${idx+1})`);
-    await fly(out,sourceCard,$('#discard-pile'),1000); hands[p].splice(idx,1); discard.push(out); renderHand(p); renderPiles();
-    $(`#${p.toLowerCase()}-label`).classList.remove('active'); $('#turn-status').textContent=''; await sleep(1000); return null;
+    await fly(out,sourceCard,$('#discard-pile'),500); hands[p].splice(idx,1); discard.push(out); renderHand(p); renderPiles();
+    $(`#${p.toLowerCase()}-label`).classList.remove('active'); $('#turn-status').textContent=''; await sleep(500); return null;
   }
   async function start() {
     // Recorder-safe warm-up: decode artwork before any timed movement begins.
@@ -102,9 +102,9 @@
     await Promise.all(['images/cards-back/back.png'].map(src => new Promise(resolve => {
       const img=new Image(); img.onload=img.onerror=resolve; img.src=src;
     })));
-    renderPiles(); await sleep(2000); await deal();
+    renderPiles(); await sleep(1000); await deal();
     goals.P1=chooseGoal('P1'); goals.P2=chooseGoal('P2');
-    await sleep(900);
+    await sleep(450);
     let result=null, p='P1';
     while(!result){result=await turn(p); p=p==='P1'?'P2':'P1';}
     $('#turn-status').textContent=''; document.querySelectorAll('.player-label').forEach(x=>x.classList.remove('active'));
