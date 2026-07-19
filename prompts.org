@@ -1,3 +1,355 @@
+* game > collect 8
+** [2026-07-18 Sat] description
+*** id
+Kartu troika dapat digunakan untuk berbagai permainan.
+Salah satunya adalah Koleksi Delapan.
+Tujuan permainan ini adalah mengumpulkan 8 kartu dengan warna yang sama atau kategori yang sama.
+Di permainan ini, digunakan 81 kartu objek saja. Kartu wildcard tidak dipakai.
+Kocok kartu, bagikan 9 kartu ke masing-masing pemain, tertutup.
+Pemain bergiliran mengambil 1 kartu dari tumpukan ambil (atau dari kartu terakhir yang dibuang pemain berikutnya), lalu membuang 1 kartu, sehingga kartu di tangan tetap 9.
+Ketika pemain sudah mengumpulkan 8 kartu warna atau kategori sama, membuka kartunya dan menang.
+*** en
+The Troika cards can be used to play many kinds of games.
+One of them is Collect Eight.
+The object of this game is to be the first two collect 8 cards of the same color or category.
+This game utilizes the 81 object cards but none of the wildcards.
+Shuffle the cards, deal 9 to each players face down.
+Players take turns taking a card from the draw pile or the last card discarded by previous player, then discard 1 card from their hand, to keep their hand at 9 cards.
+When a player has collected 8 cards of the same color or category, he reveals his hand and wins.
+** [2026-07-18 Sat] prompt 1
+*** Summary
+i'm making a html+css+javascript-based card game play simulation animation that
+will be recorded using a desktop recorder like simplescreenrecorder on linux to
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
+
+the name of the card game is "Collect 8" (or "Koleksi 8" in Indonesian).
+
+the simulation will be for 2 players (P1 and P2).
+
+*** The cards
+The cards are of two types. First there are the object cards, each of which will
+contain picture of a certain QUANTITY of objects (either one object, or two of
+the same object, or three). Each object will have a SHAPE (one of triangle,
+rectangle, and round), SIZE (one of small, medium, large), COLOR (one of nine:
+white, black, red, blue, green, yellow, orange, purple, and brown), and CATEGORY
+(one of nine: fruit, sports, building, food, gadget, fashion, furniture, toy,
+music). So in total there are 81 object cards. Listed below in the format of:
+QUANTITY-OBJECT_NAME (CATEGORY, SHAPE, COLOR, SIZE). Card name is
+QUANTITY-OBJECT_NAME.
+
+1-grape (fruit, round, purple, small)
+2-grape (fruit, round, purple, small)
+3-grape (fruit, round, purple, small)
+1-orange (fruit, round, orange, medium)
+2-orange (fruit, round, orange, medium)
+3-orange (fruit, round, orange, medium)
+1-watermelon (fruit, round, green, large)
+2-watermelon (fruit, round, green, large)
+3-watermelon (fruit, round, green, large)
+1-golf ball (sports, round, white, small)
+2-golf ball (sports, round, white, small)
+3-golf ball (sports, round, white, small)
+1-tennis ball (sports, round, green, medium)
+2-tennis ball (sports, round, green, medium)
+3-tennis ball (sports, round, green, medium)
+1-basket ball (sports, round, orange, large)
+2-basket ball (sports, round, orange, large)
+3-basket ball (sports, round, orange, large)
+1-house roof (building, triangle, red, large)
+2-house roof (building, triangle, red, large)
+3-house roof (building, triangle, red, large)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-tent (building, triangle, yellow, large)
+1-pyramid (building, triangle, brown, large)
+2-pyramid (building, triangle, brown, large)
+3-pyramid (building, triangle, brown, large)
+1-cake slice (food, triangle, orange, small)
+2-cake slice (food, triangle, orange, small)
+3-cake slice (food, triangle, orange, small)
+1-pizza slice (food, triangle, yellow, medium)
+2-pizza slice (food, triangle, yellow, medium)
+3-pizza slice (food, triangle, yellow, medium)
+1-jelly (food, round, purple, small)
+2-jelly (food, round, purple, small)
+3-jelly (food, round, purple, small)
+1-handphone (gadget, rectangle, black, small)
+2-handphone (gadget, rectangle, black, small)
+3-handphone (gadget, rectangle, black, small)
+1-tv (gadget, rectangle, black, medium)
+2-tv (gadget, rectangle, black, medium)
+3-tv (gadget, rectangle, black, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-laptop (gadget, rectangle, red, medium)
+3-laptop (gadget, rectangle, red, medium)
+1-swimming trunk (fashion, triangle, blue, small)
+2-swimming trunk (fashion, triangle, blue, small)
+3-swimming trunk (fashion, triangle, blue, small)
+1-cloth hanger (fashion, triangle, blue, large)
+2-cloth hanger (fashion, triangle, blue, large)
+3-cloth hanger (fashion, triangle, blue, large)
+1-hat (fashion, round, purple, medium)
+2-hat (fashion, round, purple, medium)
+3-hat (fashion, round, purple, medium)
+1-table (furniture, rectangle, brown, medium)
+2-table (furniture, rectangle, brown, medium)
+3-table (furniture, rectangle, brown, medium)
+1-cupboard (furniture, rectangle, brown, large)
+2-cupboard (furniture, rectangle, brown, large)
+3-cupboard (furniture, rectangle, brown, large)
+1-bed (furniture, rectangle, white, large)
+2-bed (furniture, rectangle, white, large)
+3-bed (furniture, rectangle, white, large)
+1-paper airplane (toy, triangle, yellow, small)
+2-paper airplane (toy, triangle, yellow, small)
+3-paper airplane (toy, triangle, yellow, small)
+1-dice (toy, rectangle, red, small)
+2-dice (toy, rectangle, red, small)
+3-dice (toy, rectangle, red, small)
+1-alphabet block (toy, rectangle, green, small)
+2-alphabet block (toy, rectangle, green, small)
+3-alphabet block (toy, rectangle, green, small)
+1-the triangle (music, triangle, white, medium)
+2-the triangle (music, triangle, white, medium)
+3-the triangle (music, triangle, white, medium)
+1-drum (music, round, blue, medium)
+2-drum (music, round, blue, medium)
+3-drum (music, round, blue, medium)
+1-piano (music, rectangle, black, large)
+2-piano (music, rectangle, black, large)
+3-piano (music, rectangle, black, large)
+
+And below is the same list of cards, but in Indonesian:
+
+1-anggur (buah, bundar, ungu, kecil)
+2-anggur (buah, bundar, ungu, kecil)
+3-anggur (buah, bundar, ungu, kecil)
+1-jeruk (buah, bundar, oranye, sedang)
+2-jeruk (buah, bundar, oranye, sedang)
+3-jeruk (buah, bundar, oranye, sedang)
+1-semangka (buah, bundar, hijau, besar)
+2-semangka (buah, bundar, hijau, besar)
+3-semangka (buah, bundar, hijau, besar)
+1-bola golf (olahraga, bundar, putih, kecil)
+2-bola golf (olahraga, bundar, putih, kecil)
+3-bola golf (olahraga, bundar, putih, kecil)
+1-bola tenis (olahraga, bundar, hijau, sedang)
+2-bola tenis (olahraga, bundar, hijau, sedang)
+3-bola tenis (olahraga, bundar, hijau, sedang)
+1-bola basket (olahraga, bundar, oranye, besar)
+2-bola basket (olahraga, bundar, oranye, besar)
+3-bola basket (olahraga, bundar, oranye, besar)
+1-atap rumah (bangunan, segitiga, merah, besar)
+2-atap rumah (bangunan, segitiga, merah, besar)
+3-atap rumah (bangunan, segitiga, merah, besar)
+1-tenda (bangunan, segitiga, kuning, besar)
+2-tenda (bangunan, segitiga, kuning, besar)
+3-tenda (bangunan, segitiga, kuning, besar)
+1-piramid (bangunan, segitiga, cokelat, besar)
+2-piramid (bangunan, segitiga, cokelat, besar)
+3-piramid (bangunan, segitiga, cokelat, besar)
+1-sepotong kue (makanan, segitiga, oranye, kecil)
+2-sepotong kue (makanan, segitiga, oranye, kecil)
+3-sepotong kue (makanan, segitiga, oranye, kecil)
+1-sepotong pizza (makanan, segitiga, kuning, sedang)
+2-sepotong pizza (makanan, segitiga, kuning, sedang)
+3-sepotong pizza (makanan, segitiga, kuning, sedang)
+1-jeli (makanan, bundar, ungu, kecil)
+2-jeli (makanan, bundar, ungu, kecil)
+3-jeli (makanan, bundar, ungu, kecil)
+1-ponsel (gawai, kotak, hitam, kecil)
+2-ponsel (gawai, kotak, hitam, kecil)
+3-ponsel (gawai, kotak, hitam, kecil)
+1-tv (gawai, kotak, hitam, sedang)
+2-tv (gawai, kotak, hitam, sedang)
+3-tv (gawai, kotak, hitam, sedang)
+1-laptop (gawai, kotak, merah, sedang)
+2-laptop (gawai, kotak, merah, sedang)
+3-laptop (gawai, kotak, merah, sedang)
+1-celana renang (fesyen, segitiga, biru, kecil)
+2-celana renang (fesyen, segitiga, biru, kecil)
+3-celana renang (fesyen, segitiga, biru, kecil)
+1-gantungan baju (fesyen, segitiga, biru, besar)
+2-gantungan baju (fesyen, segitiga, biru, besar)
+3-gantungan baju (fesyen, segitiga, biru, besar)
+1-topi (fesyen, bundar, ungu, sedang)
+2-topi (fesyen, bundar, ungu, sedang)
+3-topi (fesyen, bundar, ungu, sedang)
+1-meja (mebel, kotak, cokelat, sedang)
+2-meja (mebel, kotak, cokelat, sedang)
+3-meja (mebel, kotak, cokelat, sedang)
+1-lemari (mebel, kotak, cokelat, besar)
+2-lemari (mebel, kotak, cokelat, besar)
+3-lemari (mebel, kotak, cokelat, besar)
+1-ranjang (mebel, kotak, putih, besar)
+2-ranjang (mebel, kotak, putih, besar)
+3-ranjang (mebel, kotak, putih, besar)
+1-pesawat kertas (mainan, segitiga, kuning, kecil)
+2-pesawat kertas (mainan, segitiga, kuning, kecil)
+3-pesawat kertas (mainan, segitiga, kuning, kecil)
+1-dadu (mainan, kotak, merah, kecil)
+2-dadu (mainan, kotak, merah, kecil)
+3-dadu (mainan, kotak, merah, kecil)
+1-balok huruf (mainan, kotak, hijau, kecil)
+2-balok huruf (mainan, kotak, hijau, kecil)
+3-balok huruf (mainan, kotak, hijau, kecil)
+1-trikona (musik, segitiga, putih, sedang)
+2-trikona (musik, segitiga, putih, sedang)
+3-trikona (musik, segitiga, putih, sedang)
+1-drum (musik, bundar, biru, sedang)
+2-drum (musik, bundar, biru, sedang)
+3-drum (musik, bundar, biru, sedang)
+1-piano (musik, kotak, hitam, besar)
+2-piano (musik, kotak, hitam, besar)
+3-piano (musik, kotak, hitam, besar)
+wildcard max 1
+wildcard max 2
+wildcard max 3
+wildcard max 4
+wildcard max 5
+wildcard max 6
+wildcard tux 1
+wildcard tux 2
+wildcard tux 3
+wildcard tux 4
+wildcard tux 5
+wildcard tux 6
+wildcard+cut lyx 1
+wildcard+cut lyx 2
+wildcard+cut lyx 3
+wildcard+cut lyx 4
+wildcard+cut lyx 5
+wildcard+cut lyx 6
+
+And aside from that, there are also three wildcard cards, with the following names:
+
+wildcard max 1
+wildcard tux 1
+wildcard+cut lyx 1
+
+*** The game description
+The Troika cards can be used to play many kinds of games.
+One of them is Collect Eight.
+The object of this game is to be the first two collect 8 cards of the same color or category.
+This game utilizes the 81 object cards but none of the wildcards.
+Shuffle the cards, deal 9 to each players face down.
+Players take turns taking a card from the draw pile or the last card discarded by previous player, then discard 1 card from their hand, to keep their hand at 9 cards.
+When a player has collected 8 cards of the same color or category, he reveals his hand and wins.
+*** The game mechanics
+At the start of the game, each player is dealt 9 cards.
+
+P1 starts by taking one card from the draw pile or from the last card discarded
+by the previous player. He then discards another (or the same) card, keeping his
+hand size at 9 cards.
+
+P2 then does the same, and so on.
+
+Each player is trying to collect 8 cards of the same color or category, for
+example 8 red cards or 8 music cards.
+
+As soon as a player has collected 8 cards, he reveals his card and wins. The
+game ends.
+*** Layout of the screen & appearance
+From top to bottom:
+
+- The top logo+information area: the very top will contain title (use logo file
+  images/logo/logo.png) and nothing else, The logo positioning should be
+  absolute so it does not move to the left or right whenever there are text
+  being displayed or animation happens.
+- P1's hand: the P1's hand which will occupy about 1/3 of vertical area of the
+  screen. The cards put in this pile should not overlap or cover the top area or
+  the draw/discard pile.
+- on the left is the draw pile and on the right is the discard pile. this will
+  also occupy about 1/3 of vertical area of the screen. The cards put in this
+  pile should not overlap or cover the cards in P1's hand or P2's hand.
+- P2's hand: P2's hand which will also occupy about 1/3 of vertical area of the
+  screen. The cards put in this hand should not overlap or cover the cards in
+  draw/discard pile.
+
+Width of card should be 165. The height should be proportional.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be covered by the cards. Maybe put the
+labels far on the right side.
+
+The players' hands will be displayed in accordeon style with fixed spacing between
+cards (~1/5 width of the card). The leftmost card will be the bottommost card,
+and subsequent cards on the right are cards that are on top of the previous
+cards (cards to their left).
+
+The draw pile will be displayed as a vertical pile where only the top of the
+pile is shown, face down.
+
+The discard pile will be displayed as a vertical pile where only the top of the
+pile is shown, face up.
+
+*** The simulation
+The simulation starts with P1 and P2 already having their piles ready
+(containing cards in shuffled order). The discard pile is empty.
+
+After 2 seconds, the animation starts.
+
+First a card from P1's pile is animated as flying face down (smooth animation 60
+fps) into the discard pile (animation should take 0.6s) then flipped instantly.
+Then the call is displayed on the screen pretty prominently, e.g. "1 Small"
+(without covering the piles or blurring the screen). Do NOT show any text
+concerning the object name or anything else. The images on the card will
+suffice.
+
+If the card does not match the call as per rule, one of these things should happen:
+
+a) there should be a 2% chance that a player slaps mistakenly, in which case the
+   slapping player must take the cards in the discard pile.
+
+   Animation of the slap: there should be a delay between 0.1s and 0.5s. the
+   image of the player's hand should appear near the discard pile then quickly
+   slaps the card by moving into the center of the card in the discard pile
+   (animation should take between 0.1s and 0.2s, randomly). Then the card is
+   highlighted and and a red big "WRONG SLAP" should be displayed prominently.
+   Then there should be animation of the cards in the discard pile being flipped
+   instantly face down, and flying smoothly into the losing player's pile while
+   his current pile slides to the right first. after the incoming pile, the
+   current pile slides back to the right on top of the incoming pile (animation
+   should take about 2s). Then there should be a delay between 0.5s and 1s.
+
+b) (98% chance happening) there should a delay of about 0.1s and 0.5s.
+
+If the card matches the call, the players race to slap, with the animation like
+described above in a) point. There is a random 50% : 50% chance that P1 wins the
+slap. Then the card and the label of the player who wins the slap should be
+highlighted, with a text saying something like "P1 FASTEST". Then there's the
+animation of the losing player taking the cards in the discard pile to the
+bottom of his pile, like previously described (animation should take about 3s).
+
+After that the simulation continue with the next turn.
+
+Continue until one of the player wins.
+
+When a player wins, the text should display it prominently (e.g. "P1 WINS THE
+GAME" or "P2 WINS THE GAME").
+
+Then the simulation ends.
+*** The images
+the images for the front side of the cards are in images/cards-front/
+subdirectory, with the PNG files named "CARDNAME.png".
+
+The image for the back side of the cards is the images/cards-back/back.png file.
+
+The images for the hand are in images/hands/ subdirectory, with the PNG files
+named either "hands-01.png" (for player 1's hand) or "hands-02.png" (for player
+2's hand).
+
+*** Options
+i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
+When the parameter is set to 'id', the text should all be in Indonesian instead
+of English. This include the call (e.g. "1 Kecil" instead of "1 Small") and
+other messages ("WRONG SLAP" becomes "SALAH GEBRAK", "P1 FASTEST" becomes "P1
+DULUAN", "P1 WINS THE GAME" becomes "P1 MENANG" and accordingly).
+
+*** Animation style
+Animation should be smooth (60 fps).
 * game > slap
 ** [2026-07-18 Sat] description
 *** id
@@ -309,17 +661,19 @@ suffice.
 
 If the card does not match the call as per rule, one of these things should happen:
 
-a) there should be a 2% chance that a player slaps mistakenly. Animation of the
-   slap: there should be a delay between 0.1s and 0.5s. the image of the
-   player's hand should appear near the discard pile then quickly slaps the card
-   by moving into the center of the card in the discard pile (animation should
-   take between 0.1s and 0.2s, randomly). Then the card is highlighted and and a
-   red big "WRONG SLAP" should be displayed prominently. Then there should be
-   animation of the cards in the discard pile being flipped instantly face down,
-   and flying smoothly into the losing player's pile while his current pile
-   slides to the right first. after the incoming pile, the current pile slides
-   back to the right on top of the incoming pile (animation should take about
-   2s). Then there should be a delay between 0.5s and 1s.
+a) there should be a 2% chance that a player slaps mistakenly, in which case the
+   slapping player must take the cards in the discard pile.
+
+   Animation of the slap: there should be a delay between 0.1s and 0.5s. the
+   image of the player's hand should appear near the discard pile then quickly
+   slaps the card by moving into the center of the card in the discard pile
+   (animation should take between 0.1s and 0.2s, randomly). Then the card is
+   highlighted and and a red big "WRONG SLAP" should be displayed prominently.
+   Then there should be animation of the cards in the discard pile being flipped
+   instantly face down, and flying smoothly into the losing player's pile while
+   his current pile slides to the right first. after the incoming pile, the
+   current pile slides back to the right on top of the incoming pile (animation
+   should take about 2s). Then there should be a delay between 0.5s and 1s.
 
 b) (98% chance happening) there should a delay of about 0.1s and 0.5s.
 
@@ -386,6 +740,45 @@ first. after the incoming pile arrive, the current pile slides back to the right
 on top of the incoming pile. this whole animation should take about 3s.
 
 # ok good enough
+*** subsequent prompts
+# found a bug, when there is a mistaken slap, the player who does the slap is
+# the one who must take the cards in the discard pile.
+
+I found a bug. When there is a mistaken slap, the player who does the slap is
+the one who must take the cards in the discard pile, not the other player.
+** [2026-07-19 Sun] session: agy.20260719a-slap
+*** journal
+**** [2026-07-19 Sun 05:11] start
+**** [2026-07-19 Sun] kena individual quota, switch ke akun lain dari budimansnowman ke perlancar
+**** [2026-07-19 Sun 05:36] start first prompt
+**** [2026-07-19 Sun 05:37] ups, kok tetap kena individual quota ya, sebelumnya gw login sebagai apa?
+**** [2026-07-19 Sun 05:37] switch ke budimansnowman
+**** [2026-07-19 Sun 05:40] start first prompt
+**** [2026-07-19 Sun 05:58] cek hasilnya, ga bener
+gak jalan simulasinya dan banyak ngaco.
+- simulasinya gak jalan, harus direstart, lalu distart, setelah itu 1 kali
+  discard dan berhenti.
+- saat didiscard, tetep dishownya back side.
+- tombol switch Indonesian/English gak jalan.
+
+gw give up, buang aja hasilnya ini.
+
+masih lebih better openai codex kali ini. antigravity kemarin waktu bikin
+simulasi troika player sih oke ya, kodenya dia yang gw pake.
+
+UPDATE: gw baca2x reddit thread, banyak yg ga nganjurin juga antigravity/gemini,
+inferior, headache, sering kena limit, dsb.
+** [2026-07-19 Sun] session: qwen.20260719a-slap
+*** journal
+**** [2026-07-19 Sun] start, butuh 5 menitan
+**** [2026-07-19 Sun] cek hasil, gak bener, masih sekelas
+modelnya salah kaprah, "flip" dianggap flip kiri kanan bukan dibalik depan
+belakang. ada border sekeliling. tapi at least animasi jalan gak kayak
+agy.20260719a-slap yang flop.
+
+symlink diganti real directory.
+
+males gw tweak2x lagi, tinggalin aja.
 * game > troika player
 ** [2026-07-15 Wed] prompt 1
 *** Summary
@@ -666,3 +1059,5 @@ from 0.1s to 0.03s?
 * zzz journal
 ** [2026-07-16 Thu] gw taruh di sub results/NAME/ agar repo ini bisa menyimpan berbagai hasil vibecoding
 ** [2026-07-18 Sat] buat simulasi untuk game lain yang bisa dimainkan dengan kartu troika
+** [2026-07-19 Sun] mau nyobain claude code (claude desktop) ternyata gak ada free option
+kecuali jika pakai model2 seperti Ollama (self hosting), atau google gemini.

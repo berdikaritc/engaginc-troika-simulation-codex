@@ -1,0 +1,38 @@
+:root { --card-w:165px; --card-h:256px; --ink:#19241d; --gold:#f5c548; --felt:#164b38; }
+* { box-sizing:border-box; }
+html, body { margin:0; width:100%; min-height:100%; background:#0b2118; font-family:Arial, Helvetica, sans-serif; overflow:hidden; }
+body { display:grid; place-items:start center; }
+#stage { position:relative; width:720px; height:1080px; overflow:hidden; color:#fff; background:radial-gradient(circle at 50% 50%, #277052 0, #164b38 52%, #0d3628 100%); box-shadow:0 0 60px #000; }
+#stage::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.1; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E"); }
+header { position:absolute; z-index:30; left:0; top:0; width:100%; height:116px; border-bottom:1px solid #ffffff2c; background:#0d3226cc; }
+#logo { position:absolute; width:184px; height:auto; left:268px; top:3px; }
+.player-zone { position:absolute; left:0; width:100%; height:287px; }
+.player-zone.top { top:119px; }
+.player-zone.bottom { top:782px; }
+.hand { position:absolute; left:63px; top:16px; width:594px; height:260px; z-index:5; }
+.card { position:absolute; width:var(--card-w); height:var(--card-h); border-radius:10px; object-fit:cover; filter:drop-shadow(0 5px 5px #0008); background:#fff; transform-origin:center; }
+.hand .card { left:calc(var(--i) * 47px); top:0; z-index:var(--i); }
+.player-label { position:absolute; z-index:20; right:13px; top:10px; width:68px; padding:8px 5px 7px; border-radius:9px; background:#071b15dd; border:2px solid #ffffff55; text-align:center; transition:.25s ease; box-shadow:0 3px 8px #0008; }
+.player-label span { display:block; font-size:25px; line-height:24px; font-weight:900; }
+.player-label small { display:block; margin-top:4px; font-size:9px; letter-spacing:1px; }
+.player-label.active { color:#152017; background:var(--gold); border-color:#fff3a6; transform:scale(1.09); box-shadow:0 0 22px #ffd850; }
+.hand-art { position:absolute; z-index:4; opacity:.83; pointer-events:none; object-fit:contain; }
+.p1-art { width:180px; height:195px; left:-54px; top:88px; transform:rotate(82deg); }
+.p2-art { width:180px; height:195px; right:-53px; top:76px; transform:rotate(-82deg); }
+#table-zone { position:absolute; top:412px; left:0; width:100%; height:364px; border-block:1px solid #ffffff2b; background:#09291d38; }
+.pile-wrap { position:absolute; top:43px; width:190px; text-align:center; }
+.draw-wrap { left:78px; } .discard-wrap { right:78px; }
+.pile-label { height:27px; font-size:13px; font-weight:bold; letter-spacing:1.6px; text-shadow:0 2px 3px #000; }
+.pile { position:relative; width:165px; height:256px; margin:auto; border-radius:10px; }
+.pile img { width:165px; height:256px; border-radius:10px; object-fit:cover; filter:drop-shadow(0 5px 6px #0009); }
+.draw::before, .draw::after { content:""; position:absolute; inset:0; border-radius:10px; background:#e8dca6; z-index:-1; }
+.draw::before { transform:translate(-5px,5px); } .draw::after { transform:translate(-9px,9px); }
+.count { position:absolute; right:4px; bottom:2px; min-width:31px; padding:5px; color:#1b261e; background:var(--gold); border-radius:15px; font-weight:bold; }
+#turn-status { position:absolute; z-index:4; top:15px; left:260px; width:200px; text-align:center; color:#ffe886; font-size:15px; font-weight:bold; letter-spacing:1px; text-transform:uppercase; }
+.flying-card { position:absolute; z-index:100; width:165px; height:256px; border-radius:10px; object-fit:cover; filter:drop-shadow(0 12px 10px #000a); will-change:transform; pointer-events:none; }
+#result { position:absolute; z-index:200; inset:0; display:grid; place-items:center; visibility:hidden; background:#04120da8; opacity:0; transition:opacity .45s; }
+#result.show { visibility:visible; opacity:1; }
+#result div { width:620px; padding:34px 15px; text-align:center; color:#fff8cf; font-size:75px; line-height:1; font-weight:1000; letter-spacing:2px; text-shadow:0 6px 0 #7c4e00, 0 0 28px #ffd84f; background:#143e2ee8; border:5px solid var(--gold); border-radius:26px; transform:scale(.5); transition:transform .55s cubic-bezier(.2,1.5,.4,1); }
+#result.show div { transform:scale(1); }
+@media (max-width:719px), (max-height:1079px) { body { transform-origin:top center; } }
+@media (prefers-reduced-motion: reduce) { .flying-card { transition-duration:.01ms!important; } }

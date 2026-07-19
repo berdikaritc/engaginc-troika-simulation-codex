@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1, maximum-scale=1">
+  <title>Collect 8 — Card Game Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage" aria-label="Collect 8 game table">
+    <header><img src="images/logo/logo.png" alt="Collect 8" id="logo"></header>
+
+    <section class="player-zone top" id="p1-zone">
+      <div class="player-label" id="p1-label"><span>P1</span><small data-i18n="hand">HAND</small></div>
+      <img class="hand-art p1-art" src="images/hands/hands-01.png" alt="">
+      <div class="hand" id="p1-hand"></div>
+    </section>
+
+    <section id="table-zone">
+      <div class="pile-wrap draw-wrap">
+        <div class="pile-label" data-i18n="drawPile">DRAW PILE</div>
+        <div class="pile draw" id="draw-pile"><img src="images/cards-back/back.png" alt="Face-down draw pile"></div>
+        <div class="count" id="draw-count"></div>
+      </div>
+      <div id="turn-status" aria-live="polite"></div>
+      <div class="pile-wrap discard-wrap">
+        <div class="pile-label" data-i18n="discardPile">DISCARD PILE</div>
+        <div class="pile discard" id="discard-pile"></div>
+      </div>
+    </section>
+
+    <section class="player-zone bottom" id="p2-zone">
+      <div class="player-label" id="p2-label"><span>P2</span><small data-i18n="hand">HAND</small></div>
+      <img class="hand-art p2-art" src="images/hands/hands-02.png" alt="">
+      <div class="hand" id="p2-hand"></div>
+    </section>
+
+    <div id="result" role="status"><div></div></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=720, height=1080, initial-scale=1.0">
+<title>Slap - Card Game Simulation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 720px;
+    height: 1080px;
+    overflow: hidden;
+    background: #1a1a2e;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    position: relative;
+  }
+
+  /* ===== Logo Area (fixed, non-moving) ===== */
+  #logo-area {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 720px;
+    height: 70px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  #logo-area img {
+    height: 55px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  }
+
+  /* ===== Call Display ===== */
+  #call-display {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 90;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+  #call-display.visible {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  #call-text {
+    font-size: 38px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255,215,0,0.5), 0 2px 6px rgba(0,0,0,0.8);
+    letter-spacing: 3px;
+  }
+
+  /* ===== Message Overlay ===== */
+  #message-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: 0 0 25px currentColor, 0 4px 10px rgba(0,0,0,0.9);
+    line-height: 1.2;
+    padding: 15px 30px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.4);
+    transition: opacity 0.3s ease;
+  }
+  #message-overlay.show { opacity: 1; }
+  #message-overlay.wrong-slap { color: #ff4444; }
+  #message-overlay.fastest { color: #44ff88; }
+  #message-overlay.wins { color: #ffd700; font-size: 56px; }
+
+  @keyframes pulse-win {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.08); }
+  }
+  #message-overlay.wins.show {
+    animation: pulse-win 1.2s ease-in-out infinite;
+  }
+
+  /* ===== Pile Sections ===== */
+  #p1-section {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    width: 180px;
+    height: 300px;
+    z-index: 10;
+  }
+  #discard-section {
+    position: absolute;
+    top: 460px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 260px;
+    z-index: 20;
+  }
+  #p2-section {
+    position: absolute;
+    top: 750px;
+    left: 20px;
+    width: 180px;
+    height: 300px;
+    z-index: 10;
+  }
+
+  /* ===== Labels (far right) ===== */
+  .pile-label {
+    position: absolute;
+    right: 25px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #8888aa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  #p1-label { top: 140px; }
+  #discard-label { top: 470px; }
+  #p2-label { top: 760px; }
+
+  .card-count {
+    position: absolute;
+    right: 25px;
+    font-size: 14px;
+    color: #666688;
+    font-weight: 600;
+  }
+  #p1-count { top: 170px; }
+  #discard-count { top: 500px; }
+  #p2-count { top: 790px; }
+
+  /* ===== Card Styles ===== */
+  .card {
+    width: 165px;
+    height: 220px;
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    overflow: hidden;
+    backface-visibility: hidden;
+  }
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease;
+  }
+  .card.flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+  }
+  .card-back {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    border: 3px solid #1a252f;
+  }
+  .card-back img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+  }
+  .card-front {
+    transform: rotateY(180deg);
+  }
+  .card-front img {
+    width: 92%;
+    height: 92%;
+    object-fit: contain;
+  }
+
+  /* ===== Highlight Effect ===== */
+  .card.highlight {
+    box-shadow: 0 0 20px 6px rgba(255,215,0,0.8), 0 4px 15px rgba(0,0,0,0.6);
+  }
+
+  /* ===== Flying Card ===== */
+  .flying-card {
+    position: absolute;
+    z-index: 150;
+    pointer-events: none;
+    width: 165px;
+    height: 220px;
+  }
+
+  /* ===== Slap Hand ===== */
+  .slap-hand {
+    position: absolute;
+    z-index: 180;
+    width: 140px;
+    height: 140px;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .slap-hand img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  }
+
+  /* ===== Pile Slide Animation ===== */
+  .pile-slide {
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
+</head>
+<body>
+
+<!-- Logo -->
+<div id="logo-area"><img src="images/logo/logo.png" alt="Slap"></div>
+
+<!-- Call -->
+<div id="call-display"><div id="call-text"></div></div>
+
+<!-- Message -->
+<div id="message-overlay"></div>
+
+<!-- P1 -->
+<div id="p1-section"></div>
+<div id="p1-label" class="pile-label">P1</div>
+<div id="p1-count" class="card-count">42</div>
+
+<!-- Discard -->
+<div id="discard-section"></div>
+<div id="discard-label" class="pile-label">DISCARD</div>
+<div id="discard-count" class="card-count">0</div>
+
+<!-- P2 -->
+<div id="p2-section"></div>
+<div id="p2-label" class="pile-label">P2</div>
+<div id="p2-count" class="card-count">42</div>
+
+<!-- Containers -->
+<div id="fly-container"></div>
+<div id="hand-container"></div>
+
+<script>
+'use strict';
+
+// ===== Card Data =====
+const CARD_DEFS = [
+  {n:'1-grape',q:1,s:'small',i:'1-grape.png'},{n:'2-grape',q:2,s:'small',i:'2-grape.png'},{n:'3-grape',q:3,s:'small',i:'3-grape.png'},
+  {n:'1-orange',q:1,s:'medium',i:'1-orange.png'},{n:'2-orange',q:2,s:'medium',i:'2-orange.png'},{n:'3-orange',q:3,s:'medium',i:'3-orange.png'},
+  {n:'1-watermelon',q:1,s:'large',i:'1-watermelon.png'},{n:'2-watermelon',q:2,s:'large',i:'2-watermelon.png'},{n:'3-watermelon',q:3,s:'large',i:'3-watermelon.png'},
+  {n:'1-golf ball',q:1,s:'small',i:'1-golf ball.png'},{n:'2-golf ball',q:2,s:'small',i:'2-golf ball.png'},{n:'3-golf ball',q:3,s:'small',i:'3-golf ball.png'},
+  {n:'1-tennis ball',q:1,s:'medium',i:'1-tennis ball.png'},{n:'2-tennis ball',q:2,s:'medium',i:'2-tennis ball.png'},{n:'3-tennis ball',q:3,s:'medium',i:'3-tennis ball.png'},
+  {n:'1-basket ball',q:1,s:'large',i:'1-basket ball.png'},{n:'2-basket ball',q:2,s:'large',i:'2-basket ball.png'},{n:'3-basket ball',q:3,s:'large',i:'3-basket ball.png'},
+  {n:'1-house roof',q:1,s:'large',i:'1-house roof.png'},{n:'2-house roof',q:2,s:'large',i:'2-house roof.png'},{n:'3-house roof',q:3,s:'large',i:'3-house roof.png'},
+  {n:'1-tent',q:1,s:'large',i:'1-tent.png'},{n:'2-tent',q:2,s:'large',i:'2-tent.png'},{n:'3-tent',q:3,s:'large',i:'3-tent.png'},
+  {n:'1-pyramid',q:1,s:'large',i:'1-pyramid.png'},{n:'2-pyramid',q:2,s:'large',i:'2-pyramid.png'},{n:'3-pyramid',q:3,s:'large',i:'3-pyramid.png'},
+  {n:'1-cake slice',q:1,s:'small',i:'1-cake slice.png'},{n:'2-cake slice',q:2,s:'small',i:'2-cake slice.png'},{n:'3-cake slice',q:3,s:'small',i:'3-cake slice.png'},
+  {n:'1-pizza slice',q:1,s:'medium',i:'1-pizza slice.png'},{n:'2-pizza slice',q:2,s:'medium',i:'2-pizza slice.png'},{n:'3-pizza slice',q:3,s:'medium',i:'3-pizza slice.png'},
+  {n:'1-jelly',q:1,s:'small',i:'1-jelly.png'},{n:'2-jelly',q:2,s:'small',i:'2-jelly.png'},{n:'3-jelly',q:3,s:'small',i:'3-jelly.png'},
+  {n:'1-handphone',q:1,s:'small',i:'1-handphone.png'},{n:'2-handphone',q:2,s:'small',i:'2-handphone.png'},{n:'3-handphone',q:3,s:'small',i:'3-handphone.png'},
+  {n:'1-tv',q:1,s:'medium',i:'1-tv.png'},{n:'2-tv',q:2,s:'medium',i:'2-tv.png'},{n:'3-tv',q:3,s:'medium',i:'3-tv.png'},
+  {n:'1-laptop',q:1,s:'medium',i:'1-laptop.png'},{n:'2-laptop',q:2,s:'medium',i:'2-laptop.png'},{n:'3-laptop',q:3,s:'medium',i:'3-laptop.png'},
+  {n:'1-swimming trunk',q:1,s:'small',i:'1-swimming trunk.png'},{n:'2-swimming trunk',q:2,s:'small',i:'2-swimming trunk.png'},{n:'3-swimming trunk',q:3,s:'small',i:'3-swimming trunk.png'},
+  {n:'1-cloth hanger',q:1,s:'large',i:'1-cloth hanger.png'},{n:'2-cloth hanger',q:2,s:'large',i:'2-cloth hanger.png'},{n:'3-cloth hanger',q:3,s:'large',i:'3-cloth hanger.png'},
+  {n:'1-hat',q:1,s:'medium',i:'1-hat.png'},{n:'2-hat',q:2,s:'medium',i:'2-hat.png'},{n:'3-hat',q:3,s:'medium',i:'3-hat.png'},
+  {n:'1-table',q:1,s:'medium',i:'1-table.png'},{n:'2-table',q:2,s:'medium',i:'2-table.png'},{n:'3-table',q:3,s:'medium',i:'3-table.png'},
+  {n:'1-cupboard',q:1,s:'large',i:'1-cupboard.png'},{n:'2-cupboard',q:2,s:'large',i:'2-cupboard.png'},{n:'3-cupboard',q:3,s:'large',i:'3-cupboard.png'},
+  {n:'1-bed',q:1,s:'large',i:'1-bed.png'},{n:'2-bed',q:2,s:'large',i:'2-bed.png'},{n:'3-bed',q:3,s:'large',i:'3-bed.png'},
+  {n:'1-paper airplane',q:1,s:'small',i:'1-paper airplane.png'},{n:'2-paper airplane',q:2,s:'small',i:'2-paper airplane.png'},{n:'3-paper airplane',q:3,s:'small',i:'3-paper airplane.png'},
+  {n:'1-dice',q:1,s:'small',i:'1-dice.png'},{n:'2-dice',q:2,s:'small',i:'2-dice.png'},{n:'3-dice',q:3,s:'small',i:'3-dice.png'},
+  {n:'1-alphabet block',q:1,s:'small',i:'1-alphabet block.png'},{n:'2-alphabet block',q:2,s:'small',i:'2-alphabet block.png'},{n:'3-alphabet block',q:3,s:'small',i:'3-alphabet block.png'},
+  {n:'1-the triangle',q:1,s:'medium',i:'1-the triangle.png'},{n:'2-the triangle',q:2,s:'medium',i:'2-the triangle.png'},{n:'3-the triangle',q:3,s:'medium',i:'3-the triangle.png'},
+  {n:'1-drum',q:1,s:'medium',i:'1-drum.png'},{n:'2-drum',q:2,s:'medium',i:'2-drum.png'},{n:'3-drum',q:3,s:'medium',i:'3-drum.png'},
+  {n:'1-piano',q:1,s:'large',i:'1-piano.png'},{n:'2-piano',q:2,s:'large',i:'2-piano.png'},{n:'3-piano',q:3,s:'large',i:'3-piano.png'},
+  {n:'wildcard max 1',w:true,i:'wildcard max 1.png'},
+  {n:'wildcard tux 1',w:true,i:'wildcard tux 1.png'},
+  {n:'wildcard+cut lyx 1',w:true,i:'wildcard+cut lyx 1.png'}
+];
+
+// ===== Localization =====
+const LOCALE = {
+  en: {
+    calls: {small:['1 Small','2 Small','3 Small'],medium:['1 Medium','2 Medium','3 Medium'],large:['1 Large','2 Large','3 Large']},
+    wrongSlap:'WRONG SLAP', fastest:p=>`${p} FASTEST`, wins:p=>`${p} WINS THE GAME`
+  },
+  id: {
+    calls: {small:['1 Kecil','2 Kecil','3 Kecil'],medium:['1 Sedang','2 Sedang','3 Sedang'],large:['1 Besar','2 Besar','3 Besar']},
+    wrongSlap:'SALAH GEBRAK', fastest:p=>`${p} DULUAN`, wins:p=>`${p} MENANG`
+  }
+};
+
+const lang = new URLSearchParams(location.search).get('lang') === 'id' ? 'id' : 'en';
+const L = LOCALE[lang];
+
+// ===== Utilities =====
+const delay = ms => new Promise(r => setTimeout(r, ms));
+const rand = (a,b) => Math.random()*(b-a)+a;
+const shuffle = arr => { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.random()*i|0;[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+// ===== DOM =====
+const $ = id => document.getElementById(id);
+const p1Sec=$('p1-section'), p2Sec=$('p2-section'), discSec=$('discard-section');
+const callDisp=$('call-display'), callTxt=$('call-text');
+const msgOv=$('message-overlay');
+const flyC=$('fly-container'), handC=$('hand-container');
+const p1Count=$('p1-count'), p2Count=$('p2-count'), discCount=$('discard-count');
+
+// ===== Game State =====
+let p1=[], p2=[], disc=[];
+let callIdx=0, turn=1, over=false, busy=false;
+const SIZES=['small','small','small','medium','medium','medium','large','large','large'];
+const QTYS=[1,2,3,1,2,3,1,2,3];
+
+// ===== Card DOM =====
+function makeCard(c, faceUp=false) {
+  const d = document.createElement('div');
+  d.className = 'card' + (faceUp?' flipped':'');
+  d.innerHTML = `<div class="card-inner"><div class="card-front"><img src="images/cards-front/${c.i}"></div><div class="card-back"><img src="images/cards-back/back.png"></div></div>`;
+  return d;
+}
+
+function renderPile(sec, pile, countEl) {
+  sec.querySelectorAll('.pile-card').forEach(e=>e.remove());
+  const vis = Math.min(pile.length, 5);
+  const off = pile.length - vis;
+  for(let i=0;i<vis;i++){
+    const el = makeCard(pile[off+i]);
+    el.className += ' pile-card';
+    el.style.top = (i*6)+'px'; el.style.left = (i*2)+'px';
+    sec.appendChild(el);
+  }
+  countEl.textContent = pile.length;
+}
+
+function renderDisc() {
+  discSec.querySelectorAll('.card').forEach(e=>e.remove());
+  if(disc.length){
+    const el = makeCard(disc[disc.length-1], true);
+    el.style.position='absolute'; el.style.top='0'; el.style.left='0';
+    discSec.appendChild(el);
+  }
+  discCount.textContent = disc.length;
+}
+
+// ===== Display =====
+function showCall(txt){ callTxt.textContent=txt; callDisp.classList.add('visible'); }
+function hideCall(){ callDisp.classList.remove('visible'); }
+function showMsg(txt,cls){ msgOv.textContent=txt; msgOv.className='show '+cls; }
+function hideMsg(){ msgOv.className=''; }
+
+// ===== Animations =====
+function flyCard(from, to, card, dur=600){
+  return new Promise(resolve=>{
+    const fr=from.getBoundingClientRect(), tr=to.getBoundingClientRect();
+    const el = makeCard(card);
+    el.className += ' flying-card';
+    el.style.left = (fr.left+10)+'px'; el.style.top = (fr.top+fr.height/2-110)+'px';
+    flyC.appendChild(el);
+    const ex=tr.left+(tr.width-165)/2, ey=tr.top+(tr.height-220)/2;
+    const sx=parseFloat(el.style.left), sy=parseFloat(el.style.top);
+    const t0=performance.now();
+    (function step(now){
+      const p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
+      el.style.left=(sx+(ex-sx)*e)+'px'; el.style.top=(sy+(ey-sy)*e)+'px';
+      p<1?requestAnimationFrame(step):(el.remove(),resolve());
+    })(t0);
+  });
+}
+
+function slapHand(player, target, delayBefore, slapDur){
+  return new Promise(resolve=>{
+    const el = document.createElement('div');
+    el.className='slap-hand';
+    el.innerHTML=`<img src="images/hands/hands-0${player}.png">`;
+    handC.appendChild(el);
+    const tr=target.getBoundingClientRect();
+    const cx=tr.left+tr.width/2-70, cy=tr.top+tr.height/2-70;
+    const sx=player===1?-80:720, sy=cy+rand(-20,20);
+    el.style.opacity='1'; el.style.left=sx+'px'; el.style.top=sy+'px';
+    setTimeout(()=>{
+      const t0=performance.now();
+      (function step(now){
+        const p=Math.min((now-t0)/slapDur,1), e=1-Math.pow(1-p,3);
+        el.style.left=(sx+(cx-sx)*e)+'px'; el.style.top=(sy+(cy-sy)*e)+'px';
+        p<1?requestAnimationFrame(step):setTimeout(()=>{el.remove();resolve();},200);
+      })(t0);
+    }, delayBefore);
+  });
+}
+
+async function collectToLoser(loser){
+  const loserSec=loser===1?p1Sec:p2Sec;
+  loserSec.classList.add('pile-slide');
+  loserSec.style.transform='translateX(80px)';
+  await delay(900);
+
+  // Flip top discard face down
+  const dc=discSec.querySelector('.card');
+  if(dc) dc.classList.remove('flipped');
+  await delay(300);
+
+  // Animate card fly
+  const dr=discSec.getBoundingClientRect(), lr=loserSec.getBoundingClientRect();
+  if(dc){
+    const el=dc.cloneNode(true);
+    el.className='flying-card';
+    el.style.left=(dr.left+(dr.width-165)/2)+'px';
+    el.style.top=(dr.top+(dr.height-220)/2)+'px';
+    flyC.appendChild(el);
+    const ex=lr.left, ey=lr.top+100;
+    const sx=parseFloat(el.style.left), sy=parseFloat(el.style.top);
+    const t0=performance.now();
+    await new Promise(r=>{
+      (function step(now){
+        const p=Math.min((now-t0)/1500,1), e=1-Math.pow(1-p,3);
+        el.style.left=(sx+(ex-sx)*e)+'px'; el.style.top=(sy+(ey-sy)*e)+'px';
+        p<1?requestAnimationFrame(step):(el.remove(),r());
+      })(t0);
+    });
+  }
+
+  if(loser===1) p1=[...disc,...p1]; else p2=[...disc,...p2];
+  disc=[];
+  renderPile(p1Sec,p1,p1Count); renderPile(p2Sec,p2,p2Count); renderDisc();
+
+  loserSec.style.transform='translateX(0)';
+  await delay(900);
+  loserSec.classList.remove('pile-slide');
+  await delay(400);
+}
+
+// ===== Game Logic =====
+function matches(card, idx){
+  if(card.w) return true;
+  return card.q===QTYS[idx] && card.s===SIZES[idx];
+}
+
+function scenario(card, idx){
+  if(matches(card,idx)) return 'race';
+  return Math.random()<0.02?'wrong':'none';
+}
+
+function checkWin(winner){
+  const pile=winner===1?p2:p1; // other player's pile
+  return pile.length===0;
+}
+
+async function turnLoop(){
+  if(over||busy) return;
+  busy=true;
+
+  const cur=turn===1?p1:p2;
+  const sec=turn===1?p1Sec:p2Sec;
+
+  if(!cur.length){
+    turn=turn===1?2:1;
+    busy=false;
+    await turnLoop();
+    return;
+  }
+
+  const card=cur.shift();
+  renderPile(sec,cur,turn===1?p1Count:p2Count);
+  await flyCard(sec, discSec, card, 600);
+  disc.push(card);
+  renderDisc();
+
+  const callTxt2 = L.calls[SIZES[callIdx]][QTYS[callIdx]-1];
+  showCall(callTxt2);
+  await delay(rand(150,400));
+
+  const sc=scenario(card, callIdx);
+
+  if(sc==='race'){
+    const winner=Math.random()<0.5?1:2;
+    const loser=winner===1?2:1;
+    const dc=discSec.querySelector('.card');
+    await slapHand(winner, dc, rand(100,400), rand(120,200));
+
+    if(dc) dc.classList.add('highlight');
+    showMsg(L.fastest(winner===1?'P1':'P2'),'fastest');
+    await delay(800);
+    hideMsg(); if(dc) dc.classList.remove('highlight');
+
+    await collectToLoser(loser);
+
+    if(checkWin(winner)){
+      over=true; hideCall();
+      showMsg(L.wins(winner===1?'P1':'P2'),'wins');
+      busy=false; return;
+    }
+    turn=winner;
+
+  } else if(sc==='wrong'){
+    const slapper=turn;
+    const dc=discSec.querySelector('.card');
+    await slapHand(slapper, dc, rand(100,400), rand(120,200));
+
+    if(dc) dc.classList.add('highlight');
+    showMsg(L.wrongSlap,'wrong-slap');
+    await delay(900);
+    hideMsg(); if(dc) dc.classList.remove('highlight');
+
+    await collectToLoser(slapper);
+
+    const other=slapper===1?2:1;
+    if((other===1?p1:p2).length===0){
+      over=true; hideCall();
+      showMsg(L.wins(other===1?'P1':'P2'),'wins');
+      busy=false; return;
+    }
+    turn=slapper;
+
+  } else {
+    await delay(200);
+    hideCall();
+    if(cur.length===0 && disc.length===0){
+      over=true;
+      showMsg(L.wins(turn===1?'P1':'P2'),'wins');
+      busy=false; return;
+    }
+    turn=turn===1?2:1;
+  }
+
+  callIdx=(callIdx+1)%9;
+  busy=false;
+  await delay(250);
+  if(!over) await turnLoop();
+}
+
+// ===== Init =====
+(async function init(){
+  const deck=shuffle(CARD_DEFS);
+  const half=deck.length>>1;
+  p1=deck.slice(0,half); p2=deck.slice(half);
+  renderPile(p1Sec,p1,p1Count); renderPile(p2Sec,p2,p2Count); renderDisc();
+  await delay(2000);
+  await turnLoop();
+})();
+</script>
+</body>
+</html>
