@@ -16,9 +16,6 @@ header { position:absolute; z-index:30; left:0; top:0; width:100%; height:116px;
 .player-label span { display:block; font-size:25px; line-height:24px; font-weight:900; }
 .player-label small { display:block; margin-top:4px; font-size:9px; letter-spacing:1px; }
 .player-label.active { color:#152017; background:var(--gold); border-color:#fff3a6; transform:scale(1.09); box-shadow:0 0 22px #ffd850; }
-.hand-art { position:absolute; z-index:4; opacity:.83; pointer-events:none; object-fit:contain; }
-.p1-art { width:180px; height:195px; left:-54px; top:88px; transform:rotate(82deg); }
-.p2-art { width:180px; height:195px; right:-53px; top:76px; transform:rotate(-82deg); }
 #table-zone { position:absolute; top:412px; left:0; width:100%; height:364px; border-block:1px solid #ffffff2b; background:#09291d38; }
 .pile-wrap { position:absolute; top:43px; width:190px; text-align:center; }
 .draw-wrap { left:78px; } .discard-wrap { right:78px; }

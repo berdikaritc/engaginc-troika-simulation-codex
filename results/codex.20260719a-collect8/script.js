@@ -91,7 +91,7 @@
     await Promise.all(all.map(c => new Promise(resolve => {
       const img=new Image(); img.onload=img.onerror=resolve; img.src=`images/cards-front/${c.name}.png`;
     })));
-    await Promise.all(['images/cards-back/back.png','images/hands/hands-01.png','images/hands/hands-02.png'].map(src => new Promise(resolve => {
+    await Promise.all(['images/cards-back/back.png'].map(src => new Promise(resolve => {
       const img=new Image(); img.onload=img.onerror=resolve; img.src=src;
     })));
     renderPiles(); await sleep(2000); await deal(); await sleep(900);
