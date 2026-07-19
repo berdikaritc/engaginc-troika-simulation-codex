@@ -5,9 +5,10 @@
   const lang = new URLSearchParams(location.search).get('lang') === 'id' ? 'id' : 'en';
   document.documentElement.lang = lang;
   const copy = {
-    en:{hand:'HAND',drawPile:'DRAW PILE',discardPile:'DISCARD PILE',turn:p=>`${p}'S TURN`,thinking:'THINKING…',wins:p=>`${p} WINS`,draw:'DRAW'},
-    id:{hand:'KARTU',drawPile:'TUMPUKAN AMBIL',discardPile:'TUMPUKAN BUANG',turn:p=>`GILIRAN ${p}`,thinking:'BERPIKIR…',wins:p=>`${p} MENANG`,draw:'SERI'}
+    en:{hand:'HAND',drawPile:'DRAW PILE',discardPile:'DISCARD PILE',turn:p=>`${p}'S TURN`,thinking:'THINKING…',wins:p=>`${p} WINS`,draw:'DRAW',collecting:v=>`COLLECTING ${v.toUpperCase()}`},
+    id:{hand:'KARTU',drawPile:'TUMPUKAN AMBIL',discardPile:'TUMPUKAN BUANG',turn:p=>`GILIRAN ${p}`,thinking:'BERPIKIR…',wins:p=>`${p} MENANG`,draw:'SERI',collecting:v=>`MENGOLEKSI ${v.toUpperCase()}`}
   }[lang];
+  const idNames={fruit:'buah',sports:'olahraga',building:'bangunan',food:'makanan',gadget:'gawai',fashion:'fesyen',furniture:'mebel',toy:'mainan',music:'musik',white:'putih',black:'hitam',red:'merah',blue:'biru',green:'hijau',yellow:'kuning',orange:'oranye',purple:'ungu',brown:'cokelat'};
   document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = copy[el.dataset.i18n]);
 
   const items = [
@@ -104,6 +105,10 @@
     })));
     renderPiles(); await sleep(1000); await deal();
     goals.P1=chooseGoal('P1'); goals.P2=chooseGoal('P2');
+    for(const p of ['P1','P2']) {
+      const name=lang==='id' ? idNames[goals[p].value] : goals[p].value;
+      $(`#${p.toLowerCase()}-label .collection-goal`).textContent=copy.collecting(name);
+    }
     await sleep(450);
     let result=null, p='P1';
     while(!result){result=await turn(p); p=p==='P1'?'P2':'P1';}
