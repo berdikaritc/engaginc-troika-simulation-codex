@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Continue Two</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game" aria-label="Continue Two game simulation">
+    <header class="game-header">
+      <img class="logo" src="images/logo/logo.png" alt="Continue Two logo">
+      <div class="title-block">
+        <h1 id="game-title">CONTINUE TWO</h1>
+        <p id="rule-reminder">MATCH AT LEAST TWO ASPECTS OF PREVIOUS CARD</p>
+        <p id="status" aria-live="polite"></p>
+      </div>
+    </header>
+
+    <section class="hand-zone hand-zone--top" id="p1-zone">
+      <div class="zone-label" id="p1-label">P1</div>
+      <div class="hand" id="p1-hand"></div>
+    </section>
+
+    <section class="table-zone">
+      <div class="pile-wrap draw-wrap">
+        <div class="pile" id="draw-pile"></div>
+        <div class="pile-label" id="draw-label">DRAW PILE</div>
+        <div class="count" id="draw-count"></div>
+      </div>
+      <div class="callout" id="callout" aria-live="polite"></div>
+      <div class="pile-wrap discard-wrap">
+        <div class="pile" id="discard-pile"></div>
+        <div class="pile-label" id="discard-label">DISCARD</div>
+      </div>
+    </section>
+
+    <section class="hand-zone hand-zone--bottom" id="p2-zone">
+      <div class="zone-label" id="p2-label">P2</div>
+      <div class="hand" id="p2-hand"></div>
+    </section>
+
+    <div class="result" id="result" aria-live="assertive"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

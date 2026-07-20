@@ -1,0 +1,168 @@
+:root {
+  --card-w: 120px;
+  /* Source cards are 662 × 1028/1029, so 120px wide is about 187px tall. */
+  --card-h: 187px;
+  --ink: #fff8dc;
+  --gold: #ffd45c;
+  --felt: #174d3b;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: #071d18;
+  overflow: hidden;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body { display: grid; place-items: start center; }
+
+#game {
+  position: relative;
+  width: 720px;
+  height: 1080px;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255,255,255,.08), transparent 42%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0 2px, transparent 2px 7px),
+    var(--felt);
+  box-shadow: inset 0 0 70px rgba(0,0,0,.45);
+}
+
+.game-header {
+  position: relative;
+  height: 108px;
+  border-bottom: 2px solid rgba(255,212,92,.42);
+}
+
+.logo {
+  position: absolute;
+  z-index: 2;
+  left: 25px;
+  top: 9px;
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.title-block { height: 100%; display: grid; place-content: center; text-align: center; }
+h1 { margin: 0; color: var(--gold); font-size: 33px; letter-spacing: 3px; text-shadow: 0 3px 4px #000; }
+#rule-reminder { margin: 2px 0 0; font-size: 11px; font-weight: 800; letter-spacing: .45px; }
+#status { height: 20px; margin: 1px 0 0; font-size: 16px; font-weight: 700; letter-spacing: 1px; }
+
+.hand-zone { position: relative; height: 306px; border-bottom: 1px solid rgba(255,255,255,.13); }
+.hand-zone--bottom { height: 342px; border-top: 1px solid rgba(255,255,255,.13); border-bottom: 0; }
+.hand { position: absolute; left: 22px; right: 72px; top: 64px; height: var(--card-h); }
+.hand-zone--bottom .hand { top: 70px; }
+
+.zone-label {
+  position: absolute;
+  z-index: 20;
+  right: 16px;
+  top: 16px;
+  min-width: 50px;
+  padding: 8px 9px;
+  border: 2px solid rgba(255,255,255,.45);
+  border-radius: 9px;
+  background: rgba(0,0,0,.3);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  transition: .2s ease;
+}
+.zone-label.active { color: #14200d; background: var(--gold); border-color: white; box-shadow: 0 0 20px var(--gold); transform: scale(1.08); }
+
+.table-zone { position: relative; height: 324px; }
+.pile-wrap { position: absolute; top: 54px; width: var(--card-w); height: var(--card-h); }
+.draw-wrap { left: 100px; }
+.discard-wrap { right: 100px; }
+.pile { position: relative; width: 100%; height: 100%; }
+.pile-label { position: absolute; width: 150px; left: -15px; top: 200px; text-align: center; font-size: 16px; font-weight: 900; letter-spacing: .8px; }
+.count { position: absolute; top: 230px; width: 100%; text-align: center; font-size: 14px; opacity: .8; }
+.callout {
+  position: absolute;
+  z-index: 25;
+  left: 245px;
+  top: 121px;
+  width: 230px;
+  text-align: center;
+  color: var(--gold);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-shadow: 0 3px 4px #000;
+  opacity: 0;
+  transform: scale(.8);
+  transition: .18s ease;
+}
+.callout.show { opacity: 1; transform: scale(1); }
+
+.card {
+  position: absolute;
+  width: var(--card-w);
+  height: var(--card-h);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #f7f0d9;
+  object-fit: contain;
+  box-shadow: 0 4px 9px rgba(0,0,0,.55);
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+.card.placeholder { border: 3px solid #eee1b9; background: linear-gradient(145deg, #fff8df, #dbca9b); color: #263d34; display: grid; place-items: center; text-align: center; padding: 9px; font-size: 14px; font-weight: 900; overflow-wrap: anywhere; }
+.card.back.placeholder { background: repeating-linear-gradient(45deg, #163d72 0 8px, #e5bd4a 8px 13px); color: white; text-shadow: 0 2px 3px #000; }
+.card.selected { transform: translateY(-20px); box-shadow: 0 0 0 5px var(--gold), 0 0 25px var(--gold); }
+.card.flying {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  will-change: transform;
+  contain: layout paint;
+}
+.flip-card {
+  position: absolute;
+  width: var(--card-w);
+  height: var(--card-h);
+  z-index: 10000;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  backface-visibility: hidden;
+}
+.flip-face.front { transform: rotateY(180deg); }
+}
+
+.result {
+  position: absolute;
+  z-index: 200;
+  inset: 0;
+  display: none;
+  place-items: center;
+  color: white;
+  background: rgba(0,0,0,.55);
+  font-size: 72px;
+  font-weight: 1000;
+  letter-spacing: 3px;
+  text-align: center;
+  text-shadow: 0 6px 0 #14251c, 0 0 30px var(--gold);
+}
+.result.show { display: grid; animation: result-in .45s ease-out both; }
+@keyframes result-in { from { opacity: 0; transform: scale(1.3); } }
+
+@media (max-width: 719px), (max-height: 1079px) {
+  body { place-items: start center; }
+  #game { transform-origin: top center; transform: scale(min(calc(100vw / 720), calc(100vh / 1080))); }
+}

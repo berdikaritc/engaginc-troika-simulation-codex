@@ -1087,6 +1087,768 @@ show what collection a player is collecting, perhaps below the player's hand
 label? with the same font color and size as the "HAND" text in the player's hand
 label, e.g. "COLLECTING MUSIC", or "COLLECTING RED". (in indonesian it's
 "MENGOLEKSI MUSIK" or "MENGOLEKSI MERAH").
+* game > continue 1
+** [2026-07-20 Mon] description
+*** id
+Kartu troika dapat digunakan untuk berbagai permainan.
+Salah satunya adalah Sambung Satu.
+Di permainan ini, digunakan semua 81 kartu objek dan 18 kartu wildcard.
+Kocok kartu, bagikan 6 ke masing-masing pemain, tertutup.
+Lalu satu kartu yang bukan wildcard dibagikan ke tengah sebagai Tumpukan Buang, terbuka.
+Sisa kartu diletakkan di tengah sebagai Tumpukan Ambil, tertutup.
+Tujuan permainan adalah menghabiskan kartu di tangan.
+Pemain bergiliran membuang satu kartu ke tumpukan buang, terbuka.
+Kartu harus sama warnanya atau kategorinya dengan kartu sebelumnya.
+Pemain tersebut harus menyebutkan apa aspek yang dipilihnya, mis: MERAH, atau MUSIK.
+Atau bisa juga gunakan kartu wildcard, yang akan cocok dengan semua kartu.
+Jika kartu wildcard yang dibuang, maka pemain berikutnya harus mencocokkan dengan kategori/warna kartu bukan-wildcard terakhir.
+Jika pemain tidak dapat membuang kartu, dia harus mencangkul dari tumpukan ambil sampai memperoleh kartu yang bisa dibuang.
+Pemain yang pertama menghabiskan kartu di tangannya, menang.
+*** en
+The Troika cards can be used to play many kinds of games.
+One of them is called Continue One.
+This game utilizes all object cards and wildcards.
+Shuffle the cards, deal 6 to each player, face down.
+Then deal one non-wildcard card face up to the center area as the Discard Pile.
+The goal of the game is to discard all cards on your hand.
+Players take turn discarding one card from their hand to the discard pile.
+The card must be of the same category or the same color as the last discarded card.
+The player must call which aspect he chooses when discarding, e.g. RED or MUSIC.
+Player can also discard wildcard, which is always playable.
+After a wildcard, the next player must discard card that matches the category/color of the last non-wildcard card on the discard pile.
+Or they can also discard another wildcard.
+If a player cannot discard a card in his hand, he must draw a card from the Draw Pile. If that card cannot be discarded also, he must draw another card from the Draw Pile and so on.
+The first player that can discard all cards from his hand, wins.
+** [2026-07-20 Mon] prompt 1
+*** Summary
+i'm making a html+css+javascript-based card game play simulation animation that
+will be recorded using a desktop recorder like simplescreenrecorder on linux to
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
+
+the name of the card game is "Continue One" (or "Sambung Satu" in Indonesian).
+
+the simulation will be for 2 players (P1 and P2).
+
+*** The cards
+The cards are of two types. First there are the object cards, each of which will
+contain picture of a certain QUANTITY of objects (either one object, or two of
+the same object, or three). Each object will have a SHAPE (one of triangle,
+rectangle, and round), SIZE (one of small, medium, large), COLOR (one of nine:
+white, black, red, blue, green, yellow, orange, purple, and brown), and CATEGORY
+(one of nine: fruit, sports, building, food, gadget, fashion, furniture, toy,
+music). So in total there are 81 object cards. Listed below in the format of:
+QUANTITY-OBJECT_NAME (CATEGORY, SHAPE, COLOR, SIZE). Card name is
+QUANTITY-OBJECT_NAME.
+
+1-grape (fruit, round, purple, small)
+2-grape (fruit, round, purple, small)
+3-grape (fruit, round, purple, small)
+1-orange (fruit, round, orange, medium)
+2-orange (fruit, round, orange, medium)
+3-orange (fruit, round, orange, medium)
+1-watermelon (fruit, round, green, large)
+2-watermelon (fruit, round, green, large)
+3-watermelon (fruit, round, green, large)
+1-golf ball (sports, round, white, small)
+2-golf ball (sports, round, white, small)
+3-golf ball (sports, round, white, small)
+1-tennis ball (sports, round, green, medium)
+2-tennis ball (sports, round, green, medium)
+3-tennis ball (sports, round, green, medium)
+1-basket ball (sports, round, orange, large)
+2-basket ball (sports, round, orange, large)
+3-basket ball (sports, round, orange, large)
+1-house roof (building, triangle, red, large)
+2-house roof (building, triangle, red, large)
+3-house roof (building, triangle, red, large)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-tent (building, triangle, yellow, large)
+1-pyramid (building, triangle, brown, large)
+2-pyramid (building, triangle, brown, large)
+3-pyramid (building, triangle, brown, large)
+1-cake slice (food, triangle, orange, small)
+2-cake slice (food, triangle, orange, small)
+3-cake slice (food, triangle, orange, small)
+1-pizza slice (food, triangle, yellow, medium)
+2-pizza slice (food, triangle, yellow, medium)
+3-pizza slice (food, triangle, yellow, medium)
+1-jelly (food, round, purple, small)
+2-jelly (food, round, purple, small)
+3-jelly (food, round, purple, small)
+1-handphone (gadget, rectangle, black, small)
+2-handphone (gadget, rectangle, black, small)
+3-handphone (gadget, rectangle, black, small)
+1-tv (gadget, rectangle, black, medium)
+2-tv (gadget, rectangle, black, medium)
+3-tv (gadget, rectangle, black, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-laptop (gadget, rectangle, red, medium)
+3-laptop (gadget, rectangle, red, medium)
+1-swimming trunk (fashion, triangle, blue, small)
+2-swimming trunk (fashion, triangle, blue, small)
+3-swimming trunk (fashion, triangle, blue, small)
+1-cloth hanger (fashion, triangle, blue, large)
+2-cloth hanger (fashion, triangle, blue, large)
+3-cloth hanger (fashion, triangle, blue, large)
+1-hat (fashion, round, purple, medium)
+2-hat (fashion, round, purple, medium)
+3-hat (fashion, round, purple, medium)
+1-table (furniture, rectangle, brown, medium)
+2-table (furniture, rectangle, brown, medium)
+3-table (furniture, rectangle, brown, medium)
+1-cupboard (furniture, rectangle, brown, large)
+2-cupboard (furniture, rectangle, brown, large)
+3-cupboard (furniture, rectangle, brown, large)
+1-bed (furniture, rectangle, white, large)
+2-bed (furniture, rectangle, white, large)
+3-bed (furniture, rectangle, white, large)
+1-paper airplane (toy, triangle, yellow, small)
+2-paper airplane (toy, triangle, yellow, small)
+3-paper airplane (toy, triangle, yellow, small)
+1-dice (toy, rectangle, red, small)
+2-dice (toy, rectangle, red, small)
+3-dice (toy, rectangle, red, small)
+1-alphabet block (toy, rectangle, green, small)
+2-alphabet block (toy, rectangle, green, small)
+3-alphabet block (toy, rectangle, green, small)
+1-the triangle (music, triangle, white, medium)
+2-the triangle (music, triangle, white, medium)
+3-the triangle (music, triangle, white, medium)
+1-drum (music, round, blue, medium)
+2-drum (music, round, blue, medium)
+3-drum (music, round, blue, medium)
+1-piano (music, rectangle, black, large)
+2-piano (music, rectangle, black, large)
+3-piano (music, rectangle, black, large)
+
+And below is the same list of cards, but in Indonesian:
+
+1-anggur (buah, bundar, ungu, kecil)
+2-anggur (buah, bundar, ungu, kecil)
+3-anggur (buah, bundar, ungu, kecil)
+1-jeruk (buah, bundar, oranye, sedang)
+2-jeruk (buah, bundar, oranye, sedang)
+3-jeruk (buah, bundar, oranye, sedang)
+1-semangka (buah, bundar, hijau, besar)
+2-semangka (buah, bundar, hijau, besar)
+3-semangka (buah, bundar, hijau, besar)
+1-bola golf (olahraga, bundar, putih, kecil)
+2-bola golf (olahraga, bundar, putih, kecil)
+3-bola golf (olahraga, bundar, putih, kecil)
+1-bola tenis (olahraga, bundar, hijau, sedang)
+2-bola tenis (olahraga, bundar, hijau, sedang)
+3-bola tenis (olahraga, bundar, hijau, sedang)
+1-bola basket (olahraga, bundar, oranye, besar)
+2-bola basket (olahraga, bundar, oranye, besar)
+3-bola basket (olahraga, bundar, oranye, besar)
+1-atap rumah (bangunan, segitiga, merah, besar)
+2-atap rumah (bangunan, segitiga, merah, besar)
+3-atap rumah (bangunan, segitiga, merah, besar)
+1-tenda (bangunan, segitiga, kuning, besar)
+2-tenda (bangunan, segitiga, kuning, besar)
+3-tenda (bangunan, segitiga, kuning, besar)
+1-piramid (bangunan, segitiga, cokelat, besar)
+2-piramid (bangunan, segitiga, cokelat, besar)
+3-piramid (bangunan, segitiga, cokelat, besar)
+1-sepotong kue (makanan, segitiga, oranye, kecil)
+2-sepotong kue (makanan, segitiga, oranye, kecil)
+3-sepotong kue (makanan, segitiga, oranye, kecil)
+1-sepotong pizza (makanan, segitiga, kuning, sedang)
+2-sepotong pizza (makanan, segitiga, kuning, sedang)
+3-sepotong pizza (makanan, segitiga, kuning, sedang)
+1-jeli (makanan, bundar, ungu, kecil)
+2-jeli (makanan, bundar, ungu, kecil)
+3-jeli (makanan, bundar, ungu, kecil)
+1-ponsel (gawai, kotak, hitam, kecil)
+2-ponsel (gawai, kotak, hitam, kecil)
+3-ponsel (gawai, kotak, hitam, kecil)
+1-tv (gawai, kotak, hitam, sedang)
+2-tv (gawai, kotak, hitam, sedang)
+3-tv (gawai, kotak, hitam, sedang)
+1-laptop (gawai, kotak, merah, sedang)
+2-laptop (gawai, kotak, merah, sedang)
+3-laptop (gawai, kotak, merah, sedang)
+1-celana renang (fesyen, segitiga, biru, kecil)
+2-celana renang (fesyen, segitiga, biru, kecil)
+3-celana renang (fesyen, segitiga, biru, kecil)
+1-gantungan baju (fesyen, segitiga, biru, besar)
+2-gantungan baju (fesyen, segitiga, biru, besar)
+3-gantungan baju (fesyen, segitiga, biru, besar)
+1-topi (fesyen, bundar, ungu, sedang)
+2-topi (fesyen, bundar, ungu, sedang)
+3-topi (fesyen, bundar, ungu, sedang)
+1-meja (mebel, kotak, cokelat, sedang)
+2-meja (mebel, kotak, cokelat, sedang)
+3-meja (mebel, kotak, cokelat, sedang)
+1-lemari (mebel, kotak, cokelat, besar)
+2-lemari (mebel, kotak, cokelat, besar)
+3-lemari (mebel, kotak, cokelat, besar)
+1-ranjang (mebel, kotak, putih, besar)
+2-ranjang (mebel, kotak, putih, besar)
+3-ranjang (mebel, kotak, putih, besar)
+1-pesawat kertas (mainan, segitiga, kuning, kecil)
+2-pesawat kertas (mainan, segitiga, kuning, kecil)
+3-pesawat kertas (mainan, segitiga, kuning, kecil)
+1-dadu (mainan, kotak, merah, kecil)
+2-dadu (mainan, kotak, merah, kecil)
+3-dadu (mainan, kotak, merah, kecil)
+1-balok huruf (mainan, kotak, hijau, kecil)
+2-balok huruf (mainan, kotak, hijau, kecil)
+3-balok huruf (mainan, kotak, hijau, kecil)
+1-trikona (musik, segitiga, putih, sedang)
+2-trikona (musik, segitiga, putih, sedang)
+3-trikona (musik, segitiga, putih, sedang)
+1-drum (musik, bundar, biru, sedang)
+2-drum (musik, bundar, biru, sedang)
+3-drum (musik, bundar, biru, sedang)
+1-piano (musik, kotak, hitam, besar)
+2-piano (musik, kotak, hitam, besar)
+3-piano (musik, kotak, hitam, besar)
+wildcard max 1
+wildcard max 2
+wildcard max 3
+wildcard max 4
+wildcard max 5
+wildcard max 6
+wildcard tux 1
+wildcard tux 2
+wildcard tux 3
+wildcard tux 4
+wildcard tux 5
+wildcard tux 6
+wildcard+cut lyx 1
+wildcard+cut lyx 2
+wildcard+cut lyx 3
+wildcard+cut lyx 4
+wildcard+cut lyx 5
+wildcard+cut lyx 6
+
+And aside from that, there are also three wildcard cards, with the following names:
+
+wildcard max 1 wildcard tux 1 wildcard+cut lyx 1
+
+*** The rules of the game
+This game utilizes all object cards and wildcards.
+Shuffle the cards, deal 6 to each player, face down.
+Then deal one non-wildcard card face up to the center area as the Discard Pile.
+The goal of the game is to discard all cards on your hand.
+Players take turn discarding one card from their hand to the discard pile.
+The card must be of the same category or the same color as the last discarded card.
+Player can also discard wildcard, which is always playable.
+After a wildcard, the next player must discard card that matches the category/color of the last non-wildcard card on the discard pile.
+Or they can also discard another wildcard.
+If a player cannot discard a card in his hand, he must draw a card from the Draw Pile. If that card cannot be discarded also, he must draw another card from the Draw Pile and so on.
+The first player that can discard all cards from his hand, wins.
+*** Layout of the screen & appearance
+From top to bottom:
+
+- The top logo+information area: the very top will contain title (use logo file
+  images/logo/logo.png) and game name, and nothing else, The logo positioning
+  should be absolute so it does not move to the left or right whenever there are
+  text being displayed or animation happens. This area occupies about 10% of the
+  vertical space.
+- P1's hand: the P1's hand which will occupy about 30% of vertical space. The
+  cards put in this pile should not overlap or cover the area on top of it or
+  the area below it.
+- The Draw Pile on the left and The Discard pile on the right. which will occupy
+  about 30% of vertical space.
+- P2's hand: the P1's hand which will occupy about 30% of vertical space. The
+  cards put in this pile should not overlap or cover the area on top of it.
+
+Width of card should be 120. The height should be proportional. There should not
+be additional padding for the cards.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be covered by the cards. Maybe put the
+labels far on the right side.
+
+The players' hands will be displayed in accordeon style with spacing between
+cards. The accordeon should maximize all available horizontal space so it should
+adjust the spacing between cards accordingly. The leftmost card will be the
+bottommost card, and subsequent cards on the right are cards that are on top of
+the previous cards (cards to their left).
+
+The discard pile will be displayed as a vertical pile where only the topmost
+card of the pile is shown, face up. Unless when wildcard(s) are put on top of
+it, the discard pile should still display (partially) the last non-wildcard,
+until another non-wildcard is put on top in which case only the latest
+non-wildcard card is shown.
+
+The draw pile will be displayed as a vertical pile where only the topmost
+card of the pile is shown, face down.
+
+*** The simulation
+Each page load should start with a randomly shuffled cards. P1 and P2 already
+has 6 cards each, face up. Also there is a non-wildcard card face up on the
+discard pile.
+
+After 2 seconds, the simulation starts.
+
+The simulation starts with P1's turn. P1's hand label is highlighted. P1 should
+select a card that has the same category/color as the last card on the discard
+pile. Then P1 calls his card, e.g. "RED" or "MUSIC" and a text is displayed to
+show that call. The card should be lifted up, highlighted for 0.5s, then flies
+smoothly (60fps animation) into the discard pile (animation takes 0.5s). Then
+delay 0.5s. P1 can also choose to discard a wildcard, as per the rules.
+
+If P1 does not have any card in his hand that can be discarded, he should draw
+one card from the Draw Pile. A card flies face down to the P1's hand (animation
+should take 0.5s), then animated being flipped over to face up (animation should
+be smooth and take 0.5s). If that card can be discarded, it should be discarded
+with animation like described above. Otherwise, another card should be drawn
+from the Draw Pile. If there are no more cards on the Draw Pile, the player
+passes.
+
+Make sure that when animating a flying card, the card is not duplicated, e.g. a
+duplicate is already shown in the final position while the original card is
+still flying towards it.
+
+Then P1's label in unhighlighted.
+
+Then a delay of 1s.
+
+Then P2's turn, much like P1's turn.
+
+Then back to P1's turn and so on, until only one player wins (in which case a
+big text is displayed in the center showing the winning player e.g. "P1 WINS").
+Or if both player pass, then the winner is the player with the least number of
+cards in his hand, or if both players have the same number of hands then the
+game ends with draw, in which case a big text is displayed in the center showing
+"DRAW".
+
+Then simulation ends.
+*** The images
+the images for the front side of the cards are in images/cards-front/
+subdirectory, with the PNG files named "CARDNAME.png".
+
+The image for the back side of the cards is the images/cards-back/back.png file.
+
+Do not use the hands images. Leave them alone.
+
+*** Options
+i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
+When the parameter is set to 'id', the text should all be in Indonesian instead
+of English. This include "P1 WINS" becoming "P1 MENANG", "DRAW" becoming "SERI".
+"PASS" becomes "LEWAT".
+** [2026-07-20 Mon 10:00] session: codex.20260720d-continue1
+*** journal
+**** [2026-07-20 Mon 09:59] start
+**** [2026-07-20 Mon 10:10] lihat hasil, the usual bug duplicated card when animating, trus gw lupa bilang harus call, jadi start over aja deh
+**** [2026-07-20 Mon 10:11] start over
+**** [2026-07-20 Mon 10:15] inspek hasil
+ada 1 bug
+*** subsequent prompts
+bug: When a card flies from the draw pile, unless the draw pile becomes empty,
+still show the other undrawn cards.
+
+If both player have to pass, then the winner is the player with the least number
+of cards in his hand, or if both players have the same number of hands then the
+game ends with draw, in which case a big text is displayed in the center showing
+"DRAW".
+
+* game > continue 2
+** [2026-07-20 Mon] description
+*** id
+Kartu troika dapat digunakan untuk berbagai permainan.
+Salah satunya adalah Sambung Dua.
+Di permainan ini, digunakan semua 81 kartu objek dan 18 kartu wildcard.
+Kocok kartu, bagikan 6 ke masing-masing pemain, tertutup.
+Lalu satu kartu yang bukan wildcard dibagikan ke tengah sebagai Tumpukan Buang, terbuka.
+Sisa kartu diletakkan di tengah sebagai Tumpukan Ambil, tertutup.
+Tujuan permainan adalah menghabiskan kartu di tangan.
+Pemain bergiliran membuang satu kartu ke tumpukan buang, terbuka.
+Kartu harus memiliki setidaknya 2 aspek yang sama (objeknya, kategorinya, jumlahnya 1/2/3, ukurannya S/M/L, warnanya, atau bentuknya bundar/kotak/segitiga).
+Pemain tersebut harus menyebutkan apa 2 aspek yang dipilihnya, mis: MERAH BUNDAR, atau MUSIK KECIL.
+Atau bisa juga gunakan kartu wildcard, yang akan cocok dengan semua kartu.
+Jika kartu wildcard yang dibuang, maka pemain berikutnya harus mencocokkan dengan aspek dari kartu bukan-wildcard terakhir.
+Jika pemain tidak dapat membuang kartu, dia harus mencangkul dari tumpukan ambil sampai memperoleh kartu yang bisa dibuang.
+Pemain yang pertama menghabiskan kartu di tangannya, menang.
+*** en
+The Troika cards can be used to play many kinds of games.
+One of them is called Continue Two.
+This game utilizes all object cards and wildcards.
+Shuffle the cards, deal 6 to each player, face down.
+Then deal one non-wildcard card face up to the center area as the Discard Pile.
+The goal of the game is to discard all cards on your hand.
+Players take turn discarding one card from their hand to the discard pile.
+The card must have at least 2 matching aspects with the last card on the discard pile (either the object, the category, the quantity, the size, the color, or the shape).
+The player must call his chosen aspects when discarding, e.g. RED MUSIC, or RECTANGLE LARGE, or 2 SMALL.
+Player can also discard wildcard, which is always playable.
+After a wildcard, the next player must discard card that matches the aspects of the last non-wildcard card on the discard pile.
+Or they can also discard another wildcard.
+If a player cannot discard a card in his hand, he must draw a card from the Draw Pile. If that card cannot be discarded also, he must draw another card from the Draw Pile and so on.
+The first player that can discard all cards from his hand, wins.
+** [2026-07-20 Mon] prompt 1
+*** Summary
+i'm making a html+css+javascript-based card game play simulation animation that
+will be recorded using a desktop recorder like simplescreenrecorder on linux to
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
+
+the name of the card game is "Continue Two" (or "Sambung Dua" in Indonesian).
+
+the simulation will be for 2 players (P1 and P2).
+
+*** The cards
+The cards are of two types. First there are the object cards, each of which will
+contain picture of a certain QUANTITY of objects (either one object, or two of
+the same object, or three). Each object will have a SHAPE (one of triangle,
+rectangle, and round), SIZE (one of small, medium, large), COLOR (one of nine:
+white, black, red, blue, green, yellow, orange, purple, and brown), and CATEGORY
+(one of nine: fruit, sports, building, food, gadget, fashion, furniture, toy,
+music). So in total there are 81 object cards. Listed below in the format of:
+QUANTITY-OBJECT_NAME (CATEGORY, SHAPE, COLOR, SIZE). Card name is
+QUANTITY-OBJECT_NAME.
+
+1-grape (fruit, round, purple, small)
+2-grape (fruit, round, purple, small)
+3-grape (fruit, round, purple, small)
+1-orange (fruit, round, orange, medium)
+2-orange (fruit, round, orange, medium)
+3-orange (fruit, round, orange, medium)
+1-watermelon (fruit, round, green, large)
+2-watermelon (fruit, round, green, large)
+3-watermelon (fruit, round, green, large)
+1-golf ball (sports, round, white, small)
+2-golf ball (sports, round, white, small)
+3-golf ball (sports, round, white, small)
+1-tennis ball (sports, round, green, medium)
+2-tennis ball (sports, round, green, medium)
+3-tennis ball (sports, round, green, medium)
+1-basket ball (sports, round, orange, large)
+2-basket ball (sports, round, orange, large)
+3-basket ball (sports, round, orange, large)
+1-house roof (building, triangle, red, large)
+2-house roof (building, triangle, red, large)
+3-house roof (building, triangle, red, large)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-tent (building, triangle, yellow, large)
+1-pyramid (building, triangle, brown, large)
+2-pyramid (building, triangle, brown, large)
+3-pyramid (building, triangle, brown, large)
+1-cake slice (food, triangle, orange, small)
+2-cake slice (food, triangle, orange, small)
+3-cake slice (food, triangle, orange, small)
+1-pizza slice (food, triangle, yellow, medium)
+2-pizza slice (food, triangle, yellow, medium)
+3-pizza slice (food, triangle, yellow, medium)
+1-jelly (food, round, purple, small)
+2-jelly (food, round, purple, small)
+3-jelly (food, round, purple, small)
+1-handphone (gadget, rectangle, black, small)
+2-handphone (gadget, rectangle, black, small)
+3-handphone (gadget, rectangle, black, small)
+1-tv (gadget, rectangle, black, medium)
+2-tv (gadget, rectangle, black, medium)
+3-tv (gadget, rectangle, black, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-laptop (gadget, rectangle, red, medium)
+3-laptop (gadget, rectangle, red, medium)
+1-swimming trunk (fashion, triangle, blue, small)
+2-swimming trunk (fashion, triangle, blue, small)
+3-swimming trunk (fashion, triangle, blue, small)
+1-cloth hanger (fashion, triangle, blue, large)
+2-cloth hanger (fashion, triangle, blue, large)
+3-cloth hanger (fashion, triangle, blue, large)
+1-hat (fashion, round, purple, medium)
+2-hat (fashion, round, purple, medium)
+3-hat (fashion, round, purple, medium)
+1-table (furniture, rectangle, brown, medium)
+2-table (furniture, rectangle, brown, medium)
+3-table (furniture, rectangle, brown, medium)
+1-cupboard (furniture, rectangle, brown, large)
+2-cupboard (furniture, rectangle, brown, large)
+3-cupboard (furniture, rectangle, brown, large)
+1-bed (furniture, rectangle, white, large)
+2-bed (furniture, rectangle, white, large)
+3-bed (furniture, rectangle, white, large)
+1-paper airplane (toy, triangle, yellow, small)
+2-paper airplane (toy, triangle, yellow, small)
+3-paper airplane (toy, triangle, yellow, small)
+1-dice (toy, rectangle, red, small)
+2-dice (toy, rectangle, red, small)
+3-dice (toy, rectangle, red, small)
+1-alphabet block (toy, rectangle, green, small)
+2-alphabet block (toy, rectangle, green, small)
+3-alphabet block (toy, rectangle, green, small)
+1-the triangle (music, triangle, white, medium)
+2-the triangle (music, triangle, white, medium)
+3-the triangle (music, triangle, white, medium)
+1-drum (music, round, blue, medium)
+2-drum (music, round, blue, medium)
+3-drum (music, round, blue, medium)
+1-piano (music, rectangle, black, large)
+2-piano (music, rectangle, black, large)
+3-piano (music, rectangle, black, large)
+
+And below is the same list of cards, but in Indonesian:
+
+1-anggur (buah, bundar, ungu, kecil)
+2-anggur (buah, bundar, ungu, kecil)
+3-anggur (buah, bundar, ungu, kecil)
+1-jeruk (buah, bundar, oranye, sedang)
+2-jeruk (buah, bundar, oranye, sedang)
+3-jeruk (buah, bundar, oranye, sedang)
+1-semangka (buah, bundar, hijau, besar)
+2-semangka (buah, bundar, hijau, besar)
+3-semangka (buah, bundar, hijau, besar)
+1-bola golf (olahraga, bundar, putih, kecil)
+2-bola golf (olahraga, bundar, putih, kecil)
+3-bola golf (olahraga, bundar, putih, kecil)
+1-bola tenis (olahraga, bundar, hijau, sedang)
+2-bola tenis (olahraga, bundar, hijau, sedang)
+3-bola tenis (olahraga, bundar, hijau, sedang)
+1-bola basket (olahraga, bundar, oranye, besar)
+2-bola basket (olahraga, bundar, oranye, besar)
+3-bola basket (olahraga, bundar, oranye, besar)
+1-atap rumah (bangunan, segitiga, merah, besar)
+2-atap rumah (bangunan, segitiga, merah, besar)
+3-atap rumah (bangunan, segitiga, merah, besar)
+1-tenda (bangunan, segitiga, kuning, besar)
+2-tenda (bangunan, segitiga, kuning, besar)
+3-tenda (bangunan, segitiga, kuning, besar)
+1-piramid (bangunan, segitiga, cokelat, besar)
+2-piramid (bangunan, segitiga, cokelat, besar)
+3-piramid (bangunan, segitiga, cokelat, besar)
+1-sepotong kue (makanan, segitiga, oranye, kecil)
+2-sepotong kue (makanan, segitiga, oranye, kecil)
+3-sepotong kue (makanan, segitiga, oranye, kecil)
+1-sepotong pizza (makanan, segitiga, kuning, sedang)
+2-sepotong pizza (makanan, segitiga, kuning, sedang)
+3-sepotong pizza (makanan, segitiga, kuning, sedang)
+1-jeli (makanan, bundar, ungu, kecil)
+2-jeli (makanan, bundar, ungu, kecil)
+3-jeli (makanan, bundar, ungu, kecil)
+1-ponsel (gawai, kotak, hitam, kecil)
+2-ponsel (gawai, kotak, hitam, kecil)
+3-ponsel (gawai, kotak, hitam, kecil)
+1-tv (gawai, kotak, hitam, sedang)
+2-tv (gawai, kotak, hitam, sedang)
+3-tv (gawai, kotak, hitam, sedang)
+1-laptop (gawai, kotak, merah, sedang)
+2-laptop (gawai, kotak, merah, sedang)
+3-laptop (gawai, kotak, merah, sedang)
+1-celana renang (fesyen, segitiga, biru, kecil)
+2-celana renang (fesyen, segitiga, biru, kecil)
+3-celana renang (fesyen, segitiga, biru, kecil)
+1-gantungan baju (fesyen, segitiga, biru, besar)
+2-gantungan baju (fesyen, segitiga, biru, besar)
+3-gantungan baju (fesyen, segitiga, biru, besar)
+1-topi (fesyen, bundar, ungu, sedang)
+2-topi (fesyen, bundar, ungu, sedang)
+3-topi (fesyen, bundar, ungu, sedang)
+1-meja (mebel, kotak, cokelat, sedang)
+2-meja (mebel, kotak, cokelat, sedang)
+3-meja (mebel, kotak, cokelat, sedang)
+1-lemari (mebel, kotak, cokelat, besar)
+2-lemari (mebel, kotak, cokelat, besar)
+3-lemari (mebel, kotak, cokelat, besar)
+1-ranjang (mebel, kotak, putih, besar)
+2-ranjang (mebel, kotak, putih, besar)
+3-ranjang (mebel, kotak, putih, besar)
+1-pesawat kertas (mainan, segitiga, kuning, kecil)
+2-pesawat kertas (mainan, segitiga, kuning, kecil)
+3-pesawat kertas (mainan, segitiga, kuning, kecil)
+1-dadu (mainan, kotak, merah, kecil)
+2-dadu (mainan, kotak, merah, kecil)
+3-dadu (mainan, kotak, merah, kecil)
+1-balok huruf (mainan, kotak, hijau, kecil)
+2-balok huruf (mainan, kotak, hijau, kecil)
+3-balok huruf (mainan, kotak, hijau, kecil)
+1-trikona (musik, segitiga, putih, sedang)
+2-trikona (musik, segitiga, putih, sedang)
+3-trikona (musik, segitiga, putih, sedang)
+1-drum (musik, bundar, biru, sedang)
+2-drum (musik, bundar, biru, sedang)
+3-drum (musik, bundar, biru, sedang)
+1-piano (musik, kotak, hitam, besar)
+2-piano (musik, kotak, hitam, besar)
+3-piano (musik, kotak, hitam, besar)
+wildcard max 1
+wildcard max 2
+wildcard max 3
+wildcard max 4
+wildcard max 5
+wildcard max 6
+wildcard tux 1
+wildcard tux 2
+wildcard tux 3
+wildcard tux 4
+wildcard tux 5
+wildcard tux 6
+wildcard+cut lyx 1
+wildcard+cut lyx 2
+wildcard+cut lyx 3
+wildcard+cut lyx 4
+wildcard+cut lyx 5
+wildcard+cut lyx 6
+
+And aside from that, there are also three wildcard cards, with the following names:
+
+wildcard max 1 wildcard tux 1 wildcard+cut lyx 1
+
+*** The rules of the game
+One of them is called Continue Two.
+This game utilizes all object cards and wildcards.
+Shuffle the cards, deal 6 to each player, face down.
+Then deal one non-wildcard card face up to the center area as the Discard Pile.
+The goal of the game is to discard all cards on your hand.
+Players take turn discarding one card from their hand to the discard pile.
+The card must have at least 2 matching aspects with the last card on the discard pile (either the object, the category, the quantity, the size, the color, or the shape).
+The player must call his chosen aspects when discarding, e.g. RED MUSIC, or RECTANGLE LARGE, or 2 SMALL.
+Player can also discard wildcard, which is always playable.
+After a wildcard, the next player must discard card that matches the aspects of the last non-wildcard card on the discard pile.
+Or they can also discard another wildcard.
+If a player cannot discard a card in his hand, he must draw a card from the Draw Pile. If that card cannot be discarded also, he must draw another card from the Draw Pile and so on.
+The first player that can discard all cards from his hand, wins.
+*** Layout of the screen & appearance
+From top to bottom:
+
+- The top logo+information area: the very top will contain title (use logo file
+  images/logo/logo.png) and game name, and nothing else, The logo positioning
+  should be absolute so it does not move to the left or right whenever there are
+  text being displayed or animation happens. This area occupies about 10% of the
+  vertical space.
+- P1's hand: the P1's hand which will occupy about 30% of vertical space. The
+  cards put in this pile should not overlap or cover the area on top of it or
+  the area below it.
+- The Draw Pile on the left and The Discard pile on the right. which will occupy
+  about 30% of vertical space.
+- P2's hand: the P1's hand which will occupy about 30% of vertical space. The
+  cards put in this pile should not overlap or cover the area on top of it.
+
+Width of card should be 120. The height should be proportional. There should not
+be additional padding for the cards.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be covered by the cards. Maybe put the
+labels far on the right side.
+
+The players' hands will be displayed in accordeon style with spacing between
+cards. The accordeon should maximize all available horizontal space so it should
+adjust the spacing between cards accordingly. The leftmost card will be the
+bottommost card, and subsequent cards on the right are cards that are on top of
+the previous cards (cards to their left).
+
+The discard pile will be displayed as a vertical pile where only the topmost
+card of the pile is shown, face up. Unless when wildcard(s) are put on top of
+it, the discard pile should still display (partially) the last non-wildcard,
+until another non-wildcard is put on top in which case only the latest
+non-wildcard card is shown.
+
+The draw pile will be displayed as a vertical pile where only the topmost
+card of the pile is shown, face down.
+
+*** The simulation
+Each page load should start with a randomly shuffled cards. P1 and P2 already
+has 6 cards each, face up. Also there is a non-wildcard card face up on the
+discard pile.
+
+After 2 seconds, the simulation starts.
+
+The simulation starts with P1's turn. P1's hand label is highlighted. P1 should
+select a card that has at least two aspects as the aspects of last card on the
+discard pile. Then P1 should call the aspects e.g. RED MUSIC, or 2 SMALL. The
+text should be displayed to show the call. The card should be lifted up,
+highlighted for 0.5s, then flies smoothly (60fps animation) into the discard
+pile (animation takes 0.5s). Then delay 0.5s. P1 can also choose to discard a
+wildcard, as per the rules.
+
+If P1 does not have any card in his hand that can be discarded, he should draw
+one card from the Draw Pile. A card flies face down to the P1's hand (animation
+should take 0.5s), then animated being flipped over to face up (animation should
+be smooth and take 0.5s). If that card can be discarded, it should be discarded
+with animation like described above. Otherwise, another card should be drawn
+from the Draw Pile. If there are no more cards on the Draw Pile, the player
+passes.
+
+Make sure that when animating a flying card, the card is not duplicated, e.g. a
+duplicate is already shown in the final position while the original card is
+still flying towards it.
+
+Then P1's label in unhighlighted.
+
+Then a delay of 1s.
+
+Then P2's turn, much like P1's turn.
+
+Then back to P1's turn and so on, until only one player wins (in which case a
+big text is displayed in the center showing the winning player e.g. "P1 WINS").
+Or if both player pass, then the winner is the player with the least number of
+cards in his hand, or if both players have the same number of hands then the
+game ends with draw, in which case a big text is displayed in the center showing
+"DRAW".
+
+Then simulation ends.
+*** The images
+the images for the front side of the cards are in images/cards-front/
+subdirectory, with the PNG files named "CARDNAME.png".
+
+The image for the back side of the cards is the images/cards-back/back.png file.
+
+Do not use the hands images. Leave them alone.
+
+*** Options
+i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
+When the parameter is set to 'id', the text should all be in Indonesian instead
+of English. This include "P1 WINS" becoming "P1 MENANG", "DRAW" becoming "SERI".
+"PASS" becomes "LEWAT".
+** [2026-07-20 Mon 10:12] session: codex.20260720e-continue2
+*** journal
+**** [2026-07-20 Mon 10:12] start, paralel dg bikin continue1, di tab lain
+*** subsequent prompts
+If both player have to pass, then the winner is the player with the least number
+of cards in his hand, or if both players have the same number of hands then the
+game ends with draw, in which case a big text is displayed in the center showing
+"DRAW".
+
+The cards are clipped. Make sure the images of the cards are displayed fully and
+not clipped.
+
+# begini nih malesnya, suka muncul bug2x yang random kadang terjadi kadang gak
+The animation of cards flying from player's hand to disard pile, as well as
+cards flying from draw pile to player's hand, is not smooth.
+
+# bug ini juga terjadi nih, malah parah sih pas udah ke target position malah
+# ilang dulu
+bug: When a card flies from the draw pile, unless the draw pile becomes empty,
+still show the other undrawn cards.
+bug: After the card that flies from a draw pile to a player hand arrives, it disappears first.
+
+# masih. gw pengen start over nih jadinya.
+the previous bug still happens: After the card that flies from a draw pile to a
+player hand arrives, it disappears first before being flipped face down to up.
+
+when a wildcard is added to the discard pile, make sure the 1/6 width of the
+left side of the last non-wildcard card on the discard pile is still visible.
+
+bug: when a card drawn from the draw pile is being flipped over from face down
+to face up, it is covered by existing cards on the player's hand. make sure the
+z-ordering is such that the flipping card is above the existing cards on the
+player's hand.
+
+Nope, still happens. The newly drawn card being flipped is still covered by the
+rightmost existing card on the player's hand.
+
+Nope, still happens.
+
+Now a new bug appears replacing the old bug: when being flipped, the card
+becomes invisible.
+
+Nope, still happens.
+
+Nope, the flipping animation is now totally broken: the back side is still fully visible during flipping.
+
+# ok fiuh finally fixed.
+
+Add a static text that is displayed throughout the simulation, below the game
+name but above the messages, that says "MATCH AT LEAST TWO ASPECTS OF PREVIOUS CARD"
+(in Indonesian: "COCOKKAN MINIMAL 2 ASPEK DENGAN KARTU SEBELUMNYA").
 * game > memory match
 ** [2026-07-19 Sun] description
 *** id
@@ -3234,3 +3996,5 @@ from 0.1s to 0.03s?
 ** [2026-07-19 Sun] mau nyobain claude code (claude desktop) ternyata gak ada free option
 kecuali jika pakai model2 seperti Ollama (self hosting), atau google gemini.
 ** [2026-07-19 Sun 23:06] usage chatgpt plus budimansnowman gw masih 97%.
+** [2026-07-20 Mon 10:37] usage tinggal 91%, reset weekly. termasuk generous dan cukup sih utk small codebases.
+gak tau kalo codebases gede kayaknya jauh lebih cepet abis?

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1">
+  <title>Continue One</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game" aria-label="Continue One card game simulation">
+    <header class="masthead">
+      <img class="logo" src="images/logo/logo.png" alt="Continue One logo">
+      <div class="title"><h1 id="game-title">CONTINUE ONE</h1><p id="subtitle">CARD GAME</p></div>
+      <div id="callout" aria-live="polite"></div>
+    </header>
+
+    <section class="hand-zone" id="zone-p1">
+      <div class="zone-label"><span>P1</span><b id="p1-count">6 CARDS</b></div>
+      <div class="hand" id="hand-p1"></div>
+    </section>
+
+    <section class="table-zone">
+      <div class="pile-wrap draw-wrap">
+        <div class="pile" id="draw-pile"></div>
+        <div class="pile-label"><strong id="draw-label">DRAW PILE</strong><span id="draw-count"></span></div>
+      </div>
+      <div class="turn-mark" id="turn-mark">VS</div>
+      <div class="pile-wrap discard-wrap">
+        <div class="pile" id="discard-pile"></div>
+        <div class="pile-label"><strong id="discard-label">DISCARD PILE</strong></div>
+      </div>
+    </section>
+
+    <section class="hand-zone" id="zone-p2">
+      <div class="zone-label"><span>P2</span><b id="p2-count">6 CARDS</b></div>
+      <div class="hand" id="hand-p2"></div>
+    </section>
+
+    <div id="result" role="status"></div>
+    <div id="flying-layer"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
