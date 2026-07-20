@@ -10,10 +10,11 @@
   ];
   const lang = new URLSearchParams(location.search).get('lang') === 'id' ? 'id' : 'en';
   const words = lang === 'id'
-    ? { discard: 'BUANGAN', prepare: 'Mencari trio', draw: 'mengambil kartu', wins: 'MENANG' }
-    : { discard: 'DISCARD', prepare: 'Finding trios', draw: 'draws a card', wins: 'WINS' };
+    ? { discard: 'BUANGAN', prepare: 'Mencari trio', draw: 'mengambil kartu', wins: 'MENANG', instruction: 'BUANG TRIO KARTU DI TANGANMU, HINDARI MENJADI PEMAIN DENGAN 2 KARTU TERAKHIR' }
+    : { discard: 'DISCARD', prepare: 'Finding trios', draw: 'draws a card', wins: 'WINS', instruction: 'DISCARD TRIOS OF CARDS IN YOUR HAND, AVOID ENDING UP WITH THE LAST 2 CARDS' };
   document.documentElement.lang = lang;
   document.getElementById('discard-label').textContent = words.discard;
+  document.getElementById('instruction').textContent = words.instruction;
 
   const players = [
     { hand: [], handEl: byId('p1-hand'), label: byId('p1-label') },

@@ -12,6 +12,7 @@ body { display: flex; align-items: flex-start; justify-content: center; overflow
 .masthead { height: 108px; position: relative; border-bottom: 1px solid rgba(255,255,255,.13); }
 .logo { position: absolute; z-index: 3; width: 116px; height: auto; left: 24px; top: 16px; }
 h1 { margin: 0; position: absolute; left: 0; right: 0; top: 22px; text-align: center; letter-spacing: .16em; font: 800 30px/1 Georgia, serif; text-shadow: 0 3px 0 #5d2018; }
+#instruction { position: absolute; left: 150px; right: 24px; top: 59px; margin: 0; color: #d7e9df; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.35; letter-spacing: .055em; }
 #status { position: absolute; left: 120px; right: 120px; top: 20px; margin: 0; text-align: center; color: #d7e9df; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
 .zone { position: relative; width: 100%; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.1); }
 .hand-zone { height: 324px; }

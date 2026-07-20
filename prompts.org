@@ -3782,7 +3782,15 @@ bug: when the cards to be discarded start flying to the target player's hand,
 the card is duplicated. the card duplicate already appears in the final position
 then the original flying card flies to merge with it. make sure the card is not
 duplicated.
+
 # ok good enough
+
+Add a static instruction text that is displayed throughout the simulation, below
+the game name. When language is set to English the text says "DISCARD TRIOS OF
+CARDS IN YOUR HAND, AVOID ENDING UP WITH THE LAST 2 CARDS". When language is set
+to Indonesian, the text says "BUANG TRIO KARTU DI TANGANMU, HINDARI MENJADI
+PEMAIN DENGAN 2 KARTU TERAKHIR".
+
 * game > troika player
 ** [2026-07-15 Wed] prompt 1
 *** Summary
@@ -3991,6 +3999,402 @@ just stays like that.
 
 # ok for some reason perlu Ctrl-Shift-R bukan cuma F5, supaya /app.js diload.
 # kalo gak, si html ga ngeload app.js, aneh.
+
+Add a text showing the game name (if language is set to English: "TROIKA
+PLAYER"; if Indonesian: "TROIKA PLAYER") at the right of logo; perhaps shift the
+logo to the left.
+
+Also a static text that is displayed throughout the simulation, below the game
+name. When language is set to English the text says "DISCARDS CARD GROUPS THAT
+ALL HAVE MATCHING ASPECT, OR SERIES OF 6+ DIFFERENT CATEGORIES/COLORS". When
+language is set to Indonesian, the text says "BUANG GRUP KARTU DENGAN ASPEK
+SAMA, ATAU SERI 6+ KARTU KATEGORI/WARNA BEDA".
+
+ # ups, logo sudah di kiri sih.
+
+make the text that contains the game name bold and 50% larger. and make sure the
+other static text is not overlapping or covered by the logo or the other text.
+* game > troika race
+** [2026-07-20 Mon] description
+*** id
+Kartu troika dapat digunakan untuk berbagai permainan.
+Salah satunya adalah Troika Race.
+Di permainan ini, digunakan semua kartu objek dan kartu wildcard.
+Tujuan permainan adalah mengumpulkan semua kartu.
+Kocok kartu, bagikan semua kartu secara merata ke semua pemain, tertutup.
+Pemain bergiliran mengeluarkan 3 kartu sekaligus ke tengah, terbuka.
+Lalu semua pemain berlomba-lomba menyebutkan aspek mana yang sama dari ketiga kartu tersebut, jika ada.
+Misalnya, jika semua kartu merah maka pemain yang pertama menyebutkan "MERAH" bisa mengambil semua kartu yang terkumpul di tengah.
+Kartu itu lalu dibalik dan diletakkan di bawah tumpukan mainnya.
+Jika ketiga kartu tidak punya satu aspek pun yang sama, atau tidak ada pemain yang menyebut, pemain berikutnya membuang 3 kartu berikutnya.
+Jika pemain tidak memiliki 3 kartu, dia kalah dan kartunya dibuang ke tengah tanpa ada yang menyebut.
+Lanjutkan hingga tinggal ada satu pemain tersisa. Pemain tersebut menang dan mendapatkan semua kartu.
+*** en
+The Troika cards can be used to play many kinds of games.
+One of which is called Troika Race.
+This game utilizes all object cards and wildcards.
+The goal of the game is to collect all cards.
+Shuffle the cards, deal all cards evenly to each player, face down. This will be the Players' Piles.
+Players take turn discarding 3 topmost cards from their Play Pile at once to the center, face up.
+Then all players must race to be first to call what aspect these 3 cards have in common.
+Either object, category, size, shape, quantity, or color.
+The first player that calls can collect all the cards currently discarded in the center.
+The cards are turned face down and put below his Play Pile.
+If there is no aspect that can be called, or nobody calls, the play continues with the next player discarding 3 more cards.
+If a player does not have at least 3 cards, that player loses. That player must discard their cards to the center face up without anyone calling them.
+Continue until there is only one player remaining. He wins and gets all the cards.
+** [2026-07-20 Mon] prompt 1
+*** Summary
+i'm making a html+css+javascript-based card game play simulation animation that
+will be recorded using a desktop recorder like simplescreenrecorder on linux to
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
+
+the name of the card game is "Troika Race" (also "Troika Race" in Indonesian).
+
+the simulation will be for 2 players (P1 and P2).
+
+*** The cards
+The cards are of two types. First there are the object cards, each of which will
+contain picture of a certain QUANTITY of objects (either one object, or two of
+the same object, or three). Each object will have a SHAPE (one of triangle,
+rectangle, and round), SIZE (one of small, medium, large), COLOR (one of nine:
+white, black, red, blue, green, yellow, orange, purple, and brown), and CATEGORY
+(one of nine: fruit, sports, building, food, gadget, fashion, furniture, toy,
+music). So in total there are 81 object cards. Listed below in the format of:
+QUANTITY-OBJECT_NAME (CATEGORY, SHAPE, COLOR, SIZE). Card name is
+QUANTITY-OBJECT_NAME.
+
+1-grape (fruit, round, purple, small)
+2-grape (fruit, round, purple, small)
+3-grape (fruit, round, purple, small)
+1-orange (fruit, round, orange, medium)
+2-orange (fruit, round, orange, medium)
+3-orange (fruit, round, orange, medium)
+1-watermelon (fruit, round, green, large)
+2-watermelon (fruit, round, green, large)
+3-watermelon (fruit, round, green, large)
+1-golf ball (sports, round, white, small)
+2-golf ball (sports, round, white, small)
+3-golf ball (sports, round, white, small)
+1-tennis ball (sports, round, green, medium)
+2-tennis ball (sports, round, green, medium)
+3-tennis ball (sports, round, green, medium)
+1-basket ball (sports, round, orange, large)
+2-basket ball (sports, round, orange, large)
+3-basket ball (sports, round, orange, large)
+1-house roof (building, triangle, red, large)
+2-house roof (building, triangle, red, large)
+3-house roof (building, triangle, red, large)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-tent (building, triangle, yellow, large)
+1-pyramid (building, triangle, brown, large)
+2-pyramid (building, triangle, brown, large)
+3-pyramid (building, triangle, brown, large)
+1-cake slice (food, triangle, orange, small)
+2-cake slice (food, triangle, orange, small)
+3-cake slice (food, triangle, orange, small)
+1-pizza slice (food, triangle, yellow, medium)
+2-pizza slice (food, triangle, yellow, medium)
+3-pizza slice (food, triangle, yellow, medium)
+1-jelly (food, round, purple, small)
+2-jelly (food, round, purple, small)
+3-jelly (food, round, purple, small)
+1-handphone (gadget, rectangle, black, small)
+2-handphone (gadget, rectangle, black, small)
+3-handphone (gadget, rectangle, black, small)
+1-tv (gadget, rectangle, black, medium)
+2-tv (gadget, rectangle, black, medium)
+3-tv (gadget, rectangle, black, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-laptop (gadget, rectangle, red, medium)
+3-laptop (gadget, rectangle, red, medium)
+1-swimming trunk (fashion, triangle, blue, small)
+2-swimming trunk (fashion, triangle, blue, small)
+3-swimming trunk (fashion, triangle, blue, small)
+1-cloth hanger (fashion, triangle, blue, large)
+2-cloth hanger (fashion, triangle, blue, large)
+3-cloth hanger (fashion, triangle, blue, large)
+1-hat (fashion, round, purple, medium)
+2-hat (fashion, round, purple, medium)
+3-hat (fashion, round, purple, medium)
+1-table (furniture, rectangle, brown, medium)
+2-table (furniture, rectangle, brown, medium)
+3-table (furniture, rectangle, brown, medium)
+1-cupboard (furniture, rectangle, brown, large)
+2-cupboard (furniture, rectangle, brown, large)
+3-cupboard (furniture, rectangle, brown, large)
+1-bed (furniture, rectangle, white, large)
+2-bed (furniture, rectangle, white, large)
+3-bed (furniture, rectangle, white, large)
+1-paper airplane (toy, triangle, yellow, small)
+2-paper airplane (toy, triangle, yellow, small)
+3-paper airplane (toy, triangle, yellow, small)
+1-dice (toy, rectangle, red, small)
+2-dice (toy, rectangle, red, small)
+3-dice (toy, rectangle, red, small)
+1-alphabet block (toy, rectangle, green, small)
+2-alphabet block (toy, rectangle, green, small)
+3-alphabet block (toy, rectangle, green, small)
+1-the triangle (music, triangle, white, medium)
+2-the triangle (music, triangle, white, medium)
+3-the triangle (music, triangle, white, medium)
+1-drum (music, round, blue, medium)
+2-drum (music, round, blue, medium)
+3-drum (music, round, blue, medium)
+1-piano (music, rectangle, black, large)
+2-piano (music, rectangle, black, large)
+3-piano (music, rectangle, black, large)
+
+And below is the same list of cards, but in Indonesian:
+
+1-anggur (buah, bundar, ungu, kecil)
+2-anggur (buah, bundar, ungu, kecil)
+3-anggur (buah, bundar, ungu, kecil)
+1-jeruk (buah, bundar, oranye, sedang)
+2-jeruk (buah, bundar, oranye, sedang)
+3-jeruk (buah, bundar, oranye, sedang)
+1-semangka (buah, bundar, hijau, besar)
+2-semangka (buah, bundar, hijau, besar)
+3-semangka (buah, bundar, hijau, besar)
+1-bola golf (olahraga, bundar, putih, kecil)
+2-bola golf (olahraga, bundar, putih, kecil)
+3-bola golf (olahraga, bundar, putih, kecil)
+1-bola tenis (olahraga, bundar, hijau, sedang)
+2-bola tenis (olahraga, bundar, hijau, sedang)
+3-bola tenis (olahraga, bundar, hijau, sedang)
+1-bola basket (olahraga, bundar, oranye, besar)
+2-bola basket (olahraga, bundar, oranye, besar)
+3-bola basket (olahraga, bundar, oranye, besar)
+1-atap rumah (bangunan, segitiga, merah, besar)
+2-atap rumah (bangunan, segitiga, merah, besar)
+3-atap rumah (bangunan, segitiga, merah, besar)
+1-tenda (bangunan, segitiga, kuning, besar)
+2-tenda (bangunan, segitiga, kuning, besar)
+3-tenda (bangunan, segitiga, kuning, besar)
+1-piramid (bangunan, segitiga, cokelat, besar)
+2-piramid (bangunan, segitiga, cokelat, besar)
+3-piramid (bangunan, segitiga, cokelat, besar)
+1-sepotong kue (makanan, segitiga, oranye, kecil)
+2-sepotong kue (makanan, segitiga, oranye, kecil)
+3-sepotong kue (makanan, segitiga, oranye, kecil)
+1-sepotong pizza (makanan, segitiga, kuning, sedang)
+2-sepotong pizza (makanan, segitiga, kuning, sedang)
+3-sepotong pizza (makanan, segitiga, kuning, sedang)
+1-jeli (makanan, bundar, ungu, kecil)
+2-jeli (makanan, bundar, ungu, kecil)
+3-jeli (makanan, bundar, ungu, kecil)
+1-ponsel (gawai, kotak, hitam, kecil)
+2-ponsel (gawai, kotak, hitam, kecil)
+3-ponsel (gawai, kotak, hitam, kecil)
+1-tv (gawai, kotak, hitam, sedang)
+2-tv (gawai, kotak, hitam, sedang)
+3-tv (gawai, kotak, hitam, sedang)
+1-laptop (gawai, kotak, merah, sedang)
+2-laptop (gawai, kotak, merah, sedang)
+3-laptop (gawai, kotak, merah, sedang)
+1-celana renang (fesyen, segitiga, biru, kecil)
+2-celana renang (fesyen, segitiga, biru, kecil)
+3-celana renang (fesyen, segitiga, biru, kecil)
+1-gantungan baju (fesyen, segitiga, biru, besar)
+2-gantungan baju (fesyen, segitiga, biru, besar)
+3-gantungan baju (fesyen, segitiga, biru, besar)
+1-topi (fesyen, bundar, ungu, sedang)
+2-topi (fesyen, bundar, ungu, sedang)
+3-topi (fesyen, bundar, ungu, sedang)
+1-meja (mebel, kotak, cokelat, sedang)
+2-meja (mebel, kotak, cokelat, sedang)
+3-meja (mebel, kotak, cokelat, sedang)
+1-lemari (mebel, kotak, cokelat, besar)
+2-lemari (mebel, kotak, cokelat, besar)
+3-lemari (mebel, kotak, cokelat, besar)
+1-ranjang (mebel, kotak, putih, besar)
+2-ranjang (mebel, kotak, putih, besar)
+3-ranjang (mebel, kotak, putih, besar)
+1-pesawat kertas (mainan, segitiga, kuning, kecil)
+2-pesawat kertas (mainan, segitiga, kuning, kecil)
+3-pesawat kertas (mainan, segitiga, kuning, kecil)
+1-dadu (mainan, kotak, merah, kecil)
+2-dadu (mainan, kotak, merah, kecil)
+3-dadu (mainan, kotak, merah, kecil)
+1-balok huruf (mainan, kotak, hijau, kecil)
+2-balok huruf (mainan, kotak, hijau, kecil)
+3-balok huruf (mainan, kotak, hijau, kecil)
+1-trikona (musik, segitiga, putih, sedang)
+2-trikona (musik, segitiga, putih, sedang)
+3-trikona (musik, segitiga, putih, sedang)
+1-drum (musik, bundar, biru, sedang)
+2-drum (musik, bundar, biru, sedang)
+3-drum (musik, bundar, biru, sedang)
+1-piano (musik, kotak, hitam, besar)
+2-piano (musik, kotak, hitam, besar)
+3-piano (musik, kotak, hitam, besar)
+wildcard max 1
+wildcard max 2
+wildcard max 3
+wildcard max 4
+wildcard max 5
+wildcard max 6
+wildcard tux 1
+wildcard tux 2
+wildcard tux 3
+wildcard tux 4
+wildcard tux 5
+wildcard tux 6
+wildcard+cut lyx 1
+wildcard+cut lyx 2
+wildcard+cut lyx 3
+wildcard+cut lyx 4
+wildcard+cut lyx 5
+wildcard+cut lyx 6
+
+And aside from that, there are also three wildcard cards, with the following names:
+
+wildcard max 1
+wildcard tux 1
+wildcard+cut lyx 1
+
+*** How to play the game
+The Troika cards can be used to play many kinds of games.
+One of which is called Troika Race.
+This game utilizes all object cards and wildcards.
+The goal of the game is to collect all cards.
+Shuffle the cards, deal all cards evenly to each player, face down. This will be the Players' Piles.
+Players take turn discarding 3 topmost cards from their Play Pile at once to the center, face up.
+Then all players must race to be first to call what aspect these 3 cards have in common.
+Either object, category, size, shape, quantity, or color.
+The first player that calls can collect all the cards currently discarded in the center.
+The cards are turned face down and put below his Play Pile.
+If there is no aspect that can be called, or nobody calls, the play continues with the next player discarding 3 more cards.
+If a player does not have at least 3 cards, that player loses. That player must discard their cards to the center face up without anyone calling them.
+Continue until there is only one player remaining. He wins and gets all the cards.
+*** Layout of the screen & appearance
+From top to bottom:
+
+- The top logo+information area (occupies 10% of the vertical space): the very
+  top will contain title (use logo file images/logo/logo.png) and game name on
+  its right. The logo should have absolute positioning so it does not move to
+  the left or right whenever there are text being displayed or animation
+  happens. There is also a short instruction text below the game name. If
+  language is set to English, the text says "CALL MATCHING ASPECT OF 3 CARDS THE
+  FASTEST. COLLECT ALL THE CARDS". If language is set to Indonesian, the text
+  says "SEBUTKAN ASPEK 3 KARTU TERCEPAT, KUMPULKAN SEMUA KARTU."
+
+- P1's Play Pile (occupies 30% of the vertical space) + P1 Message Subarea on its right: The cards put in this
+  pile should not overlap or cover the top area or the discard pile.
+
+- discard pile (occupies 30% of vertical space): The cards put in this pile
+  should not overlap or cover the cards in P1's Play pile or P2's Play pile.
+
+- P2's Play Pile (occupies 30% of vertical space) + P1 Message Subarea on its
+  right: The cards put in this pile should not overlap or cover the cards in
+  discard pile.
+
+Width of card should be 165. The height should be proportional.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be covered by the cards. Maybe put the
+labels far on the right side.
+
+P1 Message Subarea and P2 Message Subarea should not be labeled. These subareas
+are where the text will be displayed whenever P1 or P2 calls.
+
+The players' Play Piles will be displayed as a vertical pile where only the
+topmost card is visible, face down.
+
+The Draw Pile is displayed in an accordeon/fan style to show 3 cards being
+discarded. The leftmost card will be below the card on its right, which in turn
+will be below the card on *its* right. If there are previous 3 cards or more due
+to uncalled turn, those cards are completely/exactly covered by the current 3
+cards.
+
+*** The simulation
+The simulation starts with P1 and P2 already having their Play Piles ready
+(containing cards in shuffled order, order is randomized on every page load).
+The discard pile is still empty.
+
+After 2 seconds, the animation starts.
+
+Then P1's turn: P1's pile label is highlighted. three cards in a fan/accordeon
+style is lifted above P1's play pile, that flies smoothly (60 fps animation)
+simultaneously to the discard pile (animation takes 0.5s). Then the fan is
+flipped smoothly (animation takes 0.5s). Then a delay of between 0.2s to 1s.
+
+  If there is a matching aspect in all 3 cards, a random player calls the
+  matching aspect, e.g. "RED" (shown in the player's Message Subarea). Then a
+  delay of 1s. Then all cards in the discard pile is animated as being gathered
+  together as a pile (animation takes 0.5s), flipped smoothly to face down
+  (animation takes 0.5s) and the pile flies to the calling player's Play Pile.
+  Meanwhile, as the pile flies to the player's Play Pile, the Play Pile slides
+  to the right to allow the incoming pile to be put below it. After the incoming
+  pile arrives, the existing Play Pile slides back to the right forming the new
+  Play Pile.
+
+  If there is no matching aspect, nothing happens.
+
+Then P1's pile label is unhighlighted.
+
+Then P2's turn, much like P1's turn above.
+
+Continue until one of the player cannot discard any more 3 cards. And the other
+player wins. When a player wins, the text should display it prominently (e.g.
+"P1 WINS").
+
+Then the simulation ends.
+*** The images
+the images for the front side of the cards are in images/cards-front/
+subdirectory, with the PNG files named "CARDNAME.png".
+
+The image for the back side of the cards is the images/cards-back/back.png file.
+
+Do not use the hands images. Leave them alone.
+
+*** Options
+i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
+When the parameter is set to 'id', the text should all be in Indonesian instead
+of English. This include "P1 WINS" becoming "P1 MENANG".
+** [2026-07-20 Mon 12:33] session: codex.20260720f-troikarace
+*** journal
+**** [2026-07-20 Mon 12:33] start
+**** [2026-07-20 Mon 12:34] restart, lupa images/
+*** additional prompts
+When animating flipping 3 cards on the discard pile from face down to face up,
+and there are previous 3 cards on the discard pile, make the previous 3 cards
+still visible below the flipping cards.
+
+# isu yg klasik ya, ordering
+No, make the previous 3 cards still visible *below* the flipping cards, not *over* them.
+
+No, make the previous 3 cards still visible *below* the flipping cards, not
+*over* them (in z-ordering). Remember that the newly discarded 3 cards are,
+z-order-wise, above the existing cards on the discard pile.
+
+nope, the previous cards are still in front of the new 3 discarded cards. They
+should be behind.
+
+Ok, there is remaining issue. When the newly discarded cards are being flipped
+from face down to face up, the first phase of the flipping (back side of card
+getting thinner visually until becoming a vertical line) is now correctly in
+front of the existing cards. But in the second phase of the flipping (front side
+of card expanding from a vertical line to full width) is not shown correctly, it
+seems to be still behind the existing cards.
+
+ # ok akhirnya bener
+
+When the existing player's Play Pile slide to the right to allow for the
+incoming pile to be placed into the original Play Pile's position, slide right
+far enough so the two piles don't overlap.
+
+One issue remaining: after the incoming pile is in its final position, it
+disappears. It should have been still visible while the original Play Pile
+slides back to the left and covers the incoming pile, to merge to become one pile.
+
+Nope, another issue happens. The existing pile sliding back to left should be in
+front of the incoming pile, not behind it.
+
+# duh cape deh soal z-ordering ini, ntar ilang tar di belakang gitu aja sering
 
 * zzz journal
 ** [2026-07-16 Thu] gw taruh di sub results/NAME/ agar repo ini bisa menyimpan berbagai hasil vibecoding

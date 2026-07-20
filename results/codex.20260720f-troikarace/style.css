@@ -1,0 +1,46 @@
+:root { color-scheme: dark; font-family: Inter, ui-rounded, "Arial Rounded MT Bold", Arial, sans-serif; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; min-height: 100%; background: #090c18; }
+body { display: flex; justify-content: center; overflow: hidden; }
+#game {
+  width: 720px; height: 1080px; position: relative; overflow: hidden;
+  color: #f8fbff; background:
+    radial-gradient(circle at 50% 47%, rgba(48,69,105,.38), transparent 34%),
+    linear-gradient(150deg, #101a2c 0%, #0a1020 52%, #151024 100%);
+  box-shadow: 0 0 70px #000; user-select: none;
+}
+#game::before { content:""; position:absolute; inset:108px 0 0; opacity:.18; pointer-events:none; background-image: radial-gradient(#fff 1px, transparent 1px); background-size:28px 28px; }
+.masthead { height:108px; position:relative; border-bottom:1px solid rgba(255,255,255,.12); background:rgba(5,9,19,.82); }
+.logo { position:absolute; z-index:3; left:30px; top:11px; width:142px; height:80px; object-fit:contain; }
+.heading { position:absolute; left:190px; right:25px; top:12px; text-align:left; }
+h1 { margin:0; letter-spacing:5px; font-size:32px; line-height:40px; font-weight:900; color:#fff; text-shadow:0 2px 12px #76a9ff66; }
+.heading p { max-width:485px; margin:4px 0 0; color:#b8c6dd; font-size:12px; font-weight:700; line-height:16px; letter-spacing:.6px; }
+.zone { height:324px; position:relative; border-bottom:1px solid rgba(255,255,255,.08); }
+.player-zone { background:linear-gradient(90deg, transparent, rgba(255,255,255,.018), transparent); }
+.pile { position:absolute; left:235px; top:34px; width:165px; height:257px; border-radius:11px; filter:drop-shadow(0 10px 12px #0008); }
+.pile::before, .pile::after { content:""; position:absolute; inset:0; border:2px solid #53627d; background:#192237; border-radius:11px; z-index:-1; }
+.pile::before { transform:translate(-7px, 5px); opacity:.65; }
+.pile::after { transform:translate(-13px, 10px); opacity:.35; }
+.pile img, .card img { display:block; width:165px; height:257px; object-fit:cover; border-radius:11px; }
+.message { position:absolute; left:435px; top:104px; width:170px; min-height:76px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; line-height:32px; font-weight:950; letter-spacing:1px; color:#fff; text-shadow:0 3px 15px #000; opacity:0; transform:scale(.8); }
+.message.calling { animation:callPop .34s cubic-bezier(.18,.9,.3,1.3) forwards; }
+@keyframes callPop { to { opacity:1; transform:scale(1); } }
+.zone-label { position:absolute; right:28px; top:22px; display:flex; align-items:center; gap:10px; color:#8d9bb2; font-size:18px; font-weight:900; letter-spacing:2px; transition:.2s; }
+.zone-label b { min-width:42px; padding:4px 8px; border-radius:12px; color:#dce6f7; background:#263249; text-align:center; font-size:14px; letter-spacing:0; }
+.zone-label.active { color:#ffe276; text-shadow:0 0 13px #ffc928; transform:scale(1.08); }
+.zone-label.active b { background:#df9b16; color:#17100a; }
+.discard-zone { background:rgba(0,0,0,.13); }
+.discard-label { top:22px; }
+#discard { position:absolute; inset:0; }
+.discard-layer { position:absolute; inset:0; pointer-events:none; }
+#discard-history { z-index:1; }
+#discard-current { z-index:2; }
+.card { position:absolute; left:118px; top:33px; width:165px; height:257px; transform-origin:center; filter:drop-shadow(0 10px 12px #0009); will-change:transform; }
+.card:nth-last-child(3) { left:118px; }
+.card:nth-last-child(2) { left:216px; }
+.card:nth-last-child(1) { left:314px; }
+#winner { position:absolute; z-index:1000; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:50px; background:rgba(4,7,15,.82); color:#ffe374; font-size:72px; line-height:1.05; font-weight:1000; letter-spacing:3px; text-shadow:0 5px 30px #f2a900aa; backdrop-filter:blur(5px); }
+#winner.show { display:flex; animation:winnerIn .65s cubic-bezier(.2,.9,.25,1.2); }
+@keyframes winnerIn { from { opacity:0; transform:scale(1.3); } }
+@media (max-width:719px) { #game { transform-origin:top center; transform:scale(calc(100vw / 720)); } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; } }

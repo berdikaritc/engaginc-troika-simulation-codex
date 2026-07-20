@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1, maximum-scale=1">
+  <title>Troika Race</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game" aria-label="Troika Race game simulation">
+    <header class="masthead">
+      <img class="logo" src="images/logo/logo.png" alt="Troika">
+      <div class="heading">
+        <h1>TROIKA RACE</h1>
+        <p id="instruction"></p>
+      </div>
+    </header>
+
+    <section class="zone player-zone" id="p1-zone">
+      <div class="pile" id="p1-pile"><img src="images/cards-back/back.png" alt="P1 pile"></div>
+      <div class="message" id="p1-message" aria-live="polite"></div>
+      <div class="zone-label" id="p1-label"><span>P1</span><b id="p1-count">0</b></div>
+    </section>
+
+    <section class="zone discard-zone" id="discard-zone">
+      <div id="discard" aria-label="Discard pile">
+        <div id="discard-history" class="discard-layer"></div>
+        <div id="discard-current" class="discard-layer"></div>
+      </div>
+      <div class="zone-label discard-label"><span id="discard-label-text">DISCARD</span><b id="discard-count">0</b></div>
+    </section>
+
+    <section class="zone player-zone" id="p2-zone">
+      <div class="pile" id="p2-pile"><img src="images/cards-back/back.png" alt="P2 pile"></div>
+      <div class="message" id="p2-message" aria-live="polite"></div>
+      <div class="zone-label" id="p2-label"><span>P2</span><b id="p2-count">0</b></div>
+    </section>
+
+    <div id="winner" role="status" aria-live="assertive"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
