@@ -81,12 +81,6 @@ html, body {
   letter-spacing: .35px;
 }
 
-.lang-id { display: none; }
-:lang(id) .lang-en,
-:lang(in) .lang-en { display: none; }
-:lang(id) .lang-id,
-:lang(in) .lang-id { display: block; }
-
 .status {
   position: absolute;
   left: 480px;
@@ -171,7 +165,7 @@ html, body {
   transition: .18s ease;
 }
 
-.zone-label span {
+.zone-label span:not(.discard-word) {
   display: block;
   margin-top: 8px;
   font-size: 11px;

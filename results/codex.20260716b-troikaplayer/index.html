@@ -12,8 +12,7 @@
       <img class="logo" src="logo/logo.png" alt="Anak Bos Troika">
       <div class="game-copy">
         <div class="game-name">TROIKA PLAYER</div>
-        <div class="game-rule lang-en">DISCARDS CARD GROUPS THAT ALL HAVE MATCHING ASPECT, OR SERIES OF 6+ DIFFERENT CATEGORIES/COLORS</div>
-        <div class="game-rule lang-id">BUANG GRUP KARTU DENGAN ASPEK SAMA, ATAU SERI 6+ KARTU KATEGORI/WARNA BEDA</div>
+        <div id="game-rule" class="game-rule">DISCARDS CARD GROUPS THAT ALL HAVE MATCHING ASPECT, OR SERIES OF 6+ DIFFERENT CATEGORIES/COLORS</div>
       </div>
       <div class="status">
         <div id="turn-info">GET READY</div>
@@ -23,17 +22,17 @@
 
     <section id="p1-zone" class="zone player-zone">
       <div id="p1-pile" class="pile"></div>
-      <div id="p1-label" class="zone-label">P1 <span>HAND</span></div>
+      <div id="p1-label" class="zone-label">P1 <span data-i18n="hand">HAND</span></div>
     </section>
 
     <section id="discard-zone" class="zone discard-zone">
       <div id="discard-pile" class="pile"></div>
-      <div class="zone-label discard-label">DISCARD <span>PILE</span></div>
+      <div class="zone-label discard-label"><span class="discard-word" data-i18n="discard">DISCARD</span> <span data-i18n="pile">PILE</span></div>
     </section>
 
     <section id="p2-zone" class="zone player-zone">
       <div id="p2-pile" class="pile"></div>
-      <div id="p2-label" class="zone-label">P2 <span>HAND</span></div>
+      <div id="p2-label" class="zone-label">P2 <span data-i18n="hand">HAND</span></div>
     </section>
 
     <div id="callout" class="callout" aria-live="polite"></div>

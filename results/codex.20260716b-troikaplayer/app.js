@@ -12,6 +12,84 @@ const CONFIG = Object.freeze({
   handSpacing: 27.5
 });
 
+const requestedLanguage = new URLSearchParams(location.search).get("lang");
+const language = requestedLanguage === "id" ? "id" : "en";
+const messages = {
+  en: {
+    title: "Anak Bos Troika — Simulation",
+    ariaLabel: "Anak Bos Troika game simulation",
+    rule: "DISCARDS CARD GROUPS THAT ALL HAVE MATCHING ASPECT, OR SERIES OF 6+ DIFFERENT CATEGORIES/COLORS",
+    ready: "GET READY",
+    loading: "Simulation loading…",
+    hand: "HAND",
+    discard: "DISCARD",
+    pile: "PILE",
+    starting: simulation => `Simulation ${simulation} · starting shortly`,
+    turn: (turn, step, total) => `Turn ${turn} · Step ${step}/${total}`,
+    complete: "Simulation complete",
+    finished: "All turns finished",
+    simulationError: "Simulation error",
+    unable: "Unable to continue",
+    loadError: (simulation, status) => `Could not load simulation ${simulation} (${status}).`,
+    noJson: simulation => `Simulation ${simulation} contains no JSON object.`,
+    serveHint: "Serve this folder through a local web server (for example: python3 -m http.server) instead of opening index.html directly."
+  },
+  id: {
+    title: "Anak Bos Troika — Simulasi",
+    ariaLabel: "Simulasi permainan Anak Bos Troika",
+    rule: "BUANG GRUP KARTU DENGAN ASPEK SAMA, ATAU SERI 6+ KARTU DENGAN KATEGORI/WARNA BERBEDA",
+    ready: "BERSIAP",
+    loading: "Memuat simulasi…",
+    hand: "KARTU",
+    discard: "TUMPUKAN",
+    pile: "BUANGAN",
+    starting: simulation => `Simulasi ${simulation} · segera dimulai`,
+    turn: (turn, step, total) => `Giliran ${turn} · Langkah ${step}/${total}`,
+    complete: "Simulasi selesai",
+    finished: "Semua giliran selesai",
+    simulationError: "Kesalahan simulasi",
+    unable: "Tidak dapat melanjutkan",
+    loadError: (simulation, status) => `Tidak dapat memuat simulasi ${simulation} (${status}).`,
+    noJson: simulation => `Simulasi ${simulation} tidak berisi objek JSON.`,
+    serveHint: "Jalankan folder ini melalui server web lokal (misalnya: python3 -m http.server), bukan dengan membuka index.html secara langsung."
+  }
+};
+const t = messages[language];
+
+function applyLanguage() {
+  document.documentElement.lang = language;
+  document.title = t.title;
+  document.querySelector("#animation").setAttribute("aria-label", t.ariaLabel);
+  document.querySelector("#game-rule").textContent = t.rule;
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    element.textContent = t[element.dataset.i18n];
+  });
+  document.querySelector("#turn-info").textContent = t.ready;
+  document.querySelector("#step-info").textContent = t.loading;
+}
+
+function simulationText(text) {
+  if (language !== "id" || !text) return text || "";
+  return text
+    .replace(/^INITIAL DRAW$/i, "PEMBAGIAN KARTU AWAL")
+    .replace(/\bCALLS\b/gi, "MENYEBUT")
+    .replace(/\bDISCARDS GROUP\b/gi, "MEMBUANG GRUP")
+    .replace(/\bDISCARDS SERIES\b/gi, "MEMBUANG SERI")
+    .replace(/\bDRAWS ANOTHER (\d+) CARDS?\b/gi, "MENGAMBIL $1 KARTU LAGI")
+    .replace(/\bPASSES\b/gi, "LEWAT")
+    .replace(/\bCATEGORIES\b/gi, "KATEGORI")
+    .replace(/\bCOLORS\b/gi, "WARNA")
+    .replace(/\bWINS\b/gi, "MENANG")
+    .replace(/\bBLUE\b/gi, "BIRU")
+    .replace(/\bMEDIUM\b/gi, "SEDANG")
+    .replace(/\bSMALL\b/gi, "KECIL")
+    .replace(/\bRECTANGLE\b/gi, "PERSEGI PANJANG")
+    .replace(/\bROUND\b/gi, "BULAT")
+    .replace(/\bTRIANGLE\b/gi, "SEGITIGA");
+}
+
+applyLanguage();
+
 const state = { P1: [], P2: [], DISCARD: [] };
 const root = document.querySelector("#animation");
 const piles = {
@@ -160,7 +238,7 @@ function highlightDiscardCards(step) {
 }
 
 async function showCall(text) {
-  callout.textContent = text;
+  callout.textContent = simulationText(text);
   callout.classList.add("visible");
   await sleep(CONFIG.callDuration);
   callout.classList.remove("visible");
@@ -188,24 +266,24 @@ async function start() {
   const requested = new URLSearchParams(location.search).get("sim");
   const simulation = requested || CONFIG.simulation;
   const response = await fetch(`simdata/${encodeURIComponent(simulation)}/simulation.json`);
-  if (!response.ok) throw new Error(`Could not load simulation ${simulation} (${response.status}).`);
+  if (!response.ok) throw new Error(t.loadError(simulation, response.status));
   // Some generated simulation files contain converter diagnostics before the
   // opening brace. Ignore that harmless prefix while keeping strict JSON for
   // the actual simulation object.
   const raw = await response.text();
   const jsonStart = raw.indexOf("{");
-  if (jsonStart < 0) throw new Error(`Simulation ${simulation} contains no JSON object.`);
+  if (jsonStart < 0) throw new Error(t.noJson(simulation));
   const data = JSON.parse(raw.slice(jsonStart));
 
-  stepInfo.textContent = `Simulation ${simulation} · starting shortly`;
+  stepInfo.textContent = t.starting(simulation);
   await sleep(CONFIG.initialWait);
 
   for (let turnIndex = 0; turnIndex < data.turns.length; turnIndex++) {
     const steps = data.turns[turnIndex].steps || [];
     for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
       const step = steps[stepIndex];
-      turnInfo.textContent = `Turn ${turnIndex + 1} · Step ${stepIndex + 1}/${steps.length}`;
-      stepInfo.textContent = step.summary || "";
+      turnInfo.textContent = t.turn(turnIndex + 1, stepIndex + 1, steps.length);
+      stepInfo.textContent = simulationText(step.summary);
       setActivePlayer(playerForStep(step));
       await sleep(CONFIG.stepWait);
       await runStep(step, turnIndex === 0);
@@ -213,15 +291,15 @@ async function start() {
   }
 
   setActivePlayer(null);
-  turnInfo.textContent = "Simulation complete";
-  stepInfo.textContent = "All turns finished";
+  turnInfo.textContent = t.complete;
+  stepInfo.textContent = t.finished;
 }
 
 start().catch(error => {
   console.error(error);
   const box = document.querySelector("#error");
   box.hidden = false;
-  box.textContent = `${error.message} Serve this folder through a local web server (for example: python3 -m http.server) instead of opening index.html directly.`;
-  turnInfo.textContent = "Simulation error";
-  stepInfo.textContent = "Unable to continue";
+  box.textContent = `${error.message} ${t.serveHint}`;
+  turnInfo.textContent = t.simulationError;
+  stepInfo.textContent = t.unable;
 });

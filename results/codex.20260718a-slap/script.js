@@ -3,7 +3,13 @@
   const $ = s => document.querySelector(s);
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const rand = (a,b) => a + Math.random() * (b-a);
-  const lang = new URLSearchParams(location.search).get('lang') === 'id' ? 'id' : 'en';
+  const query = new URLSearchParams(location.search);
+  const lang = query.get('lang') === 'id' ? 'id' : 'en';
+  const startCount = name => {
+    const value = Number(query.get(name));
+    return Number.isInteger(value) && value >= 1 && value <= 42 ? value : 42;
+  };
+  const initialCards = [startCount('p1start'), startCount('p2start')];
   const T = lang === 'id' ? {
     small:'Kecil',medium:'Sedang',large:'Besar',cards:'KARTU',discard:'BUANGAN',wrong:'SALAH GEBRAK',
     gameName:'GEBRAKAN',instruction:'GEBRAK KARTU SAAT COCOK',
@@ -135,7 +141,7 @@
   }
   async function finish(player,g){ if(g!==generation)return; running=false; $('#call').classList.remove('show'); const b=$('#banner');b.textContent=T.wins('P'+(player+1));b.className='show winner'; }
   function start(){
-    generation++; running=true; const deck=makeDeck(); players=[[],[]]; deck.forEach((c,i)=>players[i%2].push(c)); discard=[];turn=0;callIndex=0;pendingWinner=null;
+    generation++; running=true; const deck=makeDeck(); players=[deck.splice(0,initialCards[0]),deck.splice(0,initialCards[1])]; discard=[];turn=0;callIndex=0;pendingWinner=null;
     $('#discard').replaceChildren();$('#banner').className='';$('#call').className='';update();game(generation);
   }
   $('#restart').addEventListener('click',start); start();
