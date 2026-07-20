@@ -3,6 +3,385 @@
 #+TODO: IDEA WISHLIST | CANCELLED REJECTED
 #+TODO: POTENTIAL | CANTUSE
 
+* INPROGRESS game > bullshit
+** [2026-07-20 Mon] description
+*** id
+Kartu troika dapat digunakan untuk berbagai permainan.
+Salah satunya adalah Boong-boongan.
+Kocok kartu, bagikan 6 kartu ke masing-masing pemain, tertutup.
+Tujuan permainan: jadi yang pertama menghabiskan kartu di tangan.
+Pemain bergiliran mengeluarkan 1 hingga 3 kartu ke tengah, tertutup, dan membuat sembarang klaim yang bisa benar atau boong.
+Contohnya, "semua kartu ini merah." Atau, "ada kartu wildcard di sini." Atau, "ada objek ukuran L di sini." Atau yang lainnya.
+Pemain berikutnya harus menebak apakah klaim ini benar atau boong.
+Jika tebakannya benar (boong ditebak boong atau benar ditebak benar) maka pemain pertama harus menarik kembali kartunya ke tangannya, tanpa membuka.
+Jika tebakannya salah, pemain penebak harus mengambil kartu-kartu tersebut.
+Lalu giliran pemain berikutnya.
+Pemain pertama yang berhasil menghabiskan kartu di tangan, menang.
+*** en
+The Troika cards can be used to play many kinds of games.
+One of which is called Bullshit.
+Shuffle the cards, deal 6 cards to each player, face down.
+The goal of the game: to be the first to discard all cards in their hand.
+Players take turn putting one to three cards to the center area, face down, and make a claim that can be true or false (a.k.a. bullshit).
+For example, "all these cards are red." Or, "there is a wildcard in here." Or, "there are objects with size L in here." Or something like that.
+The next player must guess if the claim is correct (that is, a true claim is guessed as true or a false claim is guessed as bullshit) then the first player must withdraw all the cards back to their hand.
+If the guess is incorrect, the guessing player must take all the cards into his hand.
+Then the next player takes their turn.
+The first player who can discard all cards in their hand, wins.
+** [2026-07-20 Mon] prompt 1
+*** Summary
+i'm making a html+css+javascript-based card game play simulation animation that
+will be recorded using a desktop recorder like simplescreenrecorder on linux to
+produce a video animation (the video will be portrait 720x1080). make 720x1080
+the entire area for animation.
+
+the name of the card game is "Bullshit".
+
+the simulation will be for 2 players (P1 and P2).
+
+*** The cards
+The cards are of two types. First there are the object cards, each of which will
+contain picture of a certain QUANTITY of objects (either one object, or two of
+the same object, or three). Each object will have a SHAPE (one of triangle,
+rectangle, and round), SIZE (one of small, medium, large), COLOR (one of nine:
+white, black, red, blue, green, yellow, orange, purple, and brown), and CATEGORY
+(one of nine: fruit, sports, building, food, gadget, fashion, furniture, toy,
+music). So in total there are 81 object cards. Listed below in the format of:
+QUANTITY-OBJECT_NAME (CATEGORY, SHAPE, COLOR, SIZE). Card name is
+QUANTITY-OBJECT_NAME.
+
+1-grape (fruit, round, purple, small)
+2-grape (fruit, round, purple, small)
+3-grape (fruit, round, purple, small)
+1-orange (fruit, round, orange, medium)
+2-orange (fruit, round, orange, medium)
+3-orange (fruit, round, orange, medium)
+1-watermelon (fruit, round, green, large)
+2-watermelon (fruit, round, green, large)
+3-watermelon (fruit, round, green, large)
+1-golf ball (sports, round, white, small)
+2-golf ball (sports, round, white, small)
+3-golf ball (sports, round, white, small)
+1-tennis ball (sports, round, green, medium)
+2-tennis ball (sports, round, green, medium)
+3-tennis ball (sports, round, green, medium)
+1-basket ball (sports, round, orange, large)
+2-basket ball (sports, round, orange, large)
+3-basket ball (sports, round, orange, large)
+1-house roof (building, triangle, red, large)
+2-house roof (building, triangle, red, large)
+3-house roof (building, triangle, red, large)
+1-tent (building, triangle, yellow, large)
+2-tent (building, triangle, yellow, large)
+3-tent (building, triangle, yellow, large)
+1-pyramid (building, triangle, brown, large)
+2-pyramid (building, triangle, brown, large)
+3-pyramid (building, triangle, brown, large)
+1-cake slice (food, triangle, orange, small)
+2-cake slice (food, triangle, orange, small)
+3-cake slice (food, triangle, orange, small)
+1-pizza slice (food, triangle, yellow, medium)
+2-pizza slice (food, triangle, yellow, medium)
+3-pizza slice (food, triangle, yellow, medium)
+1-jelly (food, round, purple, small)
+2-jelly (food, round, purple, small)
+3-jelly (food, round, purple, small)
+1-handphone (gadget, rectangle, black, small)
+2-handphone (gadget, rectangle, black, small)
+3-handphone (gadget, rectangle, black, small)
+1-tv (gadget, rectangle, black, medium)
+2-tv (gadget, rectangle, black, medium)
+3-tv (gadget, rectangle, black, medium)
+1-laptop (gadget, rectangle, red, medium)
+2-laptop (gadget, rectangle, red, medium)
+3-laptop (gadget, rectangle, red, medium)
+1-swimming trunk (fashion, triangle, blue, small)
+2-swimming trunk (fashion, triangle, blue, small)
+3-swimming trunk (fashion, triangle, blue, small)
+1-cloth hanger (fashion, triangle, blue, large)
+2-cloth hanger (fashion, triangle, blue, large)
+3-cloth hanger (fashion, triangle, blue, large)
+1-hat (fashion, round, purple, medium)
+2-hat (fashion, round, purple, medium)
+3-hat (fashion, round, purple, medium)
+1-table (furniture, rectangle, brown, medium)
+2-table (furniture, rectangle, brown, medium)
+3-table (furniture, rectangle, brown, medium)
+1-cupboard (furniture, rectangle, brown, large)
+2-cupboard (furniture, rectangle, brown, large)
+3-cupboard (furniture, rectangle, brown, large)
+1-bed (furniture, rectangle, white, large)
+2-bed (furniture, rectangle, white, large)
+3-bed (furniture, rectangle, white, large)
+1-paper airplane (toy, triangle, yellow, small)
+2-paper airplane (toy, triangle, yellow, small)
+3-paper airplane (toy, triangle, yellow, small)
+1-dice (toy, rectangle, red, small)
+2-dice (toy, rectangle, red, small)
+3-dice (toy, rectangle, red, small)
+1-alphabet block (toy, rectangle, green, small)
+2-alphabet block (toy, rectangle, green, small)
+3-alphabet block (toy, rectangle, green, small)
+1-the triangle (music, triangle, white, medium)
+2-the triangle (music, triangle, white, medium)
+3-the triangle (music, triangle, white, medium)
+1-drum (music, round, blue, medium)
+2-drum (music, round, blue, medium)
+3-drum (music, round, blue, medium)
+1-piano (music, rectangle, black, large)
+2-piano (music, rectangle, black, large)
+3-piano (music, rectangle, black, large)
+
+And below is the same list of cards, but in Indonesian:
+
+1-anggur (buah, bundar, ungu, kecil)
+2-anggur (buah, bundar, ungu, kecil)
+3-anggur (buah, bundar, ungu, kecil)
+1-jeruk (buah, bundar, oranye, sedang)
+2-jeruk (buah, bundar, oranye, sedang)
+3-jeruk (buah, bundar, oranye, sedang)
+1-semangka (buah, bundar, hijau, besar)
+2-semangka (buah, bundar, hijau, besar)
+3-semangka (buah, bundar, hijau, besar)
+1-bola golf (olahraga, bundar, putih, kecil)
+2-bola golf (olahraga, bundar, putih, kecil)
+3-bola golf (olahraga, bundar, putih, kecil)
+1-bola tenis (olahraga, bundar, hijau, sedang)
+2-bola tenis (olahraga, bundar, hijau, sedang)
+3-bola tenis (olahraga, bundar, hijau, sedang)
+1-bola basket (olahraga, bundar, oranye, besar)
+2-bola basket (olahraga, bundar, oranye, besar)
+3-bola basket (olahraga, bundar, oranye, besar)
+1-atap rumah (bangunan, segitiga, merah, besar)
+2-atap rumah (bangunan, segitiga, merah, besar)
+3-atap rumah (bangunan, segitiga, merah, besar)
+1-tenda (bangunan, segitiga, kuning, besar)
+2-tenda (bangunan, segitiga, kuning, besar)
+3-tenda (bangunan, segitiga, kuning, besar)
+1-piramid (bangunan, segitiga, cokelat, besar)
+2-piramid (bangunan, segitiga, cokelat, besar)
+3-piramid (bangunan, segitiga, cokelat, besar)
+1-sepotong kue (makanan, segitiga, oranye, kecil)
+2-sepotong kue (makanan, segitiga, oranye, kecil)
+3-sepotong kue (makanan, segitiga, oranye, kecil)
+1-sepotong pizza (makanan, segitiga, kuning, sedang)
+2-sepotong pizza (makanan, segitiga, kuning, sedang)
+3-sepotong pizza (makanan, segitiga, kuning, sedang)
+1-jeli (makanan, bundar, ungu, kecil)
+2-jeli (makanan, bundar, ungu, kecil)
+3-jeli (makanan, bundar, ungu, kecil)
+1-ponsel (gawai, kotak, hitam, kecil)
+2-ponsel (gawai, kotak, hitam, kecil)
+3-ponsel (gawai, kotak, hitam, kecil)
+1-tv (gawai, kotak, hitam, sedang)
+2-tv (gawai, kotak, hitam, sedang)
+3-tv (gawai, kotak, hitam, sedang)
+1-laptop (gawai, kotak, merah, sedang)
+2-laptop (gawai, kotak, merah, sedang)
+3-laptop (gawai, kotak, merah, sedang)
+1-celana renang (fesyen, segitiga, biru, kecil)
+2-celana renang (fesyen, segitiga, biru, kecil)
+3-celana renang (fesyen, segitiga, biru, kecil)
+1-gantungan baju (fesyen, segitiga, biru, besar)
+2-gantungan baju (fesyen, segitiga, biru, besar)
+3-gantungan baju (fesyen, segitiga, biru, besar)
+1-topi (fesyen, bundar, ungu, sedang)
+2-topi (fesyen, bundar, ungu, sedang)
+3-topi (fesyen, bundar, ungu, sedang)
+1-meja (mebel, kotak, cokelat, sedang)
+2-meja (mebel, kotak, cokelat, sedang)
+3-meja (mebel, kotak, cokelat, sedang)
+1-lemari (mebel, kotak, cokelat, besar)
+2-lemari (mebel, kotak, cokelat, besar)
+3-lemari (mebel, kotak, cokelat, besar)
+1-ranjang (mebel, kotak, putih, besar)
+2-ranjang (mebel, kotak, putih, besar)
+3-ranjang (mebel, kotak, putih, besar)
+1-pesawat kertas (mainan, segitiga, kuning, kecil)
+2-pesawat kertas (mainan, segitiga, kuning, kecil)
+3-pesawat kertas (mainan, segitiga, kuning, kecil)
+1-dadu (mainan, kotak, merah, kecil)
+2-dadu (mainan, kotak, merah, kecil)
+3-dadu (mainan, kotak, merah, kecil)
+1-balok huruf (mainan, kotak, hijau, kecil)
+2-balok huruf (mainan, kotak, hijau, kecil)
+3-balok huruf (mainan, kotak, hijau, kecil)
+1-trikona (musik, segitiga, putih, sedang)
+2-trikona (musik, segitiga, putih, sedang)
+3-trikona (musik, segitiga, putih, sedang)
+1-drum (musik, bundar, biru, sedang)
+2-drum (musik, bundar, biru, sedang)
+3-drum (musik, bundar, biru, sedang)
+1-piano (musik, kotak, hitam, besar)
+2-piano (musik, kotak, hitam, besar)
+3-piano (musik, kotak, hitam, besar)
+wildcard max 1
+wildcard max 2
+wildcard max 3
+wildcard max 4
+wildcard max 5
+wildcard max 6
+wildcard tux 1
+wildcard tux 2
+wildcard tux 3
+wildcard tux 4
+wildcard tux 5
+wildcard tux 6
+wildcard+cut lyx 1
+wildcard+cut lyx 2
+wildcard+cut lyx 3
+wildcard+cut lyx 4
+wildcard+cut lyx 5
+wildcard+cut lyx 6
+
+And aside from that, there are also three wildcard cards, with the following names:
+
+wildcard max 1
+wildcard tux 1
+wildcard+cut lyx 1
+*** The rules of the game
+Shuffle the cards, deal 7 cards to each player, face down.
+The goal of the game: to be the first to discard all cards in their hand.
+Players take turn putting one to three cards to the center area, face down, and make a claim that can be true or false (a.k.a. bullshit).
+For example, "all these cards are red." Or, "there is a wildcard in here." Or, "there are objects with size L in here." Or something like that.
+The next player must guess if the claim is correct (that is, a true claim is guessed as true or a false claim is guessed as bullshit) then the first player must withdraw all the cards back to their hand.
+If the guess is incorrect, the guessing player must take all the cards into his hand.
+Then the next player takes their turn.
+The first player who can discard all cards in their hand, wins.
+*** The images
+the images for the front side of the cards are in images/cards-front/
+subdirectory, with the PNG files named "CARDNAME.png".
+
+The image for the back side of the cards is the images/cards-back/back.png file.
+
+Do not use the hands images. Leave them alone.
+*** Layout of the screen & appearance
+From top to bottom:
+
+- The top logo+information area: the very top will contain title (use logo file
+  images/logo/logo.png) and nothing else, The logo positioning should be
+  absolute so it does not move to the left or right whenever there are text
+  being displayed or animation happens. This will occupy about 10% of the
+  vertical space.
+- P1's Hand on the left and P1's Message Subarea on the right.
+  This will occupy about 30% of the vertical space.
+  The cards put in this area should not overlap or cover the top area or the area below it.
+- The Play Area, where the cards are put when turns are taking place.
+  This area will also occupy about 30% of vertical space.
+  The cards put in this area should not overlap or cover the cards in the area above it or below it.
+- P2's Hand on the left and P2's Message Subarea on the right.
+  This will occupy about 30% of the vertical space.
+  The cards put in this area should not overlap or cover the top area or the area below it.
+
+Width of card should be 165. The height should be proportional. You should not
+add any additional padding to the cards.
+
+Try to conserve vertical space.
+
+The labels for the areas should not be too large and covered by the cards.
+
+P1 Message Subarea and P2 Message Subarea should not be labeled. These subareas
+are where the text will be displayed whenever P1 or P2 does a claim.
+
+The players' hands will be displayed in accordeon style with fixed spacing between
+cards (~1/6 width of the card). The leftmost card will be the bottommost card,
+and subsequent cards on the right are cards that are on top of the previous
+cards (cards to their left).
+
+*** The simulation
+The simulation starts the players already having 7 random cards on their hand,
+face up. These cards should be randomly chosen on every page load.
+
+After two seconds of delay, the simulation game starts.
+
+Then P1's turn. It starts with P1 picking between one to three cards (but he
+will always pick the maximum number of cards allowed, i.e. 3 cards when there
+are at least 3 cards in his hand, or 2 if there are only 2 cards left in his
+hand, or 1 if there is only 1 card left in his hand). The P1 Message Subarea
+should display a text saying a random claim about the picked cards that has
+50% : 50% change of being true, e.g. "All cards are red." or "At least one card
+is red." or "There is at least one Grape." or "There isn't any round objects."
+The cards picked should be highlighted for 3s. Then it should flipped to face
+down smoothly (animation takes about 0.5s), then smoothly flying to the Play
+Area for 0.7s, then arriving placed next to one another at the Play Area.
+
+Then there should be a delay between 2 to 3s.
+
+Then P2 guesses. There should be a 50% chance that the guess is correct. The P2
+Message Subarea should display a text saying "TRUE" or "BULLSHIT". Then there
+should be a delay of 2s.
+
+Then the cards are flipped from face down to face up smoothly (animation takes
+about 0.5s). If the guess is correct than a text is displayed in both P1 Message
+Subarea and P2 Message Subarea "CORRECT GUESS". If guess is incorrect, the text
+should say "INCORRECT GUESS".
+
+If the guess is correct, the cards fly smoothly back towards P1's hand
+(animation should take 0.7s). If the guess is incorrect, the cards fly smoothly
+towards P2's hand (animation should take 0.7s).
+
+Then there should be a delay between 1 to 2s.
+
+Then P2's turn, much like P1.
+
+Continue until one of the player wins.
+
+When a player wins, there should be a giant text saying "P1 WINS" or "P2 WINS"
+in the center area.
+
+Then the simulation ends.
+*** Options
+i want to be able to set a query parameter 'lang' to 'en' (the default) or 'id'.
+When the parameter is set to 'id', the text should all be in Indonesian instead
+of English. This include the text "TRUE" becomes "BENAR", "BULLSHIT" becomes
+"BOONG", "CORRECT GUESS" becomes "TEBAKAN BENAR", "INCORRECT GUESS" becomes
+"TEBAKAN SALAH", "P1 WINS" becomes "P1 MENANG".
+** [2026-07-20 Mon] journal
+*** [2026-07-20 Mon 06:00]--[2026-07-20 Mon 06:27] mengedit prompt (based on speed's version)
+lama juga ya, cuma bikin deskripsi en/id, lalu edit bagian simulation.
+** [2026-07-20 Mon 06:27] session: codex.20260720a-bullshit
+*** journal
+**** [2026-07-20 Mon 06:27] start
+**** [2026-07-20 Mon 06:28] start ulang, belum taruh images/
+**** [2026-07-20 Mon 06:41] lihat hasil, masih sedikit kurang pas
+*** additional prompts
+After the claim message is displayed, aside from highlighting the cards, lift
+the cards up and above the other cards in the hand so they hover between the
+player's hand area and the Play Area, so all the picked cards can be seen in
+full. After that and the delay, then fly them to the Play Area faced down.
+
+When the picked cards are being flipped and fly to the Play Area, they still do
+so below (covered) by the cards in the player's hand. Make it so that they rise
+above the player's hand (in z-order) and are not covered by the cards in the
+player's hand.
+
+Also, make it so that players tend to pick 2 or 3 cards more (40% and 40% chance
+respectively) than picking 1 card (20% chance).
+
+When the picked cards are highlighted, raised, and flipped, they already rise
+above the cards in hand. But when they fly to the Play Area, they still become
+covered by the cards in the hand.
+
+Now when the picked cards are being flipped by P2, *sometimes* they still are
+covered by the cards in hand.
+
+Make the initial draw 7 cards instead of 6, so that each player must win the
+claim at least 3 times to win the game. Also make the players always pick the
+maximum number of cards allowed to pick (i.e. 3 when there are at least 3 cards
+in their hand, or 2 if there are 2 cards in their hand, and 1 if there is only 1
+card in their hand).
+
+Nope, when the picked cards are being flipped by P1, they are now still covered
+by cards in hand.
+
+Nope, now when the picked cards are being flipped by P2 (and not P1), they are
+now still covered by cards in hand. So when you fixed for P1, the problem
+reappears for P2. If you fix for P2, the problem reappears for P1.
+
+Add the title of the game "BULLSHIT" (or "BOONG-BOONGAN" in Indonesian) in the
+top area, at the right of logo.
+
+# ok good enough
 * game > collect 8
 ** [2026-07-18 Sat] description
 *** id
@@ -710,7 +1089,7 @@ simultanously. to be able to reach their goal faster. When they are attempting
 to collect two objects, the label should say something like "COLLECTING GRAPE OR
 TENNIS BALL".
 
-* INPROGRESS game > memory match
+* game > memory match
 ** [2026-07-19 Sun] description
 *** id
 Kartu troika dapat digunakan untuk berbagai permainan.

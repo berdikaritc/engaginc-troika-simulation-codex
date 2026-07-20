@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=720, initial-scale=1, maximum-scale=1">
+  <title>Bullshit — card game simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage" aria-label="Bullshit card game simulation">
+    <header class="masthead">
+      <img src="images/logo/logo.png" alt="Bullshit">
+      <h1 id="game-title">BULLSHIT</h1>
+    </header>
+
+    <section class="zone player-zone" id="p1-zone">
+      <h2 id="p1-label">P1 HAND</h2>
+      <div class="hand" id="p1-hand"></div>
+      <div class="message" id="p1-message" aria-live="polite"></div>
+    </section>
+
+    <section class="zone play-zone">
+      <h2 id="play-label">PLAY AREA</h2>
+      <div id="play-area"></div>
+      <div id="winner" aria-live="assertive"></div>
+    </section>
+
+    <section class="zone player-zone" id="p2-zone">
+      <h2 id="p2-label">P2 HAND</h2>
+      <div class="hand" id="p2-hand"></div>
+      <div class="message" id="p2-message" aria-live="polite"></div>
+    </section>
+    <div id="card-overlay" aria-hidden="true"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
